@@ -12,11 +12,11 @@ nonisolated enum FitResult: Sendable, Equatable {
 
     var title: String {
         switch self {
-        case .tooSmall: "Pequeña"
-        case .snug: "Ajustada"
-        case .good: "Te queda bien"
-        case .loose: "Holgada"
-        case .tooBig: "Grande"
+        case .tooSmall: String(localized: "Pequeña")
+        case .snug: String(localized: "Ajustada")
+        case .good: String(localized: "Te queda bien")
+        case .loose: String(localized: "Holgada")
+        case .tooBig: String(localized: "Grande")
         }
     }
 
@@ -117,19 +117,19 @@ nonisolated enum SizeConverter {
         var result: [SizeRecommendation] = []
         if let chestCm {
             result.append(SizeRecommendation(
-                id: "tops", title: "Camisetas y jerséis",
+                id: "tops", title: String(localized: "Camisetas y jerséis"),
                 size: topLetter(chestCm: chestCm, sizing: sizing),
                 equivalents: "EU \(topEU(chestCm: chestCm, sizing: sizing)) · US \(topUS(chestCm: chestCm, sizing: sizing))"))
         }
         if let eu = trousersEU(waistCm: waistCm, hipCm: hipCm, sizing: sizing) {
-            let jeansSize = waistCm.map { "Vaqueros \(jeans(waistCm: $0, inseamCm: inseamCm))" }
+            let jeansSize = waistCm.map { String(localized: "Vaqueros \(jeans(waistCm: $0, inseamCm: inseamCm))") }
             result.append(SizeRecommendation(
-                id: "trousers", title: "Pantalones", size: "EU \(eu)",
+                id: "trousers", title: String(localized: "Pantalones"), size: "EU \(eu)",
                 equivalents: jeansSize ?? ""))
         }
         if let footCm {
             result.append(SizeRecommendation(
-                id: "shoes", title: "Calzado", size: "EU \(shoeEU(footCm: footCm))",
+                id: "shoes", title: String(localized: "Calzado"), size: "EU \(shoeEU(footCm: footCm))",
                 equivalents: "US \(format(shoeUS(footCm: footCm, sizing: sizing))) · UK \(format(shoeUK(footCm: footCm, sizing: sizing)))"))
         }
         return result
@@ -153,7 +153,7 @@ nonisolated enum SizeConverter {
             case ...26: .loose
             default: .tooBig
             }
-            return FitAssessment(result: result, bodyPart: "pecho", bodyCm: bodyChestCm, easeCm: ease)
+            return FitAssessment(result: result, bodyPart: String(localized: "bodyPart.chest", defaultValue: "pecho"), bodyCm: bodyChestCm, easeCm: ease)
         case .lower:
             guard let waistWidthCm, let bodyWaistCm else { return nil }
             let ease = waistWidthCm * 2 - bodyWaistCm
@@ -164,7 +164,7 @@ nonisolated enum SizeConverter {
             case ...10: .loose
             default: .tooBig
             }
-            return FitAssessment(result: result, bodyPart: "cintura", bodyCm: bodyWaistCm, easeCm: ease)
+            return FitAssessment(result: result, bodyPart: String(localized: "bodyPart.waist", defaultValue: "cintura"), bodyCm: bodyWaistCm, easeCm: ease)
         case .feet, .none:
             return nil
         }

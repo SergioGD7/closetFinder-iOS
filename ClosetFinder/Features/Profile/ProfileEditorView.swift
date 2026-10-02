@@ -86,7 +86,7 @@ struct ProfileEditorView: View {
                     }
                 }
             }
-            .navigationTitle(editing == nil ? "Nueva persona" : "Editar medidas")
+            .navigationTitle(editing == nil ? String(localized: "Nueva persona") : String(localized: "Editar medidas"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -116,7 +116,7 @@ struct ProfileEditorView: View {
             modelContext.insert(profile)
         }
         let trimmed = name.trimmingCharacters(in: .whitespaces)
-        profile.name = trimmed.isEmpty ? "Yo" : trimmed
+        profile.name = trimmed.isEmpty ? String(localized: "Yo") : trimmed
         profile.sizing = sizing
         for measurement in BodyMeasurement.allCases {
             profile.setValue(GarmentEditorModel.parseCentimeters(values[measurement]), of: measurement)

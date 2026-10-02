@@ -84,23 +84,23 @@ nonisolated enum BodyMeasurement: String, CaseIterable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .height: "Altura"
-        case .chest: "Pecho"
-        case .waist: "Cintura"
-        case .hip: "Cadera"
-        case .inseam: "Entrepierna"
-        case .foot: "Pie"
+        case .height: String(localized: "Altura")
+        case .chest: String(localized: "Pecho")
+        case .waist: String(localized: "Cintura")
+        case .hip: String(localized: "Cadera")
+        case .inseam: String(localized: "Entrepierna")
+        case .foot: String(localized: "Pie")
         }
     }
 
     var howTo: String {
         switch self {
-        case .height: "Descalzo, de pie contra la pared."
-        case .chest: "Contorno por la parte más ancha, bajo las axilas."
-        case .waist: "Contorno a la altura del ombligo, sin apretar."
-        case .hip: "Contorno por la parte más ancha de la cadera."
-        case .inseam: "Del tiro del pantalón al suelo, por dentro de la pierna."
-        case .foot: "Del talón a la punta del dedo más largo."
+        case .height: String(localized: "Descalzo, de pie contra la pared.")
+        case .chest: String(localized: "Contorno por la parte más ancha, bajo las axilas.")
+        case .waist: String(localized: "Contorno a la altura del ombligo, sin apretar.")
+        case .hip: String(localized: "Contorno por la parte más ancha de la cadera.")
+        case .inseam: String(localized: "Del tiro del pantalón al suelo, por dentro de la pierna.")
+        case .foot: String(localized: "Del talón a la punta del dedo más largo.")
         }
     }
 }

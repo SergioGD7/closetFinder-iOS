@@ -149,7 +149,7 @@ struct ProfileView: View {
                             .background(Color.accentColor.opacity(0.12), in: Circle())
                     }
                     VStack(alignment: .leading, spacing: 6) {
-                        Text(profile.hasTryOnPhoto ? "Maniquí personalizado con tu foto" : "Maniquí con tus medidas")
+                        Text(profile.hasTryOnPhoto ? String(localized: "Maniquí personalizado con tu foto") : String(localized: "Maniquí con tus medidas"))
                             .font(.subheadline.weight(.semibold))
                         TryOnPhotoButton(profile: profile)
                     }
@@ -168,7 +168,7 @@ struct ProfileView: View {
             if !owned.isEmpty {
                 Section {
                     NavigationLink {
-                        GarmentListView(title: "Ropa de \(profile.name)", garments: owned)
+                        GarmentListView(title: String(localized: "Ropa de \(profile.name)"), garments: owned)
                     } label: {
                         Label("Ropa de \(profile.name)", systemImage: "hanger")
                             .badge(owned.count)

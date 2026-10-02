@@ -133,7 +133,7 @@ struct GarmentDetailView: View {
             infoCard
 
             if !garment.notes.isEmpty {
-                card(title: "Notas") {
+                card(title: String(localized: "Notas")) {
                     Text(garment.notes).font(.body)
                 }
             }
@@ -143,14 +143,14 @@ struct GarmentDetailView: View {
     private var subtitle: String {
         var parts: [String] = []
         if !garment.brand.isEmpty { parts.append(garment.brand) }
-        if !garment.size.isEmpty { parts.append("Talla \(garment.size)") }
+        if !garment.size.isEmpty { parts.append(String(localized: "Talla \(garment.size)")) }
         if !garment.material.isEmpty { parts.append(garment.material) }
         parts.append(garment.season.title)
         return parts.joined(separator: " · ")
     }
 
     private var whereCard: some View {
-        card(title: "Dónde está") {
+        card(title: String(localized: "Dónde está")) {
             if let location = garment.location {
                 NavigationLink(value: location) {
                     HStack(spacing: 14) {
@@ -196,7 +196,7 @@ struct GarmentDetailView: View {
             garment.measurement(m).map { (m, $0) }
         }
         if !measurements.isEmpty {
-            card(title: "Medidas de la prenda") {
+            card(title: String(localized: "Medidas de la prenda")) {
                 VStack(alignment: .leading, spacing: 10) {
                     HStack(alignment: .top) {
                         ForEach(measurements, id: \.0) { measurement, value in
@@ -226,10 +226,10 @@ struct GarmentDetailView: View {
     private var fitProfile: BodyProfile? { garment.owner ?? profiles.first }
 
     private var infoCard: some View {
-        card(title: "Uso") {
+        card(title: String(localized: "Uso")) {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text(garment.wearCount == 1 ? "Usada 1 vez" : "Usada \(garment.wearCount) veces")
+                    Text(garment.wearCount == 1 ? String(localized: "Usada 1 vez") : String(localized: "Usada \(garment.wearCount) veces"))
                     Spacer()
                     if let lastWorn = garment.lastWornAt {
                         Text("Última: \(lastWorn.formatted(.relative(presentation: .named)))")
@@ -309,7 +309,7 @@ struct GarmentDetailView: View {
             Button {
                 garment.isFavorite.toggle()
             } label: {
-                Label(garment.isFavorite ? "Quitar de favoritas" : "Añadir a favoritas",
+                Label(garment.isFavorite ? String(localized: "Quitar de favoritas") : String(localized: "Añadir a favoritas"),
                       systemImage: garment.isFavorite ? "heart.fill" : "heart")
             }
             .tint(garment.isFavorite ? .pink : nil)

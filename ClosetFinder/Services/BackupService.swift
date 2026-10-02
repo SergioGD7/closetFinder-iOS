@@ -89,7 +89,7 @@ enum BackupService {
 
         var errorDescription: String? {
             switch self {
-            case .newerVersion: "Esta copia se hizo con una versión más nueva de Closet Finder. Actualiza la app para restaurarla."
+            case .newerVersion: String(localized: "Esta copia se hizo con una versión más nueva de Closet Finder. Actualiza la app para restaurarla.")
             }
         }
     }

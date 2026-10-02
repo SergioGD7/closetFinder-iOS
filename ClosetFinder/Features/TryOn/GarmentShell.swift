@@ -137,7 +137,7 @@ nonisolated struct GarmentShell: Sendable {
 
         // Resumen
         lines.append(chestLine(input, body, garmentChest: garmentChest))
-        lines.append(FitLine(title: "Largo", detail: Self.describeHem(yHem, on: body), level: .info))
+        lines.append(FitLine(title: String(localized: "Largo"), detail: Self.describeHem(yHem, on: body), level: .info))
         if sleeveLength > 0.03 {
             lines.append(Self.sleeveLine(sleeveLength, body, measured: input.sleeveCm != nil))
         }
@@ -145,13 +145,15 @@ nonisolated struct GarmentShell: Sendable {
 
     private func chestLine(_ input: Input, _ body: BodyShape, garmentChest: Float) -> FitLine {
         guard input.chestWidthCm != nil else {
-            return FitLine(title: "Pecho", detail: "Sin medida de la prenda: se muestra con una holgura típica", level: .info)
+            return FitLine(title: String(localized: "Pecho"), detail: String(localized: "Sin medida de la prenda: se muestra con una holgura típica"), level: .info)
         }
         let fit = SizeConverter.fit(category: input.category, chestWidthCm: input.chestWidthCm, waistWidthCm: nil,
                                     bodyChestCm: Double(body.chest * 100), bodyWaistCm: nil)
         let ease = Int(((garmentChest - body.chest) * 100).rounded())
-        let detail = "\(fit?.result.title ?? "") · prenda \(Self.cm(garmentChest)), tú \(Self.cm(body.chest)) (\(ease >= 0 ? "+" : "")\(ease) cm)"
-        return FitLine(title: "Pecho", detail: detail, level: fit?.result == .good ? .good : .warning)
+        let easeText = "\(ease >= 0 ? "+" : "")\(ease) cm"
+        let verdict = fit?.result.title ?? ""
+        let detail = String(localized: "\(verdict) · prenda \(Self.cm(garmentChest)), tú \(Self.cm(body.chest)) (\(easeText))")
+        return FitLine(title: String(localized: "Pecho"), detail: detail, level: fit?.result == .good ? .good : .warning)
     }
 
     // MARK: Parte de abajo
@@ -224,11 +226,13 @@ nonisolated struct GarmentShell: Sendable {
             let fit = SizeConverter.fit(category: category, chestWidthCm: nil, waistWidthCm: input.waistWidthCm,
                                         bodyChestCm: nil, bodyWaistCm: Double(body.waist * 100))
             let ease = Int(((garmentWaist - body.waist) * 100).rounded())
-            lines.append(FitLine(title: "Cintura",
-                                 detail: "\(fit?.result.title ?? "") · prenda \(Self.cm(garmentWaist)), tú \(Self.cm(body.waist)) (\(ease >= 0 ? "+" : "")\(ease) cm)",
+            let easeText = "\(ease >= 0 ? "+" : "")\(ease) cm"
+            let verdict = fit?.result.title ?? ""
+            lines.append(FitLine(title: String(localized: "Cintura"),
+                                 detail: String(localized: "\(verdict) · prenda \(Self.cm(garmentWaist)), tú \(Self.cm(body.waist)) (\(easeText))"),
                                  level: fit?.result == .good ? .good : .warning))
         } else {
-            lines.append(FitLine(title: "Cintura", detail: "Sin medida de la prenda: se muestra con una holgura típica", level: .info))
+            lines.append(FitLine(title: String(localized: "Cintura"), detail: String(localized: "Sin medida de la prenda: se muestra con una holgura típica"), level: .info))
         }
         if category == .trousers {
             // Un pantalón largo está bien si el bajo queda entre el suelo y el tobillo
@@ -236,15 +240,15 @@ nonisolated struct GarmentShell: Sendable {
             let detail: String
             let level: Level
             if unclampedHem < -0.015 {
-                (detail, level) = ("Te sobran \(Int((-unclampedHem * 100).rounded())) cm de largo", .warning)
+                (detail, level) = (String(localized: "Te sobran \(Int((-unclampedHem * 100).rounded())) cm de largo"), .warning)
             } else if unclampedHem > body.yAnkle + 0.02 {
-                (detail, level) = ("Se queda \(Int(((unclampedHem - body.yAnkle) * 100).rounded())) cm por encima del tobillo", .warning)
+                (detail, level) = (String(localized: "Se queda \(Int(((unclampedHem - body.yAnkle) * 100).rounded())) cm por encima del tobillo"), .warning)
             } else {
-                (detail, level) = ("Largo justo: cae sobre el zapato", .good)
+                (detail, level) = (String(localized: "Largo justo: cae sobre el zapato"), .good)
             }
-            lines.append(FitLine(title: "Largo", detail: detail, level: level))
+            lines.append(FitLine(title: String(localized: "Largo"), detail: detail, level: level))
         } else {
-            lines.append(FitLine(title: "Largo", detail: Self.describeHem(yHem, on: body), level: .info))
+            lines.append(FitLine(title: String(localized: "Largo"), detail: Self.describeHem(yHem, on: body), level: .info))
         }
     }
 
@@ -273,7 +277,7 @@ nonisolated struct GarmentShell: Sendable {
         let maxA = rings.map(\.shape.a).max() ?? 0.25
         photoMinX = -maxA
         photoMaxX = maxA
-        lines.append(FitLine(title: "Largo", detail: Self.describeHem(yHem, on: body), level: .info))
+        lines.append(FitLine(title: String(localized: "Largo"), detail: Self.describeHem(yHem, on: body), level: .info))
     }
 
     // MARK: Calzado
@@ -282,16 +286,17 @@ nonisolated struct GarmentShell: Sendable {
         let yours = SizeConverter.shoeEU(footCm: Double(body.foot * 100))
         let number = Double(input.size.replacingOccurrences(of: ",", with: ".").filter { $0.isNumber || $0 == "." })
         guard let number, (30...52).contains(number) else {
-            lines.append(FitLine(title: "Talla", detail: "Tu talla es la EU \(yours)", level: .info))
+            lines.append(FitLine(title: String(localized: "Talla"), detail: String(localized: "Tu talla es la EU \(yours)"), level: .info))
             return
         }
         let difference = number - Double(yours)
         if abs(difference) < 0.75 {
-            lines.append(FitLine(title: "Talla", detail: "EU \(input.size): es tu talla", level: .good))
+            lines.append(FitLine(title: String(localized: "Talla"), detail: String(localized: "EU \(input.size): es tu talla"), level: .good))
         } else {
-            let detail = difference > 0 ? "EU \(input.size): te quedará grande (la tuya es la \(yours))"
-                                        : "EU \(input.size): te quedará pequeña (la tuya es la \(yours))"
-            lines.append(FitLine(title: "Talla", detail: detail, level: .warning))
+            let detail = difference > 0
+                ? String(localized: "EU \(input.size): te quedará grande (la tuya es la \(yours))")
+                : String(localized: "EU \(input.size): te quedará pequeña (la tuya es la \(yours))")
+            lines.append(FitLine(title: String(localized: "Talla"), detail: detail, level: .warning))
         }
     }
 
@@ -301,29 +306,29 @@ nonisolated struct GarmentShell: Sendable {
 
     static func describeHem(_ y: Float, on body: BodyShape) -> String {
         switch y {
-        case (body.yWaist + 0.03)...: "Corta: por encima de la cintura"
-        case (body.yHip - 0.02)...: "Llega a la cadera"
-        case (body.yCrotch - 0.06)...: "Cubre la cadera"
-        case (body.yKnee + 0.1)...: "Llega a medio muslo"
-        case (body.yKnee - 0.06)...: "Llega a la rodilla"
-        case (body.yAnkle + 0.12)...: "Por debajo de la rodilla"
-        default: "Larga, hasta el tobillo"
+        case (body.yWaist + 0.03)...: String(localized: "Corta: por encima de la cintura")
+        case (body.yHip - 0.02)...: String(localized: "Llega a la cadera")
+        case (body.yCrotch - 0.06)...: String(localized: "Cubre la cadera")
+        case (body.yKnee + 0.1)...: String(localized: "Llega a medio muslo")
+        case (body.yKnee - 0.06)...: String(localized: "Llega a la rodilla")
+        case (body.yAnkle + 0.12)...: String(localized: "Por debajo de la rodilla")
+        default: String(localized: "Larga, hasta el tobillo")
         }
     }
 
     static func sleeveLine(_ length: Float, _ body: BodyShape, measured: Bool) -> FitLine {
         let difference = Int(((length - body.armLength) * 100).rounded())
         if length < body.upperArmLength * 0.8 {
-            return FitLine(title: "Manga", detail: "Manga corta", level: .info)
+            return FitLine(title: String(localized: "Manga"), detail: String(localized: "Manga corta"), level: .info)
         }
         guard measured else {
-            return FitLine(title: "Manga", detail: "Sin medida de la prenda: largo típico", level: .info)
+            return FitLine(title: String(localized: "Manga"), detail: String(localized: "Sin medida de la prenda: largo típico"), level: .info)
         }
         if abs(difference) <= 3 {
-            return FitLine(title: "Manga", detail: "Llega a la muñeca", level: .good)
+            return FitLine(title: String(localized: "Manga"), detail: String(localized: "Llega a la muñeca"), level: .good)
         }
         return difference < 0
-            ? FitLine(title: "Manga", detail: "Se queda \(-difference) cm antes de la muñeca", level: .warning)
-            : FitLine(title: "Manga", detail: "Te sobran \(difference) cm de manga", level: .warning)
+            ? FitLine(title: String(localized: "Manga"), detail: String(localized: "Se queda \(-difference) cm antes de la muñeca"), level: .warning)
+            : FitLine(title: String(localized: "Manga"), detail: String(localized: "Te sobran \(difference) cm de manga"), level: .warning)
     }
 }

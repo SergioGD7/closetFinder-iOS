@@ -32,12 +32,12 @@ nonisolated enum WardrobeInsights {
 
     /// «hace 142 días», «sin estrenar», «hoy»
     static func wornDescription(_ garment: Garment, now: Date = .now) -> String {
-        guard garment.lastWornAt != nil else { return "Sin estrenar" }
+        guard garment.lastWornAt != nil else { return String(localized: "Sin estrenar") }
         let days = daysSinceWorn(garment, now: now)
         switch days {
-        case 0: return "Usada hoy"
-        case 1: return "Usada ayer"
-        default: return "Hace \(days) días"
+        case 0: return String(localized: "Usada hoy")
+        case 1: return String(localized: "Usada ayer")
+        default: return String(localized: "Hace \(days) días")
         }
     }
 }

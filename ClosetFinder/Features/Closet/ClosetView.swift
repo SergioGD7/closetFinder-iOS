@@ -13,10 +13,10 @@ enum ClosetSort: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .recent: "Añadidas recientemente"
-        case .name: "Nombre"
-        case .mostWorn: "Más usadas"
-        case .leastWorn: "Menos usadas"
+        case .recent: String(localized: "Añadidas recientemente")
+        case .name: String(localized: "Nombre")
+        case .mostWorn: String(localized: "Más usadas")
+        case .leastWorn: String(localized: "Menos usadas")
         }
     }
 
@@ -89,11 +89,11 @@ struct ClosetView: View {
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
-                        FilterChip(title: "Todo", isSelected: category == nil && !favoritesOnly) {
+                        FilterChip(title: String(localized: "Todo"), isSelected: category == nil && !favoritesOnly) {
                             category = nil
                             favoritesOnly = false
                         }
-                        FilterChip(title: "Favoritas", systemImage: "heart.fill", isSelected: favoritesOnly) {
+                        FilterChip(title: String(localized: "Favoritas"), systemImage: "heart.fill", isSelected: favoritesOnly) {
                             favoritesOnly.toggle()
                         }
                         ForEach(presentCategories) { item in
@@ -129,8 +129,8 @@ struct ClosetView: View {
     }
 
     private var summary: String {
-        let garmentText = garments.count == 1 ? "1 prenda" : "\(garments.count) prendas"
-        let locationText = locations.count == 1 ? "1 ubicación" : "\(locations.count) ubicaciones"
+        let garmentText = garments.count == 1 ? String(localized: "1 prenda") : String(localized: "\(garments.count) prendas")
+        let locationText = locations.count == 1 ? String(localized: "1 ubicación") : String(localized: "\(locations.count) ubicaciones")
         return "\(garmentText) · \(locationText)"
     }
 
@@ -139,7 +139,7 @@ struct ClosetView: View {
         Button {
             garment.isFavorite.toggle()
         } label: {
-            Label(garment.isFavorite ? "Quitar de favoritas" : "Añadir a favoritas",
+            Label(garment.isFavorite ? String(localized: "Quitar de favoritas") : String(localized: "Añadir a favoritas"),
                   systemImage: garment.isFavorite ? "heart.slash" : "heart")
         }
         Button {

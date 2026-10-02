@@ -30,7 +30,7 @@ enum SpotlightIndexer {
     private static func item(for garment: Garment) -> CSSearchableItem {
         let attributes = CSSearchableItemAttributeSet(contentType: .content)
         attributes.title = garment.displayName
-        attributes.contentDescription = [garment.size.isEmpty ? nil : "Talla \(garment.size)", garment.locationPath]
+        attributes.contentDescription = [garment.size.isEmpty ? nil : String(localized: "Talla \(garment.size)"), garment.locationPath]
             .compactMap { $0 }
             .joined(separator: " · ")
         attributes.thumbnailData = garment.thumbnail

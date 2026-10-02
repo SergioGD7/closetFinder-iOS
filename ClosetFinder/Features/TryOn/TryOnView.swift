@@ -93,7 +93,7 @@ struct TryOnView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 1) {
                         Text(garment.displayName).font(.headline)
-                        Text(profile.map { "En el maniquí de \($0.name)" } ?? "Maniquí estándar")
+                        Text(profile.map { String(localized: "En el maniquí de \($0.name)") } ?? String(localized: "Maniquí estándar"))
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
@@ -145,8 +145,7 @@ struct TryOnView: View {
         let names = BodyMeasurement.allCases.filter(assumed.contains).map { $0.title.lowercased() }
         let list = ListFormatter.localizedString(byJoining: names)
         return profile == nil
-            ? "Maniquí con medidas típicas. Añade tus medidas en la pestaña Medidas."
-            : "Sin medir: \(list). Se usan valores típicos."
+            ? String(localized: "Maniquí con medidas típicas. Añade tus medidas en la pestaña Medidas.") : String(localized: "Sin medir: \(list). Se usan valores típicos.")
     }
 
     private func symbol(for level: GarmentShell.Level) -> String {
@@ -176,7 +175,7 @@ struct TryOnView: View {
             Button {
                 showsGarment.toggle()
             } label: {
-                Label(showsGarment ? "Quitar la prenda" : "Poner la prenda",
+                Label(showsGarment ? String(localized: "Quitar la prenda") : String(localized: "Poner la prenda"),
                       systemImage: showsGarment ? "tshirt.fill" : "tshirt")
             }
             if profiles.count > 1 {
@@ -205,7 +204,7 @@ struct TryOnPhotoButton: View {
         // La etiqueta de PhotosPicker no se ejecuta en el actor principal: se calcula antes.
         let analyzing = isAnalyzing
         let symbol = profile.hasTryOnPhoto ? "arrow.triangle.2.circlepath.camera" : "person.crop.rectangle"
-        let title = analyzing ? "Analizando la foto…" : profile.hasTryOnPhoto ? "Cambiar la foto" : "Usar una foto mía"
+        let title = analyzing ? String(localized: "Analizando la foto…") : profile.hasTryOnPhoto ? String(localized: "Cambiar la foto") : String(localized: "Usar una foto mía")
         VStack(alignment: .leading, spacing: 6) {
             PhotosPicker(selection: $item, matching: .images) {
                 HStack(spacing: 8) {
@@ -238,7 +237,7 @@ struct TryOnPhotoButton: View {
                 self.item = nil
             }
             guard let data = try? await item.loadTransferable(type: Data.self) else {
-                errorMessage = "No se ha podido abrir la foto."
+                errorMessage = String(localized: "No se ha podido abrir la foto.")
                 return
             }
             do {
@@ -248,10 +247,10 @@ struct TryOnPhotoButton: View {
                 if let tone = analysis.skinTone { profile.skinTone = tone }
                 if let face = analysis.faceTexture { profile.faceTexture = face }
                 if analysis.shoulderRatio == nil {
-                    errorMessage = "Se ha usado tu cara, pero no se ve el cuerpo entero: las proporciones son las típicas."
+                    errorMessage = String(localized: "Se ha usado tu cara, pero no se ve el cuerpo entero: las proporciones son las típicas.")
                 }
             } catch {
-                errorMessage = "No se ve a ninguna persona. Usa una foto de cuerpo entero, de frente y con buena luz."
+                errorMessage = String(localized: "No se ve a ninguna persona. Usa una foto de cuerpo entero, de frente y con buena luz.")
             }
         }
     }

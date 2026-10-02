@@ -78,10 +78,13 @@ nonisolated final class Garment {
 
     static func generatedName(category: GarmentCategory, colors: [GarmentColor]) -> String {
         guard let color = colors.first else { return category.singular }
-        return "\(category.singular) \(color.adjective(feminine: category.isFeminine))"
+        // El orden y la concordancia dependen del idioma: «Camiseta blanca», «White T-shirt».
+        let noun = category.singular
+        let adjective = color.adjective(feminine: category.isFeminine)
+        return String(localized: "garment.generatedName", defaultValue: "\(noun) \(adjective)")
     }
 
-    var locationPath: String { location?.path ?? "Sin ubicación" }
+    var locationPath: String { location?.path ?? String(localized: "Sin ubicación") }
 
     func measurement(_ measurement: GarmentMeasurement) -> Double? {
         switch measurement {

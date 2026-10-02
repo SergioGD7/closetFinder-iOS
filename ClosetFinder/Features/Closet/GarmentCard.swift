@@ -48,7 +48,7 @@ struct GarmentCard: View {
             HStack(spacing: 3) {
                 Image(systemName: garment.location == nil ? "questionmark.folder" : "mappin")
                     .foregroundStyle(garment.location == nil ? Color.secondary : Color.accentColor)
-                Text(garment.location?.shortPath ?? "Sin ubicación")
+                Text(garment.location?.shortPath ?? String(localized: "Sin ubicación"))
                     .foregroundStyle(.secondary)
             }
             .font(.caption)

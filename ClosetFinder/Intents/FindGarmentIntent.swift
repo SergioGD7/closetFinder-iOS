@@ -28,17 +28,20 @@ struct FindGarmentIntent: AppIntent {
             return .result(dialog: "\(answer)")
         }
         let others = results.count - 1
-        return .result(dialog: "\(answer) Hay \(others) \(others == 1 ? "prenda más parecida" : "prendas más parecidas") en la app.")
+        let more = others == 1
+            ? String(localized: "Hay 1 prenda más parecida en la app.")
+            : String(localized: "Hay \(others) prendas más parecidas en la app.")
+        return .result(dialog: "\(answer) \(more)")
     }
 
     static func sentence(for garment: Garment) -> String {
         guard let location = garment.location else {
-            return "Tu \(garment.displayName) no tiene ubicación asignada."
+            return String(localized: "Tu \(garment.displayName) no tiene ubicación asignada.")
         }
         switch garment.status {
-        case .lent: return "Tu \(garment.displayName) está prestada. Su sitio es \(location.path)."
-        case .laundry: return "Tu \(garment.displayName) está lavándose. Su sitio es \(location.path)."
-        default: return "Tu \(garment.displayName) está en \(location.path)."
+        case .lent: return String(localized: "Tu \(garment.displayName) está prestada. Su sitio es \(location.path).")
+        case .laundry: return String(localized: "Tu \(garment.displayName) está lavándose. Su sitio es \(location.path).")
+        default: return String(localized: "Tu \(garment.displayName) está en \(location.path).")
         }
     }
 }

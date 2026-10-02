@@ -89,7 +89,7 @@ struct LocationsView: View {
                     }
                     if room.directGarments.count > 0 || room.sortedChildren.isEmpty {
                         NavigationLink(value: room) {
-                            Label(room.sortedChildren.isEmpty ? "Ver \(room.name)" : "Sueltas en \(room.name)",
+                            Label(room.sortedChildren.isEmpty ? String(localized: "Ver \(room.name)") : String(localized: "Sueltas en \(room.name)"),
                                   systemImage: "tray.full")
                                 .badge(room.directGarments.count)
                         }
@@ -102,7 +102,7 @@ struct LocationsView: View {
             if !unassigned.isEmpty {
                 Section {
                     NavigationLink {
-                        GarmentListView(title: "Sin ubicación", garments: unassigned)
+                        GarmentListView(title: String(localized: "Sin ubicación"), garments: unassigned)
                     } label: {
                         Label("Prendas sin ubicación", systemImage: "questionmark.folder")
                             .badge(unassigned.count)
@@ -141,8 +141,8 @@ struct LocationsView: View {
 
     private var summary: String {
         let total = garments.count - unassigned.count
-        let roomText = rooms.count == 1 ? "1 estancia" : "\(rooms.count) estancias"
-        return "\(total) \(total == 1 ? "prenda" : "prendas") en \(roomText)"
+        let roomText = rooms.count == 1 ? String(localized: "1 estancia") : String(localized: "\(rooms.count) estancias")
+        return total == 1 ? String(localized: "1 prenda en \(roomText)") : String(localized: "\(total) prendas en \(roomText)")
     }
 }
 

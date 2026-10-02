@@ -50,14 +50,14 @@ struct SettingsView: View {
             .fileExporter(isPresented: $isExporting, document: exportDocument,
                           contentType: .closetFinderBackup, defaultFilename: BackupService.suggestedFilename()) { result in
                 if case .failure(let error) = result {
-                    message = Message(title: "No se pudo guardar la copia", text: error.localizedDescription)
+                    message = Message(title: String(localized: "No se pudo guardar la copia"), text: error.localizedDescription)
                 }
             }
             .fileImporter(isPresented: $isImporting, allowedContentTypes: [.closetFinderBackup]) { result in
                 switch result {
                 case .success(let url): restore(from: url)
                 case .failure(let error):
-                    message = Message(title: "No se pudo abrir el archivo", text: error.localizedDescription)
+                    message = Message(title: String(localized: "No se pudo abrir el archivo"), text: error.localizedDescription)
                 }
             }
             .alert(item: $message) { message in
@@ -93,25 +93,25 @@ struct SettingsView: View {
     private var iCloudSymbol: String { iCloudIsWorking ? "checkmark.icloud" : "exclamationmark.icloud" }
 
     private var iCloudTitle: String {
-        guard AppModelContainer.syncsWithICloud else { return "Sincronización no disponible" }
+        guard AppModelContainer.syncsWithICloud else { return String(localized: "Sincronización no disponible") }
         switch iCloudStatus {
-        case .available: return "Sincronizado con iCloud"
-        case .noAccount: return "Sin cuenta de iCloud"
-        case .restricted: return "iCloud restringido"
-        case .temporarilyUnavailable: return "iCloud no disponible ahora"
-        default: return "Comprobando iCloud…"
+        case .available: return String(localized: "Sincronizado con iCloud")
+        case .noAccount: return String(localized: "Sin cuenta de iCloud")
+        case .restricted: return String(localized: "iCloud restringido")
+        case .temporarilyUnavailable: return String(localized: "iCloud no disponible ahora")
+        default: return String(localized: "Comprobando iCloud…")
         }
     }
 
     private var iCloudDetail: String {
         guard AppModelContainer.syncsWithICloud else {
-            return "Esta compilación no tiene acceso a iCloud. Los datos solo se guardan en este dispositivo."
+            return String(localized: "Esta compilación no tiene acceso a iCloud. Los datos solo se guardan en este dispositivo.")
         }
         switch iCloudStatus {
-        case .available: return "Los cambios se copian a tu iCloud automáticamente."
-        case .noAccount: return "Inicia sesión en Ajustes › tu nombre para guardar una copia en iCloud."
-        case .restricted: return "Un perfil o las restricciones del dispositivo impiden usar iCloud."
-        case .temporarilyUnavailable: return "Se sincronizará en cuanto iCloud vuelva a estar disponible."
+        case .available: return String(localized: "Los cambios se copian a tu iCloud automáticamente.")
+        case .noAccount: return String(localized: "Inicia sesión en Ajustes › tu nombre para guardar una copia en iCloud.")
+        case .restricted: return String(localized: "Un perfil o las restricciones del dispositivo impiden usar iCloud.")
+        case .temporarilyUnavailable: return String(localized: "Se sincronizará en cuanto iCloud vuelva a estar disponible.")
         default: return ""
         }
     }
@@ -150,7 +150,7 @@ struct SettingsView: View {
             exportDocument = BackupDocument(data: try archive.encoded())
             isExporting = true
         } catch {
-            message = Message(title: "No se pudo crear la copia", text: error.localizedDescription)
+            message = Message(title: String(localized: "No se pudo crear la copia"), text: error.localizedDescription)
         }
     }
 
@@ -162,11 +162,11 @@ struct SettingsView: View {
             let summary = try BackupService.restore(archive, into: modelContext)
             SpotlightIndexer.reindexAll(in: modelContext)
             message = Message(
-                title: "Copia restaurada",
-                text: "Se han añadido \(summary.garments) prendas, \(summary.locations) ubicaciones y \(summary.profiles) personas. \(summary.skipped) elementos ya estaban y no se han duplicado.")
+                title: String(localized: "Copia restaurada"),
+                text: String(localized: "Se han añadido \(summary.garments) prendas, \(summary.locations) ubicaciones y \(summary.profiles) personas. \(summary.skipped) elementos ya estaban y no se han duplicado."))
         } catch {
-            message = Message(title: "No se pudo restaurar", text: (error as? LocalizedError)?.errorDescription
-                              ?? "El archivo no es una copia de Closet Finder o está dañado.")
+            message = Message(title: String(localized: "No se pudo restaurar"), text: (error as? LocalizedError)?.errorDescription
+                              ?? String(localized: "El archivo no es una copia de Closet Finder o está dañado."))
         }
     }
 
