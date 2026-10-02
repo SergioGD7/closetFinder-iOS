@@ -48,7 +48,7 @@ struct QRScannerSheet: View {
     @Environment(AppRouter.self) private var router
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @State private var message = "Apunta a la etiqueta de una caja"
+    @State private var message = String(localized: "Apunta a la etiqueta de una caja")
     @State private var foundFeedback = 0
 
     var body: some View {
@@ -76,11 +76,11 @@ struct QRScannerSheet: View {
 
     private func handle(_ payload: String) {
         guard let link = DeepLink(string: payload) else {
-            message = "Este código no es de Closet Finder"
+            message = String(localized: "Este código no es de Closet Finder")
             return
         }
         guard router.open(link, in: modelContext) else {
-            message = "Esa ubicación ya no existe"
+            message = String(localized: "Esa ubicación ya no existe")
             return
         }
         foundFeedback += 1

@@ -7,36 +7,49 @@ nonisolated enum GarmentColor: String, CaseIterable, Codable, Identifiable, Send
 
     var id: Self { self }
 
+    /// Adjetivo en masculino singular, en el idioma de la app.
     var masculine: String {
         switch self {
-        case .black: "negro"
-        case .white: "blanco"
-        case .gray: "gris"
-        case .beige: "beige"
-        case .brown: "marrón"
-        case .navy: "azul marino"
-        case .blue: "azul"
-        case .lightBlue: "celeste"
-        case .green: "verde"
-        case .olive: "verde oliva"
-        case .yellow: "amarillo"
-        case .orange: "naranja"
-        case .red: "rojo"
-        case .burgundy: "burdeos"
-        case .pink: "rosa"
-        case .purple: "morado"
-        case .multicolor: "multicolor"
+        case .black: String(localized: "color.black.masculine", defaultValue: "negro")
+        case .white: String(localized: "color.white.masculine", defaultValue: "blanco")
+        case .gray: String(localized: "color.gray.masculine", defaultValue: "gris")
+        case .beige: String(localized: "color.beige.masculine", defaultValue: "beige")
+        case .brown: String(localized: "color.brown.masculine", defaultValue: "marrón")
+        case .navy: String(localized: "color.navy.masculine", defaultValue: "azul marino")
+        case .blue: String(localized: "color.blue.masculine", defaultValue: "azul")
+        case .lightBlue: String(localized: "color.lightBlue.masculine", defaultValue: "celeste")
+        case .green: String(localized: "color.green.masculine", defaultValue: "verde")
+        case .olive: String(localized: "color.olive.masculine", defaultValue: "verde oliva")
+        case .yellow: String(localized: "color.yellow.masculine", defaultValue: "amarillo")
+        case .orange: String(localized: "color.orange.masculine", defaultValue: "naranja")
+        case .red: String(localized: "color.red.masculine", defaultValue: "rojo")
+        case .burgundy: String(localized: "color.burgundy.masculine", defaultValue: "burdeos")
+        case .pink: String(localized: "color.pink.masculine", defaultValue: "rosa")
+        case .purple: String(localized: "color.purple.masculine", defaultValue: "morado")
+        case .multicolor: String(localized: "color.multicolor.masculine", defaultValue: "multicolor")
         }
     }
 
+    /// Adjetivo en femenino singular, en el idioma de la app.
     var feminine: String {
         switch self {
-        case .black: "negra"
-        case .white: "blanca"
-        case .yellow: "amarilla"
-        case .red: "roja"
-        case .purple: "morada"
-        default: masculine
+        case .black: String(localized: "color.black.feminine", defaultValue: "negra")
+        case .white: String(localized: "color.white.feminine", defaultValue: "blanca")
+        case .gray: String(localized: "color.gray.feminine", defaultValue: "gris")
+        case .beige: String(localized: "color.beige.feminine", defaultValue: "beige")
+        case .brown: String(localized: "color.brown.feminine", defaultValue: "marrón")
+        case .navy: String(localized: "color.navy.feminine", defaultValue: "azul marino")
+        case .blue: String(localized: "color.blue.feminine", defaultValue: "azul")
+        case .lightBlue: String(localized: "color.lightBlue.feminine", defaultValue: "celeste")
+        case .green: String(localized: "color.green.feminine", defaultValue: "verde")
+        case .olive: String(localized: "color.olive.feminine", defaultValue: "verde oliva")
+        case .yellow: String(localized: "color.yellow.feminine", defaultValue: "amarilla")
+        case .orange: String(localized: "color.orange.feminine", defaultValue: "naranja")
+        case .red: String(localized: "color.red.feminine", defaultValue: "roja")
+        case .burgundy: String(localized: "color.burgundy.feminine", defaultValue: "burdeos")
+        case .pink: String(localized: "color.pink.feminine", defaultValue: "rosa")
+        case .purple: String(localized: "color.purple.feminine", defaultValue: "morada")
+        case .multicolor: String(localized: "color.multicolor.feminine", defaultValue: "multicolor")
         }
     }
 

@@ -23,6 +23,8 @@ struct RootTabView: View {
                     SearchView()
                 }
             }
+            // En iPad, las pestañas se pueden convertir en barra lateral.
+            .tabViewStyle(.sidebarAdaptable)
             .minimizingTabBarOnScroll()
         } else {
             TabView(selection: $router.selectedTab) {

@@ -8,33 +8,33 @@ nonisolated enum LocationKind: String, CaseIterable, Codable, Identifiable, Send
 
     var title: String {
         switch self {
-        case .room: "Estancia"
-        case .wardrobe: "Armario"
-        case .dresser: "Cómoda"
-        case .shoeRack: "Zapatero"
-        case .shelving: "Estantería"
-        case .box: "Caja"
-        case .suitcase: "Maleta"
-        case .rail: "Barra"
-        case .shelf: "Balda"
-        case .drawer: "Cajón"
-        case .other: "Otro"
+        case .room: String(localized: "Estancia")
+        case .wardrobe: String(localized: "Armario")
+        case .dresser: String(localized: "Cómoda")
+        case .shoeRack: String(localized: "Zapatero")
+        case .shelving: String(localized: "Estantería")
+        case .box: String(localized: "Caja")
+        case .suitcase: String(localized: "Maleta")
+        case .rail: String(localized: "Barra")
+        case .shelf: String(localized: "Balda")
+        case .drawer: String(localized: "Cajón")
+        case .other: String(localized: "Otro")
         }
     }
 
     var plural: String {
         switch self {
-        case .room: "estancias"
-        case .wardrobe: "armarios"
-        case .dresser: "cómodas"
-        case .shoeRack: "zapateros"
-        case .shelving: "estanterías"
-        case .box: "cajas"
-        case .suitcase: "maletas"
-        case .rail: "barras"
-        case .shelf: "baldas"
-        case .drawer: "cajones"
-        case .other: "otros"
+        case .room: String(localized: "kind.plural.room", defaultValue: "estancias")
+        case .wardrobe: String(localized: "kind.plural.wardrobe", defaultValue: "armarios")
+        case .dresser: String(localized: "kind.plural.dresser", defaultValue: "cómodas")
+        case .shoeRack: String(localized: "kind.plural.shoeRack", defaultValue: "zapateros")
+        case .shelving: String(localized: "kind.plural.shelving", defaultValue: "estanterías")
+        case .box: String(localized: "kind.plural.box", defaultValue: "cajas")
+        case .suitcase: String(localized: "kind.plural.suitcase", defaultValue: "maletas")
+        case .rail: String(localized: "kind.plural.rail", defaultValue: "barras")
+        case .shelf: String(localized: "kind.plural.shelf", defaultValue: "baldas")
+        case .drawer: String(localized: "kind.plural.drawer", defaultValue: "cajones")
+        case .other: String(localized: "kind.plural.other", defaultValue: "otros")
         }
     }
 
@@ -77,13 +77,14 @@ nonisolated enum LocationKind: String, CaseIterable, Codable, Identifiable, Send
     var template: [(kind: LocationKind, name: String)] {
         switch self {
         case .wardrobe:
-            [(.rail, "Barra")] + (1...4).map { (.shelf, "Balda \($0)") } + (1...2).map { (.drawer, "Cajón \($0)") }
+            [(.rail, String(localized: "Barra"))] + (1...4).map { (.shelf, String(localized: "Balda \($0)")) }
+                + (1...2).map { (.drawer, String(localized: "Cajón \($0)")) }
         case .dresser:
-            (1...3).map { (.drawer, "Cajón \($0)") }
+            (1...3).map { (.drawer, String(localized: "Cajón \($0)")) }
         case .shoeRack:
-            (1...3).map { (.shelf, "Balda \($0)") }
+            (1...3).map { (.shelf, String(localized: "Balda \($0)")) }
         case .shelving:
-            (1...4).map { (.shelf, "Balda \($0)") }
+            (1...4).map { (.shelf, String(localized: "Balda \($0)")) }
         default:
             []
         }

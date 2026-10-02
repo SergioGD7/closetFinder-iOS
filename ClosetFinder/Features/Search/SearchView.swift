@@ -78,7 +78,7 @@ struct SearchView: View {
             ContentUnavailableView.search(text: text)
                 .listRowBackground(Color.clear)
         } else {
-            Section(results.count == 1 ? "1 resultado" : "\(results.count) resultados") {
+            Section(results.count == 1 ? String(localized: "1 resultado") : String(localized: "\(results.count) resultados")) {
                 ForEach(results) { garment in
                     NavigationLink(value: garment) {
                         GarmentRow(garment: garment)

@@ -13,25 +13,25 @@ enum SampleData {
 
     static func insert(into context: ModelContext) {
         // Ubicaciones
-        let bedroom = makeLocation("Dormitorio", .room, index: 0, parent: nil, in: context)
-        let wardrobe = makeLocation("Armario grande", .wardrobe, index: 0, parent: bedroom, in: context)
+        let bedroom = makeLocation(String(localized: "Dormitorio"), .room, index: 0, parent: nil, in: context)
+        let wardrobe = makeLocation(String(localized: "Armario grande"), .wardrobe, index: 0, parent: bedroom, in: context)
         let compartments = Dictionary(uniqueKeysWithValues: LocationKind.wardrobe.template.enumerated().map { index, item in
             (item.name, makeLocation(item.name, item.kind, index: index, parent: wardrobe, in: context))
         })
-        let dresser = makeLocation("Cómoda", .dresser, index: 1, parent: bedroom, in: context)
-        let drawers = (1...3).map { makeLocation("Cajón \($0)", .drawer, index: $0 - 1, parent: dresser, in: context) }
+        let dresser = makeLocation(String(localized: "Cómoda"), .dresser, index: 1, parent: bedroom, in: context)
+        let drawers = (1...3).map { makeLocation(String(localized: "Cajón \($0)"), .drawer, index: $0 - 1, parent: dresser, in: context) }
 
-        let hall = makeLocation("Entrada", .room, index: 1, parent: nil, in: context)
-        let shoeRack = makeLocation("Zapatero", .shoeRack, index: 0, parent: hall, in: context)
-        let shoeShelves = (1...3).map { makeLocation("Balda \($0)", .shelf, index: $0 - 1, parent: shoeRack, in: context) }
+        let hall = makeLocation(String(localized: "Entrada"), .room, index: 1, parent: nil, in: context)
+        let shoeRack = makeLocation(String(localized: "Zapatero"), .shoeRack, index: 0, parent: hall, in: context)
+        let shoeShelves = (1...3).map { makeLocation(String(localized: "Balda \($0)"), .shelf, index: $0 - 1, parent: shoeRack, in: context) }
 
-        let storage = makeLocation("Trastero", .room, index: 2, parent: nil, in: context)
-        let winterBox = makeLocation("Caja «Invierno»", .box, index: 0, parent: storage, in: context)
-        let snowBox = makeLocation("Caja «Nieve»", .box, index: 1, parent: storage, in: context)
-        let suitcase = makeLocation("Maleta grande", .suitcase, index: 2, parent: storage, in: context)
+        let storage = makeLocation(String(localized: "Trastero"), .room, index: 2, parent: nil, in: context)
+        let winterBox = makeLocation(String(localized: "Caja «Invierno»"), .box, index: 0, parent: storage, in: context)
+        let snowBox = makeLocation(String(localized: "Caja «Nieve»"), .box, index: 1, parent: storage, in: context)
+        let suitcase = makeLocation(String(localized: "Maleta grande"), .suitcase, index: 2, parent: storage, in: context)
 
         // Persona
-        let me = BodyProfile(name: "Yo", sizing: .menswear)
+        let me = BodyProfile(name: String(localized: "Yo"), sizing: .menswear)
         context.insert(me)
         me.heightCm = 178
         me.chestCm = 98
@@ -42,22 +42,22 @@ enum SampleData {
 
         // Prendas
         let items: [SampleGarment] = [
-            .init("Chaqueta vaquera", .jacket, "M", [.blue], compartments["Balda 2"], brand: "Levi's", material: "Algodón",
+            .init(String(localized: "Chaqueta vaquera"), .jacket, "M", [.blue], compartments[String(localized: "Balda \(2)")], brand: "Levi's", material: String(localized: "Algodón"),
                   season: .midSeason, chest: 54, length: 66, sleeve: 63, wears: 12, daysAgo: 9, favorite: true),
-            .init("Camiseta básica blanca", .tShirt, "L", [.white], drawers[0], material: "Algodón", chest: 55, length: 72, wears: 30, daysAgo: 2),
-            .init("Sudadera verde", .sweater, "L", [.green], drawers[2], season: .autumnWinter, chest: 58, length: 70, sleeve: 64, wears: 8, daysAgo: 20),
-            .init("Zapatillas running", .shoes, "43", [.black], shoeShelves[0], brand: "Asics", wears: 40, daysAgo: 1, favorite: true),
-            .init("Abrigo camel", .coat, "M", [.brown], compartments["Barra"], material: "Lana", season: .autumnWinter, chest: 57, length: 95, sleeve: 65, wears: 5, daysAgo: 160),
-            .init("Chino gris marengo", .trousers, "42", [.gray], compartments["Balda 3"], waist: 43, length: 104, inseam: 81, wears: 14, daysAgo: 6),
-            .init("Plumífero azul marino", .coat, "L", [.navy], snowBox, season: .autumnWinter, chest: 62, length: 78, wears: 2, daysAgo: 250),
-            .init("Americana azul", .blazer, "50", [.blue], compartments["Barra"], material: "Lana fría", chest: 54, length: 75, sleeve: 64, wears: 3, daysAgo: 95),
-            .init("Camisa de lino", .shirt, "M", [.lightBlue], compartments["Barra"], material: "Lino", season: .springSummer, chest: 56, length: 76, sleeve: 64, wears: 6, daysAgo: 40),
-            .init("Bañador estampado", .swimwear, "M", [.multicolor], suitcase, season: .springSummer, wears: 4, daysAgo: 70),
-            .init("Jersey de punto burdeos", .sweater, "M", [.burgundy], winterBox, material: "Lana merino", season: .autumnWinter, chest: 50, length: 66, sleeve: 62, wears: 9, daysAgo: 180),
-            .init("Vaqueros rectos", .trousers, "42", [.navy], compartments["Balda 3"], brand: "Levi's", waist: 42.5, length: 106, inseam: 82, wears: 22, daysAgo: 3),
-            .init("Botas de montaña", .shoes, "43", [.brown], snowBox, season: .autumnWinter, wears: 3, daysAgo: 240),
-            .init("Pantalón corto beige", .shorts, "M", [.beige], suitcase, season: .springSummer, waist: 44, length: 48, wears: 7, daysAgo: 60),
-            .init("Polo rojo", .tShirt, "M", [.red], compartments["Cajón 1"], status: .lent, chest: 52, length: 70, wears: 5, daysAgo: 30),
+            .init(String(localized: "Camiseta básica blanca"), .tShirt, "L", [.white], drawers[0], material: String(localized: "Algodón"), chest: 55, length: 72, wears: 30, daysAgo: 2),
+            .init(String(localized: "Sudadera verde"), .sweater, "L", [.green], drawers[2], season: .autumnWinter, chest: 58, length: 70, sleeve: 64, wears: 8, daysAgo: 20),
+            .init(String(localized: "Zapatillas running"), .shoes, "43", [.black], shoeShelves[0], brand: "Asics", wears: 40, daysAgo: 1, favorite: true),
+            .init(String(localized: "Abrigo camel"), .coat, "M", [.brown], compartments[String(localized: "Barra")], material: String(localized: "Lana"), season: .autumnWinter, chest: 57, length: 95, sleeve: 65, wears: 5, daysAgo: 160),
+            .init(String(localized: "Chino gris marengo"), .trousers, "42", [.gray], compartments[String(localized: "Balda \(3)")], waist: 43, length: 104, inseam: 81, wears: 14, daysAgo: 6),
+            .init(String(localized: "Plumífero azul marino"), .coat, "L", [.navy], snowBox, season: .autumnWinter, chest: 62, length: 78, wears: 2, daysAgo: 250),
+            .init(String(localized: "Americana azul"), .blazer, "50", [.blue], compartments[String(localized: "Barra")], material: String(localized: "Lana fría"), chest: 54, length: 75, sleeve: 64, wears: 3, daysAgo: 95),
+            .init(String(localized: "Camisa de lino"), .shirt, "M", [.lightBlue], compartments[String(localized: "Barra")], material: String(localized: "Lino"), season: .springSummer, chest: 56, length: 76, sleeve: 64, wears: 6, daysAgo: 40),
+            .init(String(localized: "Bañador estampado"), .swimwear, "M", [.multicolor], suitcase, season: .springSummer, wears: 4, daysAgo: 70),
+            .init(String(localized: "Jersey de punto burdeos"), .sweater, "M", [.burgundy], winterBox, material: String(localized: "Lana merino"), season: .autumnWinter, chest: 50, length: 66, sleeve: 62, wears: 9, daysAgo: 180),
+            .init(String(localized: "Vaqueros rectos"), .trousers, "42", [.navy], compartments[String(localized: "Balda \(3)")], brand: "Levi's", waist: 42.5, length: 106, inseam: 82, wears: 22, daysAgo: 3),
+            .init(String(localized: "Botas de montaña"), .shoes, "43", [.brown], snowBox, season: .autumnWinter, wears: 3, daysAgo: 240),
+            .init(String(localized: "Pantalón corto beige"), .shorts, "M", [.beige], suitcase, season: .springSummer, waist: 44, length: 48, wears: 7, daysAgo: 60),
+            .init(String(localized: "Polo rojo"), .tShirt, "M", [.red], compartments[String(localized: "Cajón \(1)")], status: .lent, chest: 52, length: 70, wears: 5, daysAgo: 30),
         ]
 
         for item in items {

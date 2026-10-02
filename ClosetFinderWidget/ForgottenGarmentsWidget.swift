@@ -38,7 +38,7 @@ nonisolated struct ForgottenItem: Identifiable, Sendable {
     init(_ garment: Garment) {
         id = garment.uuid
         name = garment.displayName
-        place = garment.location?.shortPath ?? "Sin ubicación"
+        place = garment.location?.shortPath ?? String(localized: "Sin ubicación")
         detail = WardrobeInsights.wornDescription(garment)
         category = garment.category
         color = garment.primaryColor
@@ -63,9 +63,9 @@ nonisolated struct ForgottenEntry: TimelineEntry, Sendable {
     let items: [ForgottenItem]
 
     static let sample = ForgottenEntry(date: .now, items: [
-        ForgottenItem(name: "Plumífero azul marino", place: "Trastero · Caja «Nieve»", detail: "Hace 250 días", category: .coat, color: .navy),
-        ForgottenItem(name: "Botas de montaña", place: "Trastero · Caja «Nieve»", detail: "Hace 240 días", category: .shoes, color: .brown),
-        ForgottenItem(name: "Jersey burdeos", place: "Trastero · Caja «Invierno»", detail: "Hace 180 días", category: .sweater, color: .burgundy),
+        ForgottenItem(name: String(localized: "Plumífero azul marino"), place: String(localized: "Trastero · Caja «Nieve»"), detail: String(localized: "Hace \(250) días"), category: .coat, color: .navy),
+        ForgottenItem(name: String(localized: "Botas de montaña"), place: String(localized: "Trastero · Caja «Nieve»"), detail: String(localized: "Hace \(240) días"), category: .shoes, color: .brown),
+        ForgottenItem(name: String(localized: "Jersey de punto burdeos"), place: String(localized: "Trastero · Caja «Invierno»"), detail: String(localized: "Hace \(180) días"), category: .sweater, color: .burgundy),
     ])
 }
 

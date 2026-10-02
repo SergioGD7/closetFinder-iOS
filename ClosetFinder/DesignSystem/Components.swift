@@ -147,7 +147,7 @@ struct FurnitureSchematic: View {
                 .overlay { RoundedRectangle(cornerRadius: 7, style: .continuous).stroke(Color(.separator), lineWidth: 1) }
         }
         .accessibilityElement()
-        .accessibilityLabel(highlighted.map { "\($0.name) de \(furniture.name)" } ?? furniture.name)
+        .accessibilityLabel(highlighted.map { String(localized: "\($0.name) de \(furniture.name)") } ?? furniture.name)
     }
 
     private struct RailSlot: View {

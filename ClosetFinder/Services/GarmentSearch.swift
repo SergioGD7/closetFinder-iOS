@@ -18,7 +18,7 @@ nonisolated enum SearchToken: Hashable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .color(let value): "Color: \(value.title)"
+        case .color(let value): String(localized: "Color: \(value.title)")
         case .category(let value): value.title
         case .season(let value): value.title
         case .status(let value): value.title
@@ -70,6 +70,12 @@ nonisolated enum GarmentSearch {
         "y", "en", "con", "donde", "esta", "estan", "que", "para", "por",
         "algo", "alguna", "alguno", "algun", "ropa", "prenda", "prendas", "cosa", "cosas",
         "busco", "quiero", "necesito", "tengo", "ponerme", "llevar",
+        // Otros idiomas de la app
+        "the", "a", "an", "my", "of", "for", "with", "where", "is", "something", "some", "clothes",
+        "le", "les", "un", "une", "des", "mon", "ma", "mes", "pour", "avec", "ou", "quelque", "chose",
+        "der", "die", "das", "ein", "eine", "mein", "meine", "fur", "mit", "wo", "ist", "etwas",
+        "il", "lo", "gli", "uno", "mio", "mia", "per", "dove", "qualcosa",
+        "o", "os", "as", "um", "uma", "meu", "minha", "com", "onde", "algum", "alguma",
     ]
 
     static func search(_ garments: [Garment], text: String, tokens: [SearchToken] = []) -> [Garment] {

@@ -40,7 +40,7 @@ struct GarmentEditorView: View {
                 }
                 if isNew { burstSection }
             }
-            .navigationTitle(isNew ? "Nueva prenda" : "Editar prenda")
+            .navigationTitle(isNew ? String(localized: "Nueva prenda") : String(localized: "Editar prenda"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -123,7 +123,7 @@ struct GarmentEditorView: View {
                 }
                 .overlay(alignment: .topTrailing) {
                     if model.hasPhoto && !model.isProcessing {
-                        GlassCircleButton(title: "Quitar foto", systemImage: "trash") { model.removePhoto() }
+                        GlassCircleButton(title: String(localized: "Quitar foto"), systemImage: "trash") { model.removePhoto() }
                             .padding(10)
                     }
                 }
@@ -256,7 +256,7 @@ struct GarmentEditorView: View {
                 LocationPicker(selection: model.location) { model.location = $0 }
             } label: {
                 LabeledContent("Ubicación") {
-                    Text(model.location?.path ?? "Sin ubicación")
+                    Text(model.location?.path ?? String(localized: "Sin ubicación"))
                         .foregroundStyle(model.location == nil ? Color.secondary : Color.accentColor)
                         .lineLimit(2)
                         .multilineTextAlignment(.trailing)
@@ -346,7 +346,7 @@ struct GarmentEditorView: View {
         model.prepareNextInBurst()
         let count = model.burstCount
         withAnimation(.snappy) {
-            burstMessage = count == 1 ? "1 prenda guardada" : "\(count) prendas guardadas"
+            burstMessage = count == 1 ? String(localized: "1 prenda guardada") : String(localized: "\(count) prendas guardadas")
         }
         Task {
             try? await Task.sleep(for: .seconds(2))

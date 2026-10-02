@@ -11,10 +11,10 @@ struct StatsView: View {
         List {
             Section {
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
-                    StatTile(value: garments.count, title: "Prendas", systemImage: "hanger", tint: .accentColor)
-                    StatTile(value: forgotten.count, title: "Sin usar en 6 meses", systemImage: "moon.zzz", tint: .indigo)
-                    StatTile(value: count(.lent), title: "Prestadas", systemImage: GarmentStatus.lent.symbol, tint: .orange)
-                    StatTile(value: count(.toDonate), title: "Para donar", systemImage: GarmentStatus.toDonate.symbol, tint: .pink)
+                    StatTile(value: garments.count, title: String(localized: "Prendas"), systemImage: "hanger", tint: .accentColor)
+                    StatTile(value: forgotten.count, title: String(localized: "Sin usar en 6 meses"), systemImage: "moon.zzz", tint: .indigo)
+                    StatTile(value: count(.lent), title: String(localized: "Prestadas"), systemImage: GarmentStatus.lent.symbol, tint: .orange)
+                    StatTile(value: count(.toDonate), title: String(localized: "Para donar"), systemImage: GarmentStatus.toDonate.symbol, tint: .pink)
                 }
             }
             .listRowBackground(Color.clear)
@@ -69,7 +69,7 @@ struct StatsView: View {
                 } else {
                     ForEach(forgotten.prefix(8)) { garment in
                         NavigationLink(value: garment) {
-                            GarmentRow(garment: garment, locationText: WardrobeInsights.wornDescription(garment) + " · " + (garment.location?.shortPath ?? "Sin ubicación"))
+                            GarmentRow(garment: garment, locationText: WardrobeInsights.wornDescription(garment) + " · " + (garment.location?.shortPath ?? String(localized: "Sin ubicación")))
                         }
                     }
                 }
@@ -117,7 +117,7 @@ struct StatsView: View {
     private var byRoom: [Bucket] {
         var buckets = locations.filter { $0.parent == nil }.map { Bucket(label: $0.name, count: $0.totalGarmentCount) }
         let unassigned = garments.filter { $0.location == nil }.count
-        if unassigned > 0 { buckets.append(Bucket(label: "Sin ubicación", count: unassigned)) }
+        if unassigned > 0 { buckets.append(Bucket(label: String(localized: "Sin ubicación"), count: unassigned)) }
         return buckets.filter { $0.count > 0 }
     }
 }

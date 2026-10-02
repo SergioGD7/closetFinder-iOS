@@ -52,8 +52,7 @@ struct LocationDetailView: View {
             }
         } message: {
             Text(location.children?.isEmpty == false
-                 ? "Se eliminará también todo lo que contiene. Las prendas quedarán sin ubicación."
-                 : "Las prendas que hay aquí quedarán sin ubicación.")
+                 ? String(localized: "Se eliminará también todo lo que contiene. Las prendas quedarán sin ubicación.") : String(localized: "Las prendas que hay aquí quedarán sin ubicación."))
         }
         .sensoryFeedback(.success, trigger: movedFeedback)
     }
@@ -81,7 +80,7 @@ struct LocationDetailView: View {
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
-                    Text(location.totalGarmentCount == 1 ? "1 prenda" : "\(location.totalGarmentCount) prendas")
+                    Text(location.totalGarmentCount == 1 ? String(localized: "1 prenda") : String(localized: "\(location.totalGarmentCount) prendas"))
                         .font(.footnote.weight(.medium))
                         .foregroundStyle(Color.accentColor)
                 }
@@ -132,7 +131,7 @@ struct LocationDetailView: View {
                 Text("Prendas")
                 Spacer()
                 if !garments.isEmpty {
-                    Button(isSelecting ? "Listo" : "Seleccionar") {
+                    Button(isSelecting ? String(localized: "Listo") : String(localized: "Seleccionar")) {
                         withAnimation(.snappy) {
                             isSelecting.toggle()
                             selection.removeAll()
@@ -147,8 +146,8 @@ struct LocationDetailView: View {
 
     /// Ruta de la prenda dentro de esta ubicación: «Balda 2», «Caja › Bolsa».
     private func relativePath(of garment: Garment) -> String {
-        guard let garmentLocation = garment.location else { return "Sin ubicación" }
-        if garmentLocation === location { return "Aquí" }
+        guard let garmentLocation = garment.location else { return String(localized: "Sin ubicación") }
+        if garmentLocation === location { return String(localized: "Aquí") }
         let components = garmentLocation.pathComponents
         let ownDepth = location.pathComponents.count
         return components.dropFirst(ownDepth).joined(separator: " › ")
@@ -174,7 +173,7 @@ struct LocationDetailView: View {
             Button {
                 isMovingSelection = true
             } label: {
-                Label(selection.count == 1 ? "Mover 1 prenda" : "Mover \(selection.count) prendas",
+                Label(selection.count == 1 ? String(localized: "Mover 1 prenda") : String(localized: "Mover \(selection.count) prendas"),
                       systemImage: "arrow.left.arrow.right")
                     .frame(maxWidth: .infinity)
             }
@@ -194,7 +193,7 @@ struct LocationDetailView: View {
             Menu {
                 Button { isAddingGarment = true } label: { Label("Añadir prenda aquí", systemImage: "tshirt") }
                 Button { editorTarget = .new(parent: location) } label: {
-                    Label(location.kind == .room ? "Añadir mueble" : "Añadir compartimento", systemImage: "plus.square")
+                    Label(location.kind == .room ? String(localized: "Añadir mueble") : String(localized: "Añadir compartimento"), systemImage: "plus.square")
                 }
                 Button { isShowingLabel = true } label: { Label("Etiqueta QR", systemImage: "qrcode") }
                 Divider()

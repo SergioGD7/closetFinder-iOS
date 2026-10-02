@@ -42,7 +42,7 @@ struct LocationPicker: View {
     var body: some View {
         List {
             if allowsNone && searchText.isEmpty {
-                row(title: "Sin ubicación", systemImage: "questionmark.folder", isSelected: selection == nil) {
+                row(title: String(localized: "Sin ubicación"), systemImage: "questionmark.folder", isSelected: selection == nil) {
                     pick(nil)
                 }
             }

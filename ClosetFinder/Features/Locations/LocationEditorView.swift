@@ -53,8 +53,8 @@ struct LocationEditorView: View {
 
     private var placeholder: String {
         switch kind {
-        case .room: "Dormitorio, Entrada, Trastero…"
-        case .box: "Caja «Invierno»"
+        case .room: String(localized: "Dormitorio, Entrada, Trastero…")
+        case .box: String(localized: "Caja «Invierno»")
         default: "\(kind.title) \(nextNumber)"
         }
     }
@@ -96,7 +96,7 @@ struct LocationEditorView: View {
                         NavigationLink {
                             LocationPicker(selection: parent, excluding: editing, allowsNone: true) { parent = $0 }
                         } label: {
-                            Text(parent?.path ?? "Ninguna (es una estancia)")
+                            Text(parent?.path ?? String(localized: "Ninguna (es una estancia)"))
                                 .foregroundStyle(parent == nil ? Color.secondary : Color.primary)
                         }
                     }
@@ -106,7 +106,7 @@ struct LocationEditorView: View {
                     }
                 }
             }
-            .navigationTitle(editing == nil ? "Nueva ubicación" : "Editar ubicación")
+            .navigationTitle(editing == nil ? String(localized: "Nueva ubicación") : String(localized: "Editar ubicación"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
