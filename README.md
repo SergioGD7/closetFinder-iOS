@@ -35,7 +35,7 @@ Abre `ClosetFinder.xcodeproj` en Xcode 26 o posterior y ejecuta el esquema **Clo
 - `-inMemoryStore` arranca con un almacén temporal que no se guarda.
 - El recorte de fondo de Vision no funciona en el simulador: ahí la foto se guarda tal cual.
 
-Tests (Swift Testing):
+Tests (Swift Testing). También se ejecutan en GitHub Actions en cada pull request y en cada push a `main` (`.github/workflows/ci.yml`):
 
 ```bash
 xcodebuild test -project ClosetFinder.xcodeproj -scheme ClosetFinder -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
