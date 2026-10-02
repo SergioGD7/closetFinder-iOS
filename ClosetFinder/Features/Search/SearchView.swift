@@ -11,6 +11,13 @@ struct SearchView: View {
     @State private var suggestedTokens: [SearchToken] = []
     @AppStorage("recentSearches") private var recentStorage = ""
 
+    // Búsqueda inteligente (Apple Intelligence)
+    @State private var isInterpreting = false
+    @State private var interpretedQuery: String?
+    @State private var interpretationFailed = false
+    /// Lo último que puso la interpretación, para distinguirlo de lo que escribe el usuario.
+    @State private var appliedInterpretation: SmartSearch.Interpretation?
+
     private var isSearching: Bool { !text.trimmingCharacters(in: .whitespaces).isEmpty || !tokens.isEmpty }
 
     private var results: [Garment] { GarmentSearch.search(garments, text: text, tokens: tokens) }
@@ -35,13 +42,28 @@ struct SearchView: View {
             }
             .onChange(of: text) { _, newValue in
                 suggestedTokens = GarmentSearch.suggestedTokens(for: newValue, excluding: tokens)
+                if newValue != appliedInterpretation?.text {
+                    interpretedQuery = nil
+                    interpretationFailed = false
+                }
             }
             .onChange(of: tokens) { old, new in
+                suggestedTokens = []
+                guard new != appliedInterpretation?.tokens else { return }
+                interpretedQuery = nil
                 // Al convertir una palabra en token, se quita del texto.
                 if new.count > old.count { text = GarmentSearch.removingLastWord(from: text) }
-                suggestedTokens = []
             }
             .onSubmit(of: .search) { remember(text) }
+            #if DEBUG
+            .task {
+                // `-search "texto"` abre la búsqueda ya escrita (capturas y pruebas manuales).
+                let arguments = ProcessInfo.processInfo.arguments
+                if let index = arguments.firstIndex(of: "-search"), arguments.indices.contains(index + 1) {
+                    text = arguments[index + 1]
+                }
+            }
+            #endif
             .appNavigationDestinations()
         }
     }
@@ -50,6 +72,7 @@ struct SearchView: View {
 
     @ViewBuilder
     private var resultsSection: some View {
+        smartSearchSection
         let results = results
         if results.isEmpty {
             ContentUnavailableView.search(text: text)
@@ -62,6 +85,57 @@ struct SearchView: View {
                     }
                     .simultaneousGesture(TapGesture().onEnded { remember(text) })
                 }
+            }
+        }
+    }
+
+    // MARK: Búsqueda inteligente
+
+    @ViewBuilder
+    private var smartSearchSection: some View {
+        if let interpretedQuery {
+            Section {
+                Label("Interpretado con Apple Intelligence: «\(interpretedQuery)»", systemImage: "sparkles")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+        } else if tokens.isEmpty, SmartSearch.shouldOffer(for: text) {
+            Section {
+                Button {
+                    interpret(text)
+                } label: {
+                    HStack {
+                        Label("Buscar «\(text.trimmingCharacters(in: .whitespaces))» con Apple Intelligence", systemImage: "sparkles")
+                        Spacer()
+                        if isInterpreting { ProgressView() }
+                    }
+                }
+                .disabled(isInterpreting)
+            } footer: {
+                if interpretationFailed {
+                    Text("No se ha podido interpretar la búsqueda. Prueba con otras palabras.")
+                } else {
+                    Text("Entiende frases como «algo de abrigo para la nieve». Funciona en el iPhone, sin conexión.")
+                }
+            }
+        }
+    }
+
+    private func interpret(_ query: String) {
+        let trimmed = query.trimmingCharacters(in: .whitespaces)
+        isInterpreting = true
+        interpretationFailed = false
+        Task {
+            defer { isInterpreting = false }
+            do {
+                let interpretation = try await SmartSearch.interpret(trimmed)
+                remember(trimmed)
+                appliedInterpretation = interpretation
+                text = interpretation.text
+                tokens = interpretation.tokens
+                interpretedQuery = trimmed
+            } catch {
+                interpretationFailed = true
             }
         }
     }

@@ -1,6 +1,7 @@
 import CoreSpotlight
 import SwiftData
 import SwiftUI
+import WidgetKit
 
 @main
 struct ClosetFinderApp: App {
@@ -18,6 +19,7 @@ struct ClosetFinderApp: App {
 struct RootView: View {
     @Environment(AppRouter.self) private var router
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         RootTabView()
@@ -34,11 +36,22 @@ struct RootView: View {
                 guard let id = activity.userInfo?[CSSearchableItemActivityIdentifier] as? String else { return }
                 router.openGarment(withID: id, in: modelContext)
             }
+            .onOpenURL { url in
+                if let link = DeepLink(url: url) { router.open(link, in: modelContext) }
+            }
+            .onChange(of: scenePhase) { _, phase in
+                // El widget lee el mismo almacén: al salir de la app se refresca con los cambios.
+                if phase == .background {
+                    try? modelContext.save()
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+            }
     }
 
     #if DEBUG
     /// Abre una pantalla concreta al arrancar, para capturas y pruebas manuales:
-    /// `-openTab locations|profile|search` o `-openGarment "Chaqueta vaquera"`.
+    /// `-openTab locations|profile|search|stats`, `-openGarment "Chaqueta vaquera"`
+    /// o `-openLocation "Armario grande"`.
     private func applyDebugLaunchArguments() {
         let arguments = ProcessInfo.processInfo.arguments
         func value(after flag: String) -> String? {
@@ -49,7 +62,12 @@ struct RootView: View {
         case "locations": router.selectedTab = .locations
         case "profile": router.selectedTab = .profile
         case "search": router.selectedTab = .search
+        case "stats": router.closetPath.append(ClosetRoute.stats)
         default: break
+        }
+        if let name = value(after: "-openLocation"),
+           let location = try? modelContext.fetch(FetchDescriptor<StorageLocation>()).first(where: { $0.name == name }) {
+            router.open(location)
         }
         if let name = value(after: "-openGarment"),
            let garment = try? modelContext.fetch(FetchDescriptor<Garment>()).first(where: { $0.name == name }) {

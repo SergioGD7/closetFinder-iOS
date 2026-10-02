@@ -38,6 +38,12 @@ struct GarmentSearchTests {
         #expect(results == ["Abrigo camel"])
     }
 
+    @Test func everydayPhrasesStillFindSomething() {
+        // Sin Apple Intelligence: «algo», «para», «la» se ignoran; «abrigo» y «nieve» bastan.
+        let results = names(GarmentSearch.search(garments, text: "algo de abrigo para la nieve"))
+        #expect(results == ["Plumífero azul marino"])
+    }
+
     @Test func suggestedTokens() {
         let suggestions = GarmentSearch.suggestedTokens(for: "chaqueta az", excluding: [])
         #expect(suggestions.contains(.color(.blue)))

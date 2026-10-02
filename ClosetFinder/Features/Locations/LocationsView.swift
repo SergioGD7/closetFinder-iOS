@@ -3,6 +3,7 @@ import SwiftUI
 
 /// Estancias de la casa y sus muebles, con el número de prendas de cada uno.
 struct LocationsView: View {
+    @Environment(AppRouter.self) private var router
     @Environment(\.modelContext) private var modelContext
     @Query(sort: [SortDescriptor(\StorageLocation.sortIndex), SortDescriptor(\StorageLocation.name)])
     private var locations: [StorageLocation]
@@ -10,12 +11,14 @@ struct LocationsView: View {
 
     @State private var editorTarget: LocationEditorTarget?
     @State private var roomToDelete: StorageLocation?
+    @State private var isScanning = false
 
     private var rooms: [StorageLocation] { locations.filter { $0.parent == nil } }
     private var unassigned: [Garment] { garments.filter { $0.location == nil } }
 
     var body: some View {
-        NavigationStack {
+        @Bindable var router = router
+        NavigationStack(path: $router.locationsPath) {
             Group {
                 if rooms.isEmpty {
                     ContentUnavailableView {
@@ -32,7 +35,14 @@ struct LocationsView: View {
             }
             .navigationTitle("Ubicaciones")
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    if QRScannerView.isAvailable {
+                        Button {
+                            isScanning = true
+                        } label: {
+                            Label("Escanear etiqueta", systemImage: "qrcode.viewfinder")
+                        }
+                    }
                     Button {
                         editorTarget = .new(parent: nil)
                     } label: {
@@ -40,6 +50,7 @@ struct LocationsView: View {
                     }
                 }
             }
+            .fullScreenCover(isPresented: $isScanning) { QRScannerSheet() }
             .appNavigationDestinations()
             .sheet(item: $editorTarget) { target in
                 LocationEditorView(target: target)
@@ -182,5 +193,6 @@ struct GarmentListView: View {
 
 #Preview {
     LocationsView()
+        .environment(AppRouter())
         .modelContainer(AppModelContainer.preview())
 }
