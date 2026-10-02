@@ -65,6 +65,21 @@ struct RootView: View {
         case "stats": router.closetPath.append(ClosetRoute.stats)
         default: break
         }
+        // `-samplePhotos`: las prendas sin foto reciben su ilustración como foto recortada,
+        // para probar el probador 3D y las texturas sin tener fotos reales.
+        if arguments.contains("-samplePhotos"),
+           let garments = try? modelContext.fetch(FetchDescriptor<Garment>()) {
+            for garment in garments where garment.photo == nil {
+                let renderer = ImageRenderer(content: GarmentArtwork(category: garment.category, color: garment.primaryColor)
+                    .frame(width: 600, height: 600))
+                renderer.scale = 1
+                guard let png = renderer.uiImage?.pngData() else { continue }
+                garment.photo = png
+                garment.thumbnail = png
+                garment.hasCutout = true
+                garment.imageRevision += 1
+            }
+        }
         if let name = value(after: "-openLocation"),
            let location = try? modelContext.fetch(FetchDescriptor<StorageLocation>()).first(where: { $0.name == name }) {
             router.open(location)

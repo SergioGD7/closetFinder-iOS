@@ -34,6 +34,11 @@ nonisolated struct BackupArchive: Codable, Sendable {
         var sizing: String
         var heightCm, chestCm, waistCm, hipCm, inseamCm, footCm: Double?
         var createdAt: Date
+        // Añadidos con el probador 3D: opcionales para poder leer copias anteriores.
+        var shoulderRatio: Double?
+        var hipRatio: Double?
+        var skinTone: [Double]?
+        var faceTexture: Data?
     }
 
     struct GarmentRecord: Codable, Sendable {
@@ -97,7 +102,9 @@ enum BackupService {
         }
         archive.profiles = try context.fetch(FetchDescriptor<BodyProfile>()).map {
             .init(id: $0.uuid, name: $0.name, sizing: $0.sizingRaw, heightCm: $0.heightCm, chestCm: $0.chestCm,
-                  waistCm: $0.waistCm, hipCm: $0.hipCm, inseamCm: $0.inseamCm, footCm: $0.footCm, createdAt: $0.createdAt)
+                  waistCm: $0.waistCm, hipCm: $0.hipCm, inseamCm: $0.inseamCm, footCm: $0.footCm, createdAt: $0.createdAt,
+                  shoulderRatio: $0.shoulderRatio, hipRatio: $0.hipRatio, skinTone: $0.skinTone.isEmpty ? nil : $0.skinTone,
+                  faceTexture: $0.faceTexture)
         }
         archive.garments = try context.fetch(FetchDescriptor<Garment>()).map {
             .init(id: $0.uuid, name: $0.name, category: $0.categoryRaw, size: $0.size, colors: $0.colorsRaw,
@@ -147,6 +154,10 @@ enum BackupService {
             profile.inseamCm = record.inseamCm
             profile.footCm = record.footCm
             profile.createdAt = record.createdAt
+            profile.shoulderRatio = record.shoulderRatio
+            profile.hipRatio = record.hipRatio
+            profile.skinTone = record.skinTone ?? []
+            profile.faceTexture = record.faceTexture
             profiles[record.id] = profile
             summary.profiles += 1
         }

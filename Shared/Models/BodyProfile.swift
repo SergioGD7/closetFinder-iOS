@@ -15,6 +15,16 @@ nonisolated final class BodyProfile {
     var footCm: Double?
     var createdAt: Date = Date.now
 
+    // Probador 3D: datos sacados de una foto de cuerpo entero (la foto no se guarda).
+    /// Distancia entre hombros / altura.
+    var shoulderRatio: Double?
+    /// Distancia entre caderas / altura.
+    var hipRatio: Double?
+    /// Tono de piel (r, g, b entre 0 y 1). Vacío si no hay foto.
+    var skinTone: [Double] = []
+    /// Cara recortada para la cabeza del maniquí (PNG).
+    @Attribute(.externalStorage) var faceTexture: Data?
+
     @Relationship(deleteRule: .nullify, inverse: \Garment.owner)
     var garments: [Garment]? = []
 
@@ -50,6 +60,15 @@ nonisolated final class BodyProfile {
         case .inseam: inseamCm = value
         case .foot: footCm = value
         }
+    }
+
+    var hasTryOnPhoto: Bool { faceTexture != nil || shoulderRatio != nil }
+
+    func clearTryOnPhoto() {
+        shoulderRatio = nil
+        hipRatio = nil
+        skinTone = []
+        faceTexture = nil
     }
 
     var recommendations: [SizeRecommendation] {

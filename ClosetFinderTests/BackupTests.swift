@@ -7,13 +7,16 @@ import Testing
 struct BackupTests {
 
     @Test func roundTripKeepsEverything() throws {
-        let source = AppModelContainer.preview().mainContext
+        let sourceContainer = AppModelContainer.preview()
+        let source = sourceContainer.mainContext
         let original = try source.fetch(FetchDescriptor<Garment>())
         let jacket = try #require(original.first { $0.name == "Chaqueta vaquera" })
         jacket.photo = Data([1, 2, 3])
 
         let data = try BackupService.makeArchive(from: source).encoded()
-        let target = AppModelContainer.make(inMemory: true).mainContext
+        // El contenedor tiene que seguir vivo mientras se use su contexto.
+        let targetContainer = AppModelContainer.make(inMemory: true)
+        let target = targetContainer.mainContext
         let summary = try BackupService.restore(BackupArchive.decode(data), into: target)
 
         #expect(summary.garments == original.count)
@@ -30,9 +33,12 @@ struct BackupTests {
     }
 
     @Test func restoringTwiceDoesNotDuplicate() throws {
-        let source = AppModelContainer.preview().mainContext
+        let sourceContainer = AppModelContainer.preview()
+        let source = sourceContainer.mainContext
         let archive = try BackupService.makeArchive(from: source)
-        let target = AppModelContainer.make(inMemory: true).mainContext
+        // El contenedor tiene que seguir vivo mientras se use su contexto.
+        let targetContainer = AppModelContainer.make(inMemory: true)
+        let target = targetContainer.mainContext
         try BackupService.restore(archive, into: target)
         let second = try BackupService.restore(archive, into: target)
 
@@ -45,7 +51,9 @@ struct BackupTests {
     @Test func rejectsNewerVersions() throws {
         var archive = BackupArchive()
         archive.version = BackupArchive.currentVersion + 1
-        let target = AppModelContainer.make(inMemory: true).mainContext
+        // El contenedor tiene que seguir vivo mientras se use su contexto.
+        let targetContainer = AppModelContainer.make(inMemory: true)
+        let target = targetContainer.mainContext
         #expect(throws: BackupService.BackupError.self) {
             try BackupService.restore(archive, into: target)
         }

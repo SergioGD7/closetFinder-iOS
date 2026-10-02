@@ -13,6 +13,7 @@ struct GarmentDetailView: View {
     @State private var isMoving = false
     @State private var isConfirmingDelete = false
     @State private var wornFeedback = 0
+    @State private var isTryingOn = false
     @Environment(\.horizontalSizeClass) private var sizeClass
 
     /// En iPad (ancho regular) la foto es más alta y el texto no pasa de una columna cómoda.
@@ -57,6 +58,13 @@ struct GarmentDetailView: View {
             Text("Se borrarán la prenda y su foto. No se puede deshacer.")
         }
         .sensoryFeedback(.success, trigger: wornFeedback)
+        .fullScreenCover(isPresented: $isTryingOn) { TryOnView(garment: garment) }
+        #if DEBUG
+        .task {
+            // `-openTryOn` junto a `-openGarment` abre el probador (capturas y pruebas manuales).
+            if ProcessInfo.processInfo.arguments.contains("-openTryOn") { isTryingOn = true }
+        }
+        #endif
     }
 
     // MARK: Cabecera
@@ -78,6 +86,22 @@ struct GarmentDetailView: View {
                     }
                     .buttonStyle(.plain)
                     .padding(.leading)
+                    .padding(.bottom, 44)
+                }
+            }
+            .overlay(alignment: .bottomTrailing) {
+                if GarmentShell.style(for: garment.category) != .unsupported {
+                    Button {
+                        isTryingOn = true
+                    } label: {
+                        Label("Probar en 3D", systemImage: "figure.stand")
+                            .font(.footnote.weight(.semibold))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .glassBackground(in: Capsule(), interactive: true)
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.trailing)
                     .padding(.bottom, 44)
                 }
             }
