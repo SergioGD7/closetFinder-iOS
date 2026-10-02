@@ -13,8 +13,11 @@ struct GarmentDetailView: View {
     @State private var isMoving = false
     @State private var isConfirmingDelete = false
     @State private var wornFeedback = 0
+    @Environment(\.horizontalSizeClass) private var sizeClass
 
-    private let heroHeight: CGFloat = 380
+    /// En iPad (ancho regular) la foto es más alta y el texto no pasa de una columna cómoda.
+    private var heroHeight: CGFloat { sizeClass == .regular ? 480 : 380 }
+    private let readableWidth: CGFloat = 720
 
     var body: some View {
         ScrollView {
@@ -24,7 +27,8 @@ struct GarmentDetailView: View {
                     .padding(.horizontal)
                     .padding(.top, 22)
                     .padding(.bottom, 24)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: readableWidth, alignment: .leading)
+                    .frame(maxWidth: .infinity)
                     .background(Color(.systemGroupedBackground),
                                 in: UnevenRoundedRectangle(topLeadingRadius: 28, topTrailingRadius: 28, style: .continuous))
                     .padding(.top, -28)
@@ -270,6 +274,7 @@ struct GarmentDetailView: View {
             .controlSize(.large)
             .fontWeight(.semibold)
         }
+        .frame(maxWidth: 560)
         .padding(.horizontal)
         .padding(.bottom, 4)
     }

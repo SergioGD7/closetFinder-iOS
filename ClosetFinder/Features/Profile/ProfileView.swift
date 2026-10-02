@@ -7,6 +7,7 @@ struct ProfileView: View {
     @AppStorage("selectedProfileID") private var selectedID = ""
 
     @State private var editorTarget: ProfileEditorTarget?
+    @State private var isShowingSettings = false
 
     private var selected: BodyProfile? {
         profiles.first { $0.uuid.uuidString == selectedID } ?? profiles.first
@@ -30,6 +31,13 @@ struct ProfileView: View {
             }
             .navigationTitle("Medidas")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        isShowingSettings = true
+                    } label: {
+                        Label("Ajustes", systemImage: "gearshape")
+                    }
+                }
                 if let selected {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button("Editar") { editorTarget = .edit(selected) }
@@ -42,6 +50,7 @@ struct ProfileView: View {
                 }
             }
             .appNavigationDestinations()
+            .sheet(isPresented: $isShowingSettings) { SettingsView() }
         }
     }
 
