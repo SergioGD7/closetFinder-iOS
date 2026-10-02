@@ -45,7 +45,10 @@ nonisolated enum AppModelContainer {
         }
         if let storeURL { migrateDefaultStore(to: storeURL) }
 
-        if syncWithICloud,
+        // Sin los permisos de iCloud (compilación sin firmar, como en CI), CloudKit no lanza un
+        // error que se pueda capturar: detiene la app. El App Group va en el mismo fichero de
+        // permisos, así que si no está disponible, tampoco lo está iCloud.
+        if syncWithICloud, storeURL != nil,
            let synced = try? ModelContainer(for: schema, configurations: [configuration(cloudKit: .private(cloudKitContainer))]) {
             return (synced, true)
         }
