@@ -17,6 +17,7 @@ todo con el sitio exacto donde está: estancia › mueble › balda, cajón o ca
 | Pestaña | Qué hace |
 | --- | --- |
 | Armario | Rejilla de prendas con talla y ubicación, filtros por categoría y favoritas, orden por uso. Estadísticas: prendas por categoría y estancia, olvidadas (6 meses sin usar), prestadas y para donar. |
+| Looks | **Looks**: combinaciones guardadas eligiendo una prenda para cada parte del cuerpo (abrigo, parte de arriba —hasta dos capas—, cuerpo entero, parte de abajo, calzado y accesorios); cada look muestra dónde está cada prenda. **Semana**: un look por día, con «Llevar hoy». **Maletas**: viajes con looks y prendas sueltas, y la lista de qué llevar agrupada por dónde está cada prenda, con casillas para ir marcando lo que ya está en la maleta. |
 | Ubicaciones | Árbol de estancias, muebles y compartimentos con recuento de prendas. Plantillas de mueble (armario con barra, 4 baldas y 2 cajones…). Mover prendas en lote. Etiquetas QR imprimibles y escáner. |
 | Medidas | Una o varias personas, medidas corporales y tallas recomendadas (EU/US/UK). |
 | Buscar | Texto libre sin acentos ni plurales («chaquetas azules») y filtros como tokens (color, categoría, temporada, estado). En iOS 26 con Apple Intelligence, interpreta frases como «algo de abrigo para la nieve» en el propio iPhone (Foundation Models). |
@@ -32,10 +33,6 @@ Además:
 - **Widget «Sin ponerte»** (pequeño y mediano): las prendas que llevas más tiempo sin usar y
   dónde están. Lee el mismo almacén que la app a través del App Group
   `group.com.sergiogonzalez.ClosetFinder`.
-- **Probador 3D** (gratuito, en el dispositivo): un maniquí construido con las medidas de la
-  persona y la prenda puesta con sus propias medidas y su foto. Dice si queda bien, pequeña o
-  larga. Con una foto de cuerpo entero opcional, Vision toma las proporciones, el tono de piel y la
-  cara; la foto no se guarda.
 - **iCloud**: sincronización con la base de datos privada del usuario. Si se borra la app y se
   vuelve a instalar con el mismo Apple ID, los datos vuelven solos. Sin iCloud, se puede exportar
   y restaurar una copia de seguridad (`.closetfinder`) desde Ajustes (pestaña Medidas).
@@ -51,10 +48,10 @@ Abre `ClosetFinder.xcodeproj` en Xcode 26 o posterior y ejecuta el esquema **Clo
 - `-inMemoryStore` arranca con un almacén temporal que no se guarda.
 - Solo en Debug: `-openTab locations|profile|search|stats`, `-openGarment "<nombre>"`,
   `-openLocation "<nombre>"` y `-search "<texto>"` abren una pantalla concreta al arrancar.
-- Solo en Debug: `-samplePhotos` da a las prendas de ejemplo una foto recortada (su ilustración) y
-  `-openTryOn` (junto a `-openGarment`) abre el probador.
-- En el simulador no funcionan el recorte de fondo de Vision, el escáner QR, la postura 3D ni la
-  generación de Apple Intelligence: hay que probarlos en un iPhone real.
+- Solo en Debug: `-samplePhotos` da a las prendas de ejemplo una foto recortada (su ilustración);
+  `-openTab looks|week|trips`, `-openOutfit "<nombre>"` y `-openTrip "<nombre>"` abren los looks.
+- En el simulador no funcionan el recorte de fondo de Vision, el escáner QR ni la generación de
+  Apple Intelligence: hay que probarlos en un iPhone real.
 - La firma usa el equipo `84HB28K4CM` (iCloud y App Group). Para sincronizar de verdad hay que
   ejecutar una vez desde Xcode en un dispositivo para que se cree el contenedor
   `iCloud.com.sergiogonzalez.ClosetFinder`.
@@ -70,13 +67,13 @@ xcodebuild test -project ClosetFinder.xcodeproj -scheme ClosetFinder -destinatio
 ```
 ClosetFinder/          App
 ├─ App/                Punto de entrada, pestañas, navegación y enlaces
-├─ Features/           Closet · AddGarment · Locations · Search · Profile · Settings · TryOn
+├─ Features/           Closet · Looks · AddGarment · Locations · Search · Profile · Settings
 ├─ Services/           ImageProcessor (Vision), GarmentSearch, SmartSearch (Foundation Models),
 │                      Spotlight, BackupService
 ├─ Intents/            App Intents para Siri y Atajos
 └─ DesignSystem/       Cristal con alternativa para iOS < 26 y componentes
 Shared/                Código común a la app y al widget
-├─ Models/             Garment, StorageLocation, BodyProfile (SwiftData), enumeraciones y almacén
+├─ Models/             Garment, StorageLocation, BodyProfile, Outfit, OutfitPlan, Trip (SwiftData)
 ├─ Services/           SizeConverter, WardrobeInsights, DeepLink
 └─ DesignSystem/       Ilustraciones de prendas y color de marca
 ClosetFinderWidget/    Widget «Sin ponerte» (WidgetKit)
@@ -87,4 +84,4 @@ ClosetFinderWidget/    Widget «Sin ponerte» (WidgetKit)
 - Publicación en el App Store (App Store Connect, capturas, ficha y política de privacidad).
 - Auditoría de accesibilidad con VoiceOver y tamaños de texto grandes.
 - Medidas en pulgadas para quien use el sistema imperial.
-- Probador: prenda con caída de tela simulada y accesorios.
+- Widget con el look de hoy.

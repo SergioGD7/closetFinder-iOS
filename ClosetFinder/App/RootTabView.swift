@@ -13,6 +13,9 @@ struct RootTabView: View {
                 Tab("Armario", systemImage: "hanger", value: AppTab.closet) {
                     ClosetView()
                 }
+                Tab("Looks", systemImage: "tshirt", value: AppTab.looks) {
+                    LooksView()
+                }
                 Tab("Ubicaciones", systemImage: "shippingbox", value: AppTab.locations) {
                     LocationsView()
                 }
@@ -31,6 +34,9 @@ struct RootTabView: View {
                 ClosetView()
                     .tabItem { Label("Armario", systemImage: "hanger") }
                     .tag(AppTab.closet)
+                LooksView()
+                    .tabItem { Label("Looks", systemImage: "tshirt") }
+                    .tag(AppTab.looks)
                 LocationsView()
                     .tabItem { Label("Ubicaciones", systemImage: "shippingbox") }
                     .tag(AppTab.locations)

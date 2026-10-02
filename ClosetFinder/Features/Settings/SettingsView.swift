@@ -163,7 +163,7 @@ struct SettingsView: View {
             SpotlightIndexer.reindexAll(in: modelContext)
             message = Message(
                 title: String(localized: "Copia restaurada"),
-                text: String(localized: "Se han añadido \(summary.garments) prendas, \(summary.locations) ubicaciones y \(summary.profiles) personas. \(summary.skipped) elementos ya estaban y no se han duplicado."))
+                text: String(localized: "Se han añadido \(summary.garments) prendas, \(summary.locations) ubicaciones, \(summary.profiles) personas, \(summary.outfits) looks y \(summary.trips) maletas. \(summary.skipped) elementos ya estaban y no se han duplicado."))
         } catch {
             message = Message(title: String(localized: "No se pudo restaurar"), text: (error as? LocalizedError)?.errorDescription
                               ?? String(localized: "El archivo no es una copia de Closet Finder o está dañado."))

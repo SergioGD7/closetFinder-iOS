@@ -103,36 +103,36 @@
         }
       }
     },
-    "%@ · prenda %@, tú %@ (%@)": {
+    "%@: %@": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · item %2$@, you %3$@ (%4$@)"
+            "value": "%1$@: %2$@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · vêtement %2$@, vous %3$@ (%4$@)"
+            "value": "%1$@ : %2$@"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · Kleidung %2$@, du %3$@ (%4$@)"
+            "value": "%1$@: %2$@"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · capo %2$@, tu %3$@ (%4$@)"
+            "value": "%1$@: %2$@"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · peça %2$@, você %3$@ (%4$@)"
+            "value": "%1$@: %2$@"
           }
         }
       }
@@ -167,6 +167,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld"
+          }
+        }
+      }
+    },
+    "%lld de %lld prendas en la maleta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld of %2$lld items packed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld vêtements sur %2$lld dans la valise"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld von %2$lld Teilen im Koffer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld capi su %2$lld in valigia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld de %2$lld peças na mala"
+          }
+        }
+      }
+    },
+    "%lld días": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld days"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld jours"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Tage"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld giorni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld dias"
           }
         }
       }
@@ -375,6 +443,40 @@
         }
       }
     },
+    "%lld/%lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
     "%lld×": {
       "localizations": {
         "en": {
@@ -405,6 +507,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld×"
+          }
+        }
+      }
+    },
+    "+%lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld"
+          }
+        }
+      }
+    },
+    "1 día": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 day"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 jour"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Tag"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 giorno"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 dia"
           }
         }
       }
@@ -681,6 +851,40 @@
         }
       }
     },
+    "Abrigo o chaqueta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coat or jacket"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manteau ou veste"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantel oder Jacke"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cappotto o giacca"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casaco ou jaqueta"
+          }
+        }
+      }
+    },
     "Abrigos": {
       "localizations": {
         "en": {
@@ -745,6 +949,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acessórios"
+          }
+        }
+      }
+    },
+    "Agrupado por dónde está guardada cada prenda, para recogerlo todo de una vez. Marca lo que ya está en la maleta.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grouped by where each item is stored, so you can collect everything in one go. Check off what’s already packed."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regroupé selon l’endroit où chaque vêtement est rangé, pour tout récupérer d’un coup. Cochez ce qui est déjà dans la valise."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gruppiert danach, wo jedes Teil aufbewahrt wird, damit du alles auf einmal holst. Hake ab, was schon im Koffer ist."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raggruppato per dove è riposto ogni capo, per prendere tutto in una volta. Spunta ciò che è già in valigia."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agrupado por onde cada peça está guardada, para pegar tudo de uma vez. Marque o que já está na mala."
           }
         }
       }
@@ -1021,36 +1259,36 @@
         }
       }
     },
-    "Analizando la foto…": {
+    "Anotado para hoy": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Analyzing photo…"
+            "value": "Saved for today"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Analyse de la photo…"
+            "value": "Noté pour aujourd’hui"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Foto wird analysiert …"
+            "value": "Für heute eingetragen"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Analisi della foto…"
+            "value": "Segnato per oggi"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Analisando a foto…"
+            "value": "Anotado para hoje"
           }
         }
       }
@@ -1259,6 +1497,74 @@
         }
       }
     },
+    "Añade prendas a tu armario.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add items to your closet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoutez des vêtements à votre dressing."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge Kleidung zu deinem Schrank hinzu."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi capi al tuo armadio."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione peças ao seu guarda-roupa."
+          }
+        }
+      }
+    },
+    "Añade prendas de tipo «%@» a tu armario.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add “%@” items to your closet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoutez des vêtements « %@ » à votre dressing."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge Teile vom Typ „%@“ zu deinem Schrank hinzu."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi capi di tipo «%@» al tuo armadio."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione peças do tipo “%@” ao seu guarda-roupa."
+          }
+        }
+      }
+    },
     "Añade prendas y aquí verás las que llevas tiempo sin ponerte.": {
       "localizations": {
         "en": {
@@ -1289,6 +1595,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicione peças e aqui você verá as que está há tempos sem usar."
+          }
+        }
+      }
+    },
+    "Añade primero tus prendas en el Armario. Después podrás combinarlas en looks.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your items in Closet first. Then you can combine them into looks."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoutez d’abord vos vêtements dans Dressing. Vous pourrez ensuite les combiner en looks."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge zuerst deine Kleidung im Kleiderschrank hinzu. Dann kannst du sie zu Looks kombinieren."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi prima i tuoi capi nell’Armadio. Poi potrai combinarli in look."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione primeiro suas peças no Guarda-roupa. Depois você poderá combiná-las em looks."
           }
         }
       }
@@ -1361,6 +1701,40 @@
         }
       }
     },
+    "Añadido a «%@»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Added to “%@”"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouté à « %@ »"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu „%@“ hinzugefügt"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiunto a «%@»"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionado a “%@”"
+          }
+        }
+      }
+    },
     "Añadir a favoritas": {
       "localizations": {
         "en": {
@@ -1391,6 +1765,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicionar aos favoritos"
+          }
+        }
+      }
+    },
+    "Añadir a favoritos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to favorites"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter aux favoris"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu Favoriten hinzufügen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi ai preferiti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar aos favoritos"
+          }
+        }
+      }
+    },
+    "Añadir a una maleta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to a trip"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter à une valise"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu einem Koffer hinzufügen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi a una valigia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar a uma mala"
           }
         }
       }
@@ -1497,6 +1939,40 @@
         }
       }
     },
+    "Añadir look": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter un look"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look hinzufügen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar look"
+          }
+        }
+      }
+    },
     "Añadir medidas": {
       "localizations": {
         "en": {
@@ -1561,6 +2037,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicionar móvel"
+          }
+        }
+      }
+    },
+    "Añadir otra": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add another"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En ajouter une autre"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiteres hinzufügen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi un altro"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar outra"
           }
         }
       }
@@ -1697,6 +2207,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ainda não há lugares"
+          }
+        }
+      }
+    },
+    "Aún no tienes looks": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No looks yet"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas encore de looks"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Looks"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ancora nessun look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você ainda não tem looks"
           }
         }
       }
@@ -2495,36 +3039,70 @@
         }
       }
     },
-    "Cambiar la foto": {
+    "Cambiar": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Change photo"
+            "value": "Change"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Changer de photo"
+            "value": "Changer"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Foto ändern"
+            "value": "Ändern"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cambia foto"
+            "value": "Cambia"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trocar a foto"
+            "value": "Trocar"
+          }
+        }
+      }
+    },
+    "Cambiar look": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changer de look"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look ändern"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambia look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trocar look"
           }
         }
       }
@@ -5689,40 +6267,6 @@
         }
       }
     },
-    "Con una foto de cuerpo entero, de frente, el maniquí toma tus proporciones, tu tono de piel y tu cara. Se analiza en el iPhone y la foto no se guarda.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "With a full-length photo taken from the front, the mannequin takes on your proportions, skin tone and face. It’s analyzed on your iPhone and the photo isn’t saved."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avec une photo en pied, de face, le mannequin prend vos proportions, votre teint et votre visage. L’analyse se fait sur l’iPhone et la photo n’est pas conservée."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mit einem Ganzkörperfoto von vorn übernimmt die Puppe deine Proportionen, deinen Hautton und dein Gesicht. Die Analyse erfolgt auf dem iPhone, das Foto wird nicht gespeichert."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Con una foto a figura intera, di fronte, il manichino prende le tue proporzioni, il tuo incarnato e il tuo viso. L’analisi avviene sull’iPhone e la foto non viene salvata."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Com uma foto de corpo inteiro, de frente, o manequim ganha suas proporções, seu tom de pele e seu rosto. A análise é feita no iPhone e a foto não é salva."
-          }
-        }
-      }
-    },
     "Contiene": {
       "localizations": {
         "en": {
@@ -5927,40 +6471,6 @@
         }
       }
     },
-    "Corta: por encima de la cintura": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cropped: above the waist"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Courte : au-dessus de la taille"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kurz: über der Taille"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Corta: sopra la vita"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Curta: acima da cintura"
-          }
-        }
-      }
-    },
     "Crea una estancia para empezar a ordenar.": {
       "localizations": {
         "en": {
@@ -5991,6 +6501,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Crie um cômodo para começar a organizar."
+          }
+        }
+      }
+    },
+    "Crea una maleta para un viaje, añade los looks que quieres llevar y la app te dirá qué meter y dónde está cada prenda.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a trip, add the looks you want to take and the app will tell you what to pack and where each item is."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créez une valise pour un voyage, ajoutez les looks à emporter et l’app vous dira quoi mettre et où est chaque vêtement."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lege einen Koffer für eine Reise an, füge die Looks hinzu und die App sagt dir, was du einpacken musst und wo jedes Teil ist."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea una valigia per un viaggio, aggiungi i look da portare e l’app ti dirà cosa mettere e dove si trova ogni capo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crie uma mala para uma viagem, adicione os looks que quer levar e o app dirá o que colocar e onde está cada peça."
           }
         }
       }
@@ -6029,36 +6573,138 @@
         }
       }
     },
-    "Cubre la cadera": {
+    "Crear look nuevo": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Covers the hips"
+            "value": "Create new look"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Couvre les hanches"
+            "value": "Créer un nouveau look"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bedeckt die Hüfte"
+            "value": "Neuen Look erstellen"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Copre i fianchi"
+            "value": "Crea nuovo look"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cobre o quadril"
+            "value": "Criar novo look"
+          }
+        }
+      }
+    },
+    "Crear un look": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créer un look"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look erstellen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea un look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Criar um look"
+          }
+        }
+      }
+    },
+    "Crear un look con esta prenda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a look with this item"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créer un look avec ce vêtement"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look mit diesem Teil erstellen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea un look con questo capo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Criar um look com esta peça"
+          }
+        }
+      }
+    },
+    "Cuerpo entero": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full body"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corps entier"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganzkörper"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intero"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corpo inteiro"
           }
         }
       }
@@ -6369,6 +7015,74 @@
         }
       }
     },
+    "Día": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jour"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tag"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giorno"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dia"
+          }
+        }
+      }
+    },
+    "Día de nieve": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snow day"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jour de neige"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schneetag"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giornata di neve"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dia de neve"
+          }
+        }
+      }
+    },
     "Dónde está": {
       "localizations": {
         "en": {
@@ -6399,6 +7113,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Onde está"
+          }
+        }
+      }
+    },
+    "Dónde está cada prenda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where each item is"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où est chaque vêtement"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wo jedes Teil ist"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dove si trova ogni capo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onde está cada peça"
           }
         }
       }
@@ -6467,6 +7215,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Editar"
+          }
+        }
+      }
+    },
+    "Editar look": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier le look"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look bearbeiten"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifica look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar look"
+          }
+        }
+      }
+    },
+    "Editar maleta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit trip"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier la valise"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koffer bearbeiten"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifica valigia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar mala"
           }
         }
       }
@@ -6607,36 +7423,172 @@
         }
       }
     },
-    "El probador todavía no muestra accesorios.": {
+    "Elegir": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The fitting room doesn’t show accessories yet."
+            "value": "Choose"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La cabine d’essayage n’affiche pas encore les accessoires."
+            "value": "Choisir"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Umkleide zeigt noch keine Accessoires."
+            "value": "Wählen"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Il camerino non mostra ancora gli accessori."
+            "value": "Scegli"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O provador ainda não mostra acessórios."
+            "value": "Escolher"
+          }
+        }
+      }
+    },
+    "Elegir look": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir un look"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look wählen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher look"
+          }
+        }
+      }
+    },
+    "Elegir prenda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose item"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir un vêtement"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teil wählen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli capo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher peça"
+          }
+        }
+      }
+    },
+    "Elegir un look": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir un look"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look wählen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli un look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher um look"
+          }
+        }
+      }
+    },
+    "Elige una prenda para cada parte del cuerpo y guarda la combinación para ponértela cuando quieras.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick an item for each part of the body and save the combination to wear whenever you like."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un vêtement pour chaque partie du corps et enregistrez la combinaison pour la porter quand vous voulez."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle für jeden Körperbereich ein Teil und sichere die Kombination, um sie jederzeit zu tragen."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli un capo per ogni parte del corpo e salva la combinazione per indossarla quando vuoi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha uma peça para cada parte do corpo e salve a combinação para usar quando quiser."
           }
         }
       }
@@ -6705,6 +7657,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apagar cômodo"
+          }
+        }
+      }
+    },
+    "Eliminar look": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer le look"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look löschen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apagar look"
+          }
+        }
+      }
+    },
+    "Eliminar maleta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete trip"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer la valise"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koffer löschen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina valigia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apagar mala"
           }
         }
       }
@@ -6811,36 +7831,70 @@
         }
       }
     },
-    "En el maniquí de %@": {
+    "En la maleta de": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "On %@’s mannequin"
+            "value": "Packed for"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sur le mannequin de %@"
+            "value": "Dans la valise de"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "An der Puppe von %@"
+            "value": "Im Koffer für"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sul manichino di %@"
+            "value": "Nella valigia di"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "No manequim de %@"
+            "value": "Na mala de"
+          }
+        }
+      }
+    },
+    "En tus looks": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In your looks"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans vos looks"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In deinen Looks"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nei tuoi look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nos seus looks"
           }
         }
       }
@@ -7117,6 +8171,74 @@
         }
       }
     },
+    "Escapada a la sierra": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mountain getaway"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escapade à la montagne"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausflug in die Berge"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gita in montagna"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escapada para a serra"
+          }
+        }
+      }
+    },
+    "Escapada a Lisboa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lisbon getaway"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escapade à Lisbonne"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausflug nach Lissabon"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuga a Lisbona"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escapada para Lisboa"
+          }
+        }
+      }
+    },
     "Esta compilación no tiene acceso a iCloud. Los datos solo se guardan en este dispositivo.": {
       "localizations": {
         "en": {
@@ -7181,6 +8303,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Este backup foi feito com uma versão mais recente do Closet Finder. Atualize o app para restaurá-lo."
+          }
+        }
+      }
+    },
+    "Esta semana": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This week"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette semaine"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Woche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questa settimana"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta semana"
           }
         }
       }
@@ -7491,108 +8647,6 @@
         }
       }
     },
-    "EU %@: es tu talla": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %@: your size"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %@ : votre pointure"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %@: deine Größe"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %@: è il tuo numero"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %@: é o seu número"
-          }
-        }
-      }
-    },
-    "EU %@: te quedará grande (la tuya es la %lld)": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %1$@: will be too big (yours is %2$lld)"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %1$@ : sera trop grande (la vôtre est %2$lld)"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %1$@: wird zu groß sein (deine ist %2$lld)"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %1$@: ti starà grande (il tuo è %2$lld)"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %1$@: vai ficar grande (o seu é %2$lld)"
-          }
-        }
-      }
-    },
-    "EU %@: te quedará pequeña (la tuya es la %lld)": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %1$@: will be too small (yours is %2$lld)"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %1$@ : sera trop petite (la vôtre est %2$lld)"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %1$@: wird zu klein sein (deine ist %2$lld)"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %1$@: ti starà piccolo (il tuo è %2$lld)"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "EU %1$@: vai ficar pequeno (o seu é %2$lld)"
-          }
-        }
-      }
-    },
     "Exportar copia de seguridad": {
       "localizations": {
         "en": {
@@ -7691,6 +8745,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Favoritas"
+          }
+        }
+      }
+    },
+    "Favoritos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favorites"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favoris"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favoriten"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preferiti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favoritos"
+          }
+        }
+      }
+    },
+    "Fin de semana": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekend"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week-end"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wochenende"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekend"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fim de semana"
           }
         }
       }
@@ -8923,6 +10045,40 @@
         }
       }
     },
+    "La semana que viene": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next week"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La semaine prochaine"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächste Woche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La settimana prossima"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana que vem"
+          }
+        }
+      }
+    },
     "Lana": {
       "localizations": {
         "en": {
@@ -9025,40 +10181,6 @@
         }
       }
     },
-    "Larga, hasta el tobillo": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Long, down to the ankle"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Longue, jusqu’à la cheville"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lang, bis zum Knöchel"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lunga, fino alla caviglia"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Longa, até o tornozelo"
-          }
-        }
-      }
-    },
     "Largo": {
       "localizations": {
         "en": {
@@ -9093,36 +10215,36 @@
         }
       }
     },
-    "Largo justo: cae sobre el zapato": {
+    "Las prendas no se borran. El look desaparece de la semana y de las maletas.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Right length: falls on the shoe"
+            "value": "Items aren’t deleted. The look is removed from the week and from trips."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bonne longueur : tombe sur la chaussure"
+            "value": "Les vêtements ne sont pas supprimés. Le look disparaît de la semaine et des valises."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Richtige Länge: fällt auf den Schuh"
+            "value": "Die Kleidungsstücke werden nicht gelöscht. Der Look verschwindet aus der Woche und den Koffern."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lunghezza giusta: cade sulla scarpa"
+            "value": "I capi non vengono eliminati. Il look sparisce dalla settimana e dalle valigie."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Comprimento certo: cai sobre o sapato"
+            "value": "As peças não são apagadas. O look sai da semana e das malas."
           }
         }
       }
@@ -9331,138 +10453,172 @@
         }
       }
     },
-    "Llega a la cadera": {
+    "Llevar hoy": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reaches the hips"
+            "value": "Wear today"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arrive aux hanches"
+            "value": "Porter aujourd’hui"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reicht bis zur Hüfte"
+            "value": "Heute tragen"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arriva ai fianchi"
+            "value": "Indossa oggi"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chega ao quadril"
+            "value": "Usar hoje"
           }
         }
       }
     },
-    "Llega a la muñeca": {
+    "Lo que no va en ningún look: pijama, bañador, una chaqueta de repuesto…": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reaches the wrist"
+            "value": "Anything not in a look: pajamas, swimsuit, a spare jacket…"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arrive au poignet"
+            "value": "Ce qui n’est dans aucun look : pyjama, maillot de bain, une veste de rechange…"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reicht bis zum Handgelenk"
+            "value": "Was in keinem Look ist: Schlafanzug, Badehose, eine Ersatzjacke …"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arriva al polso"
+            "value": "Ciò che non è in nessun look: pigiama, costume, una giacca di riserva…"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chega ao pulso"
+            "value": "O que não está em nenhum look: pijama, roupa de banho, uma jaqueta extra…"
           }
         }
       }
     },
-    "Llega a la rodilla": {
+    "Look con %@": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reaches the knee"
+            "value": "Look with %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arrive au genou"
+            "value": "Look avec %@"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reicht bis zum Knie"
+            "value": "Look mit %@"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arriva al ginocchio"
+            "value": "Look con %@"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chega ao joelho"
+            "value": "Look com %@"
           }
         }
       }
     },
-    "Llega a medio muslo": {
+    "Look sin prendas": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reaches mid-thigh"
+            "value": "Empty look"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arrive à mi-cuisse"
+            "value": "Look sans vêtements"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reicht bis zur Oberschenkelmitte"
+            "value": "Look ohne Teile"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arriva a metà coscia"
+            "value": "Look senza capi"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chega ao meio da coxa"
+            "value": "Look sem peças"
+          }
+        }
+      }
+    },
+    "Looks": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks"
           }
         }
       }
@@ -9497,6 +10653,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "As alterações são copiadas para o seu iCloud automaticamente."
+          }
+        }
+      }
+    },
+    "Los looks y las prendas no se borran.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks and items aren’t deleted."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les looks et les vêtements ne sont pas supprimés."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks und Kleidung werden nicht gelöscht."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I look e i capi non vengono eliminati."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os looks e as peças não são apagados."
           }
         }
       }
@@ -9603,6 +10793,74 @@
         }
       }
     },
+    "Maleta lista": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All packed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valise prête"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koffer gepackt"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valigia pronta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mala pronta"
+          }
+        }
+      }
+    },
+    "Maletas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trips"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valises"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koffer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valigie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Malas"
+          }
+        }
+      }
+    },
     "Manga": {
       "localizations": {
         "en": {
@@ -9633,210 +10891,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Manga"
-          }
-        }
-      }
-    },
-    "Manga corta": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Short sleeve"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manches courtes"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kurzarm"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manica corta"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manga curta"
-          }
-        }
-      }
-    },
-    "Maniquí con medidas típicas. Añade tus medidas en la pestaña Medidas.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mannequin with typical measurements. Add yours in the Measurements tab."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mannequin aux mesures standard. Ajoutez les vôtres dans l’onglet Mesures."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Puppe mit üblichen Maßen. Füge deine im Tab „Maße“ hinzu."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manichino con misure tipiche. Aggiungi le tue nella scheda Misure."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manequim com medidas típicas. Adicione as suas na aba Medidas."
-          }
-        }
-      }
-    },
-    "Maniquí con tus medidas": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mannequin with your measurements"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mannequin à vos mesures"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Puppe mit deinen Maßen"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manichino con le tue misure"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manequim com suas medidas"
-          }
-        }
-      }
-    },
-    "Maniquí en 3D con %@. Desliza para girarlo.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D mannequin wearing %@. Swipe to rotate it."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mannequin 3D portant %@. Balayez pour le faire pivoter."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D-Puppe mit %@. Wische, um sie zu drehen."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manichino 3D con %@. Scorri per ruotarlo."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manequim 3D com %@. Deslize para girá-lo."
-          }
-        }
-      }
-    },
-    "Maniquí estándar": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standard mannequin"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mannequin standard"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Standardpuppe"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manichino standard"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manequim padrão"
-          }
-        }
-      }
-    },
-    "Maniquí personalizado con tu foto": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mannequin personalized with your photo"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mannequin personnalisé avec votre photo"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mit deinem Foto personalisierte Puppe"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manichino personalizzato con la tua foto"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manequim personalizado com sua foto"
           }
         }
       }
@@ -9875,6 +10929,40 @@
         }
       }
     },
+    "Marcada como en la maleta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marked as packed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marqué comme dans la valise"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Als eingepackt markiert"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segnato come in valigia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marcada como na mala"
+          }
+        }
+      }
+    },
     "Material": {
       "localizations": {
         "en": {
@@ -9905,6 +10993,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Material"
+          }
+        }
+      }
+    },
+    "Me lo he puesto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I wore it"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je l’ai porté"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Getragen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’ho indossato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usei"
           }
         }
       }
@@ -10385,6 +11507,40 @@
         }
       }
     },
+    "No hay prendas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No items"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun vêtement"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Kleidungsstücke"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun capo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma peça"
+          }
+        }
+      }
+    },
     "No he encontrado «%@» en tu armario.": {
       "localizations": {
         "en": {
@@ -10415,40 +11571,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Não encontrei “%@” no seu guarda-roupa."
-          }
-        }
-      }
-    },
-    "No se ha podido abrir la foto.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Couldn’t open the photo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Impossible d’ouvrir la photo."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Foto konnte nicht geöffnet werden."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Impossibile aprire la foto."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não foi possível abrir a foto."
           }
         }
       }
@@ -10623,40 +11745,6 @@
         }
       }
     },
-    "No se ve a ninguna persona. Usa una foto de cuerpo entero, de frente y con buena luz.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No person is visible. Use a full-length photo, from the front, in good light."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucune personne n’est visible. Utilisez une photo en pied, de face et bien éclairée."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Es ist keine Person zu sehen. Verwende ein Ganzkörperfoto von vorn bei gutem Licht."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Non si vede nessuna persona. Usa una foto a figura intera, di fronte e con buona luce."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nenhuma pessoa aparece. Use uma foto de corpo inteiro, de frente e com boa luz."
-          }
-        }
-      }
-    },
     "Nombre": {
       "localizations": {
         "en": {
@@ -10759,6 +11847,40 @@
         }
       }
     },
+    "Nueva maleta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New trip"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle valise"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neuer Koffer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuova valigia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nova mala"
+          }
+        }
+      }
+    },
     "Nueva persona": {
       "localizations": {
         "en": {
@@ -10857,6 +11979,108 @@
           "stringUnit": {
             "state": "translated",
             "value": "Novo lugar"
+          }
+        }
+      }
+    },
+    "Nuevo look": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveau look"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neuer Look"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuovo look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novo look"
+          }
+        }
+      }
+    },
+    "Oficina": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Office"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bureau"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Büro"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ufficio"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trabalho"
+          }
+        }
+      }
+    },
+    "Oficina, Fin de semana, Boda…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Office, Weekend, Wedding…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bureau, Week-end, Mariage…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Büro, Wochenende, Hochzeit …"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ufficio, Weekend, Matrimonio…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trabalho, Fim de semana, Casamento…"
           }
         }
       }
@@ -11235,6 +12459,142 @@
         }
       }
     },
+    "Para qué ocasión, con qué complementos…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which occasion, which accessories…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour quelle occasion, avec quels accessoires…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für welchen Anlass, mit welchen Accessoires …"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per quale occasione, con quali accessori…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para qual ocasião, com quais acessórios…"
+          }
+        }
+      }
+    },
+    "Parte de abajo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bottom"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bas"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unterteil"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parte sotto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parte de baixo"
+          }
+        }
+      }
+    },
+    "Parte de arriba": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Top"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haut"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oberteil"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parte sopra"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parte de cima"
+          }
+        }
+      }
+    },
+    "Pasadas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Past"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passées"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergangen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passate"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anteriores"
+          }
+        }
+      }
+    },
     "Pecho": {
       "localizations": {
         "en": {
@@ -11439,6 +12799,142 @@
         }
       }
     },
+    "Planifica qué ponerte cada día. Al abrir el look verás dónde está cada prenda.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan what to wear each day. Open the look to see where every item is."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planifiez quoi porter chaque jour. En ouvrant le look, vous verrez où est chaque vêtement."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plane, was du an jedem Tag trägst. Im Look siehst du, wo jedes Teil ist."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pianifica cosa indossare ogni giorno. Aprendo il look vedrai dove si trova ogni capo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planeje o que vestir a cada dia. Ao abrir o look, você verá onde está cada peça."
+          }
+        }
+      }
+    },
+    "Planificado para el %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planned for %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prévu pour le %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geplant für %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pianificato per %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planejado para %@"
+          }
+        }
+      }
+    },
+    "Planificar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planifier"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pianifica"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planejar"
+          }
+        }
+      }
+    },
+    "Planificar look": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planifier le look"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look planen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pianifica look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planejar look"
+          }
+        }
+      }
+    },
     "Plumífero azul marino": {
       "localizations": {
         "en": {
@@ -11541,40 +13037,6 @@
         }
       }
     },
-    "Poner la prenda": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Put on the item"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mettre le vêtement"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kleidungsstück anziehen"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Metti il capo"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vestir a peça"
-          }
-        }
-      }
-    },
     "Por categoría": {
       "localizations": {
         "en": {
@@ -11639,40 +13101,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Por cor"
-          }
-        }
-      }
-    },
-    "Por debajo de la rodilla": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Below the knee"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sous le genou"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unter dem Knie"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sotto il ginocchio"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abaixo do joelho"
           }
         }
       }
@@ -11915,6 +13343,40 @@
         }
       }
     },
+    "Prendas sueltas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra items"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vêtements en plus"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einzelteile"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capi sciolti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peças avulsas"
+          }
+        }
+      }
+    },
     "Prendas, colores, ubicaciones…": {
       "localizations": {
         "en": {
@@ -12017,6 +13479,40 @@
         }
       }
     },
+    "Previsión: nieve el sábado.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forecast: snow on Saturday."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prévisions : neige samedi."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorhersage: Schnee am Samstag."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previsioni: neve sabato."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previsão: neve no sábado."
+          }
+        }
+      }
+    },
     "Primavera · Verano": {
       "localizations": {
         "en": {
@@ -12047,74 +13543,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Primavera · Verão"
-          }
-        }
-      }
-    },
-    "Probador": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fitting room"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cabine d’essayage"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Umkleide"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Camerino"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Provador"
-          }
-        }
-      }
-    },
-    "Probador 3D": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D fitting room"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cabine d’essayage 3D"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D-Umkleide"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Camerino 3D"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Provador 3D"
           }
         }
       }
@@ -12153,41 +13581,211 @@
         }
       }
     },
-    "Probar en 3D": {
+    "Próximas": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Try on in 3D"
+            "value": "Upcoming"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Essayer en 3D"
+            "value": "À venir"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "In 3D anprobieren"
+            "value": "Bevorstehend"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Prova in 3D"
+            "value": "Prossime"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Provar em 3D"
+            "value": "Próximas"
+          }
+        }
+      }
+    },
+    "Puesto %lld veces": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worn %lld times"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porté %lld fois"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld-mal getragen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indossato %lld volte"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usado %lld vezes"
+          }
+        }
+      }
+    },
+    "Puesto 1 vez": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worn once"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porté 1 fois"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1-mal getragen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indossato 1 volta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usado 1 vez"
+          }
+        }
+      }
+    },
+    "Quitar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entfernen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover"
+          }
+        }
+      }
+    },
+    "Quitar %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ entfernen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover %@"
           }
         }
       }
     },
     "Quitar de favoritas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove from favorites"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer des favoris"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus Favoriten entfernen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi dai preferiti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover dos favoritos"
+          }
+        }
+      }
+    },
+    "Quitar de favoritos": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -12255,70 +13853,36 @@
         }
       }
     },
-    "Quitar la prenda": {
+    "Qué llevar": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Take off the item"
+            "value": "What to pack"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Retirer le vêtement"
+            "value": "À emporter"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kleidungsstück ausziehen"
+            "value": "Was einpacken"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Togli il capo"
+            "value": "Cosa portare"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tirar a peça"
-          }
-        }
-      }
-    },
-    "Quitar los datos de la foto": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remove photo data"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Supprimer les données de la photo"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fotodaten entfernen"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rimuovi i dati della foto"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remover os dados da foto"
+            "value": "O que levar"
           }
         }
       }
@@ -12527,6 +14091,40 @@
         }
       }
     },
+    "Salida": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Departure"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Départ"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abreise"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partenza"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ida"
+          }
+        }
+      }
+    },
     "Se borrarán la prenda y su foto. No se puede deshacer.": {
       "localizations": {
         "en": {
@@ -12629,138 +14227,36 @@
         }
       }
     },
-    "Se ha usado tu cara, pero no se ve el cuerpo entero: las proporciones son las típicas.": {
+    "Se han añadido %lld prendas, %lld ubicaciones, %lld personas, %lld looks y %lld maletas. %lld elementos ya estaban y no se han duplicado.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your face was used, but your whole body isn’t visible, so typical proportions are used."
+            "value": "Added %1$lld items, %2$lld places, %3$lld people, %4$lld looks and %5$lld trips. %6$lld were already there and weren’t duplicated."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Votre visage a été utilisé, mais le corps entier n’est pas visible : les proportions sont standard."
+            "value": "%1$lld vêtements, %2$lld emplacements, %3$lld personnes, %4$lld looks et %5$lld valises ajoutés. %6$lld éléments existaient déjà et n’ont pas été dupliqués."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dein Gesicht wurde übernommen, aber der ganze Körper ist nicht zu sehen: Es werden übliche Proportionen verwendet."
+            "value": "%1$lld Kleidungsstücke, %2$lld Orte, %3$lld Personen, %4$lld Looks und %5$lld Koffer hinzugefügt. %6$lld Elemente waren schon vorhanden und wurden nicht doppelt angelegt."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "È stato usato il tuo viso, ma il corpo intero non si vede: le proporzioni sono quelle tipiche."
+            "value": "Aggiunti %1$lld capi, %2$lld posti, %3$lld persone, %4$lld look e %5$lld valigie. %6$lld elementi c’erano già e non sono stati duplicati."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Seu rosto foi usado, mas o corpo inteiro não aparece: as proporções são as típicas."
-          }
-        }
-      }
-    },
-    "Se han añadido %lld prendas, %lld ubicaciones y %lld personas. %lld elementos ya estaban y no se han duplicado.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Added %1$lld items, %2$lld places and %3$lld people. %4$lld were already there and weren’t duplicated."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$lld vêtements, %2$lld emplacements et %3$lld personnes ajoutés. %4$lld éléments existaient déjà et n’ont pas été dupliqués."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$lld Kleidungsstücke, %2$lld Orte und %3$lld Personen hinzugefügt. %4$lld Elemente waren schon vorhanden und wurden nicht doppelt angelegt."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aggiunti %1$lld capi, %2$lld posti e %3$lld persone. %4$lld elementi c’erano già e non sono stati duplicati."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Foram adicionadas %1$lld peças, %2$lld lugares e %3$lld pessoas. %4$lld itens já existiam e não foram duplicados."
-          }
-        }
-      }
-    },
-    "Se queda %lld cm antes de la muñeca": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ends %lld cm short of the wrist"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "S’arrête %lld cm avant le poignet"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Endet %lld cm vor dem Handgelenk"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Finisce %lld cm prima del polso"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Termina %lld cm antes do pulso"
-          }
-        }
-      }
-    },
-    "Se queda %lld cm por encima del tobillo": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ends %lld cm above the ankle"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "S’arrête %lld cm au-dessus de la cheville"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Endet %lld cm über dem Knöchel"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Finisce %lld cm sopra la caviglia"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Termina %lld cm acima do tornozelo"
+            "value": "Foram adicionadas %1$lld peças, %2$lld lugares, %3$lld pessoas, %4$lld looks e %5$lld malas. %6$lld itens já existiam e não foram duplicados."
           }
         }
       }
@@ -12799,6 +14295,40 @@
         }
       }
     },
+    "Sección": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Section"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Section"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bereich"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sezione"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seção"
+          }
+        }
+      }
+    },
     "Seleccionar": {
       "localizations": {
         "en": {
@@ -12829,6 +14359,108 @@
           "stringUnit": {
             "state": "translated",
             "value": "Selecionar"
+          }
+        }
+      }
+    },
+    "Semana": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semaine"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Woche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settimana"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana"
+          }
+        }
+      }
+    },
+    "Semana anterior": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous week"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semaine précédente"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorherige Woche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settimana precedente"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana anterior"
+          }
+        }
+      }
+    },
+    "Semana siguiente": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next week"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semaine suivante"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächste Woche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settimana successiva"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próxima semana"
           }
         }
       }
@@ -12901,104 +14533,36 @@
         }
       }
     },
-    "Sin medida de la prenda: largo típico": {
+    "Sin maletas": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No item measurement: typical length"
+            "value": "No trips"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sans mesure du vêtement : longueur standard"
+            "value": "Aucune valise"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kein Maß des Kleidungsstücks: übliche Länge"
+            "value": "Keine Koffer"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Senza misura del capo: lunghezza tipica"
+            "value": "Nessuna valigia"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sem medida da peça: comprimento típico"
-          }
-        }
-      }
-    },
-    "Sin medida de la prenda: se muestra con una holgura típica": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No item measurement: shown with typical ease"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sans mesure du vêtement : affiché avec une aisance standard"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kein Maß des Kleidungsstücks: mit üblicher Weite dargestellt"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Senza misura del capo: mostrato con vestibilità tipica"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sem medida da peça: mostrada com folga típica"
-          }
-        }
-      }
-    },
-    "Sin medir: %@. Se usan valores típicos.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Not measured: %@. Typical values are used."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Non mesuré : %@. Des valeurs standard sont utilisées."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nicht gemessen: %@. Es werden übliche Werte verwendet."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Non misurato: %@. Si usano valori tipici."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sem medida: %@. São usados valores típicos."
+            "value": "Nenhuma mala"
           }
         }
       }
@@ -13237,6 +14801,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Só favoritas"
+          }
+        }
+      }
+    },
+    "Son %lld días y llevas %lld looks. Repite alguno o añade más.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It’s %1$lld days and you have %2$lld looks. Repeat one or add more."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le voyage dure %1$lld jours et vous avez %2$lld looks. Répétez-en un ou ajoutez-en."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es sind %1$lld Tage und du hast %2$lld Looks. Wiederhole einen oder füge mehr hinzu."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sono %1$lld giorni e hai %2$lld look. Ripetine uno o aggiungine altri."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "São %1$lld dias e você leva %2$lld looks. Repita algum ou adicione mais."
           }
         }
       }
@@ -13615,74 +15213,6 @@
         }
       }
     },
-    "Te sobran %lld cm de largo": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld cm too long"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld cm trop long"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld cm zu lang"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld cm troppo lungo"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld cm comprido demais"
-          }
-        }
-      }
-    },
-    "Te sobran %lld cm de manga": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sleeves %lld cm too long"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manches %lld cm trop longues"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ärmel %lld cm zu lang"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Maniche %lld cm troppo lunghe"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mangas %lld cm compridas demais"
-          }
-        }
-      }
-    },
     "Temporada": {
       "localizations": {
         "en": {
@@ -13717,6 +15247,40 @@
         }
       }
     },
+    "Tiempo previsto, planes, cosas que no olvidar…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weather forecast, plans, things not to forget…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Météo prévue, projets, choses à ne pas oublier…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wettervorhersage, Pläne, was du nicht vergessen darfst …"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meteo prevista, programmi, cose da non dimenticare…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previsão do tempo, planos, coisas para não esquecer…"
+          }
+        }
+      }
+    },
     "Tipo": {
       "localizations": {
         "en": {
@@ -13747,6 +15311,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tipo"
+          }
+        }
+      }
+    },
+    "Toca para marcarla como en la maleta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap to mark as packed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez pour la marquer comme dans la valise"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe, um es als eingepackt zu markieren"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca per segnarlo come in valigia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque para marcá-la como na mala"
+          }
+        }
+      }
+    },
+    "Toca una prenda para ver su sitio en el mueble.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap an item to see its spot in the furniture."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez un vêtement pour voir sa place dans le meuble."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe auf ein Teil, um seinen Platz im Möbel zu sehen."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca un capo per vedere il suo posto nel mobile."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque numa peça para ver o lugar dela no móvel."
           }
         }
       }
@@ -13815,6 +15447,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "O ano todo"
+          }
+        }
+      }
+    },
+    "Todos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos"
           }
         }
       }
@@ -14091,40 +15757,6 @@
         }
       }
     },
-    "Tu talla es la EU %lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your size is EU %lld"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Votre pointure est EU %lld"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Größe ist EU %lld"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il tuo numero è EU %lld"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seu número é EU %lld"
-          }
-        }
-      }
-    },
     "Tus prendas, fotos y ubicaciones se guardan en tu iCloud privado. Si borras la app y la vuelves a instalar con el mismo Apple ID, todo vuelve solo. También se sincroniza entre tu iPhone y tu iPad.": {
       "localizations": {
         "en": {
@@ -14223,6 +15855,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lugar"
+          }
+        }
+      }
+    },
+    "Un look por día cubierto.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One look per day covered."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un look par jour : c’est bon."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Look pro Tag ist abgedeckt."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un look per ogni giorno."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um look por dia garantido."
           }
         }
       }
@@ -14431,40 +16097,6 @@
         }
       }
     },
-    "Usar una foto mía": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Use a photo of me"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utiliser une photo de moi"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Foto von mir verwenden"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usa una mia foto"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usar uma foto minha"
-          }
-        }
-      }
-    },
     "Uso": {
       "localizations": {
         "en": {
@@ -14495,6 +16127,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uso"
+          }
+        }
+      }
+    },
+    "Vaciar la maleta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unpack all"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vider la valise"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koffer leeren"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Svuota la valigia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esvaziar a mala"
           }
         }
       }
@@ -14601,6 +16267,40 @@
         }
       }
     },
+    "Verano": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summer"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Été"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sommer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estate"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verão"
+          }
+        }
+      }
+    },
     "Versión": {
       "localizations": {
         "en": {
@@ -14665,6 +16365,108 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vestidos"
+          }
+        }
+      }
+    },
+    "Viaje": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trip"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voyage"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reise"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Viaggio"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Viagem"
+          }
+        }
+      }
+    },
+    "Volver a esta semana": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to this week"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revenir à cette semaine"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zurück zu dieser Woche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Torna a questa settimana"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voltar para esta semana"
+          }
+        }
+      }
+    },
+    "Vuelta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Return"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rückreise"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritorno"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volta"
           }
         }
       }

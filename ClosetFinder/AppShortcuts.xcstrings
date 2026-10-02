@@ -1,126 +1,128 @@
 {
-  "sourceLanguage": "es",
-  "strings": {
-    "Busca una prenda en ${applicationName}": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Busca una prenda en ${applicationName}"
+  "sourceLanguage" : "es",
+  "strings" : {
+    "Busca una prenda en ${applicationName}" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finde ein Kleidungsstück in ${applicationName}"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Find an item in ${applicationName}"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find an item in ${applicationName}"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cherche un vêtement dans ${applicationName}"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busca una prenda en ${applicationName}"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Finde ein Kleidungsstück in ${applicationName}"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cherche un vêtement dans ${applicationName}"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cerca un capo in ${applicationName}"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca un capo in ${applicationName}"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Busque uma peça no ${applicationName}"
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busque uma peça no ${applicationName}"
           }
         }
       }
     },
-    "Dónde está mi ropa en ${applicationName}": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dónde está mi ropa en ${applicationName}"
+    "Dónde está mi ropa en ${applicationName}" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wo ist meine Kleidung in ${applicationName}"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Where are my clothes in ${applicationName}"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where are my clothes in ${applicationName}"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Où sont mes vêtements dans ${applicationName}"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dónde está mi ropa en ${applicationName}"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wo ist meine Kleidung in ${applicationName}"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Où sont mes vêtements dans ${applicationName}"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dove sono i miei vestiti in ${applicationName}"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dove sono i miei vestiti in ${applicationName}"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Onde estão minhas roupas no ${applicationName}"
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onde estão minhas roupas no ${applicationName}"
           }
         }
       }
     },
-    "Encuentra ropa con ${applicationName}": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Encuentra ropa con ${applicationName}"
+    "Encuentra ropa con ${applicationName}" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finde Kleidung mit ${applicationName}"
           }
         },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Find clothes with ${applicationName}"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find clothes with ${applicationName}"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trouve des vêtements avec ${applicationName}"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encuentra ropa con ${applicationName}"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Finde Kleidung mit ${applicationName}"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trouve des vêtements avec ${applicationName}"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trova vestiti con ${applicationName}"
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trova vestiti con ${applicationName}"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Encontre roupas com o ${applicationName}"
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encontre roupas com o ${applicationName}"
           }
         }
       }
     }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }

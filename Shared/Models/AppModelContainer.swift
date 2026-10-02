@@ -9,7 +9,8 @@ import SwiftData
 nonisolated enum AppModelContainer {
     static let appGroup = "group.com.sergiogonzalez.ClosetFinder"
     static let cloudKitContainer = "iCloud.com.sergiogonzalez.ClosetFinder"
-    static let schema = Schema([Garment.self, StorageLocation.self, BodyProfile.self])
+    static let schema = Schema([Garment.self, StorageLocation.self, BodyProfile.self,
+                                Outfit.self, OutfitPlan.self, Trip.self])
 
     /// `-inMemoryStore` arranca con un almacén vacío que no se guarda (útil para pruebas y capturas).
     static let isInMemory = ProcessInfo.processInfo.arguments.contains("-inMemoryStore")

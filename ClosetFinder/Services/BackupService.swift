@@ -11,13 +11,47 @@ extension UTType {
 /// Copia de seguridad completa (ubicaciones, personas, prendas y fotos) en un solo fichero.
 /// Para quien no usa iCloud, o para guardar una copia aparte en Archivos o en el ordenador.
 nonisolated struct BackupArchive: Codable, Sendable {
-    static let currentVersion = 1
+    /// 1: prendas, ubicaciones y personas. 2: además looks, planificación y maletas.
+    static let currentVersion = 2
 
     var version = BackupArchive.currentVersion
     var createdAt = Date.now
     var locations: [LocationRecord] = []
     var profiles: [ProfileRecord] = []
     var garments: [GarmentRecord] = []
+    // Desde la versión 2. Opcionales para poder leer copias de la versión 1.
+    var outfits: [OutfitRecord]?
+    var plans: [PlanRecord]?
+    var trips: [TripRecord]?
+
+    struct OutfitRecord: Codable, Sendable {
+        var id: UUID
+        var name: String
+        var notes: String
+        var isFavorite: Bool
+        var wearCount: Int
+        var lastWornAt: Date?
+        var createdAt: Date
+        var garmentIDs: [UUID]
+    }
+
+    struct PlanRecord: Codable, Sendable {
+        var id: UUID
+        var day: Date
+        var outfitID: UUID?
+    }
+
+    struct TripRecord: Codable, Sendable {
+        var id: UUID
+        var name: String
+        var startDate: Date
+        var endDate: Date
+        var notes: String
+        var packedGarmentIDs: [String]
+        var createdAt: Date
+        var outfitIDs: [UUID]
+        var extraGarmentIDs: [UUID]
+    }
 
     struct LocationRecord: Codable, Sendable {
         var id: UUID
@@ -34,11 +68,6 @@ nonisolated struct BackupArchive: Codable, Sendable {
         var sizing: String
         var heightCm, chestCm, waistCm, hipCm, inseamCm, footCm: Double?
         var createdAt: Date
-        // Añadidos con el probador 3D: opcionales para poder leer copias anteriores.
-        var shoulderRatio: Double?
-        var hipRatio: Double?
-        var skinTone: [Double]?
-        var faceTexture: Data?
     }
 
     struct GarmentRecord: Codable, Sendable {
@@ -81,6 +110,8 @@ enum BackupService {
         var garments = 0
         var locations = 0
         var profiles = 0
+        var outfits = 0
+        var trips = 0
         var skipped = 0
     }
 
@@ -102,9 +133,7 @@ enum BackupService {
         }
         archive.profiles = try context.fetch(FetchDescriptor<BodyProfile>()).map {
             .init(id: $0.uuid, name: $0.name, sizing: $0.sizingRaw, heightCm: $0.heightCm, chestCm: $0.chestCm,
-                  waistCm: $0.waistCm, hipCm: $0.hipCm, inseamCm: $0.inseamCm, footCm: $0.footCm, createdAt: $0.createdAt,
-                  shoulderRatio: $0.shoulderRatio, hipRatio: $0.hipRatio, skinTone: $0.skinTone.isEmpty ? nil : $0.skinTone,
-                  faceTexture: $0.faceTexture)
+                  waistCm: $0.waistCm, hipCm: $0.hipCm, inseamCm: $0.inseamCm, footCm: $0.footCm, createdAt: $0.createdAt)
         }
         archive.garments = try context.fetch(FetchDescriptor<Garment>()).map {
             .init(id: $0.uuid, name: $0.name, category: $0.categoryRaw, size: $0.size, colors: $0.colorsRaw,
@@ -113,6 +142,18 @@ enum BackupService {
                   chestWidthCm: $0.chestWidthCm, waistWidthCm: $0.waistWidthCm, lengthCm: $0.lengthCm,
                   sleeveCm: $0.sleeveCm, inseamCm: $0.inseamCm, isFavorite: $0.isFavorite, wearCount: $0.wearCount,
                   lastWornAt: $0.lastWornAt, createdAt: $0.createdAt, locationID: $0.location?.uuid, ownerID: $0.owner?.uuid)
+        }
+        archive.outfits = try context.fetch(FetchDescriptor<Outfit>()).map {
+            .init(id: $0.uuid, name: $0.name, notes: $0.notes, isFavorite: $0.isFavorite, wearCount: $0.wearCount,
+                  lastWornAt: $0.lastWornAt, createdAt: $0.createdAt, garmentIDs: ($0.garments ?? []).map(\.uuid))
+        }
+        archive.plans = try context.fetch(FetchDescriptor<OutfitPlan>()).map {
+            .init(id: $0.uuid, day: $0.day, outfitID: $0.outfit?.uuid)
+        }
+        archive.trips = try context.fetch(FetchDescriptor<Trip>()).map {
+            .init(id: $0.uuid, name: $0.name, startDate: $0.startDate, endDate: $0.endDate, notes: $0.notes,
+                  packedGarmentIDs: $0.packedGarmentIDs, createdAt: $0.createdAt,
+                  outfitIDs: ($0.outfits ?? []).map(\.uuid), extraGarmentIDs: ($0.extraGarments ?? []).map(\.uuid))
         }
         return archive
     }
@@ -154,10 +195,6 @@ enum BackupService {
             profile.inseamCm = record.inseamCm
             profile.footCm = record.footCm
             profile.createdAt = record.createdAt
-            profile.shoulderRatio = record.shoulderRatio
-            profile.hipRatio = record.hipRatio
-            profile.skinTone = record.skinTone ?? []
-            profile.faceTexture = record.faceTexture
             profiles[record.id] = profile
             summary.profiles += 1
         }
@@ -192,6 +229,45 @@ enum BackupService {
             garment.location = record.locationID.flatMap { locations[$0] }
             garment.owner = record.ownerID.flatMap { profiles[$0] }
             summary.garments += 1
+        }
+
+        let garments = Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<Garment>()).map { ($0.uuid, $0) })
+        var outfits = Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<Outfit>()).map { ($0.uuid, $0) })
+        for record in archive.outfits ?? [] {
+            guard outfits[record.id] == nil else { summary.skipped += 1; continue }
+            let outfit = Outfit(name: record.name)
+            context.insert(outfit)
+            outfit.uuid = record.id
+            outfit.notes = record.notes
+            outfit.isFavorite = record.isFavorite
+            outfit.wearCount = record.wearCount
+            outfit.lastWornAt = record.lastWornAt
+            outfit.createdAt = record.createdAt
+            outfit.garments = record.garmentIDs.compactMap { garments[$0] }
+            outfits[record.id] = outfit
+            summary.outfits += 1
+        }
+
+        let existingPlans = Set(try context.fetch(FetchDescriptor<OutfitPlan>()).map(\.uuid))
+        for record in archive.plans ?? [] where !existingPlans.contains(record.id) {
+            let plan = OutfitPlan(day: record.day)
+            context.insert(plan)
+            plan.uuid = record.id
+            plan.outfit = record.outfitID.flatMap { outfits[$0] }
+        }
+
+        let existingTrips = Set(try context.fetch(FetchDescriptor<Trip>()).map(\.uuid))
+        for record in archive.trips ?? [] {
+            guard !existingTrips.contains(record.id) else { summary.skipped += 1; continue }
+            let trip = Trip(name: record.name, startDate: record.startDate, endDate: record.endDate)
+            context.insert(trip)
+            trip.uuid = record.id
+            trip.notes = record.notes
+            trip.packedGarmentIDs = record.packedGarmentIDs
+            trip.createdAt = record.createdAt
+            trip.outfits = record.outfitIDs.compactMap { outfits[$0] }
+            trip.extraGarments = record.extraGarmentIDs.compactMap { garments[$0] }
+            summary.trips += 1
         }
         try context.save()
         return summary

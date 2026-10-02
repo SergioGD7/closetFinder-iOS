@@ -12,8 +12,8 @@ struct GarmentDetailView: View {
     @State private var isEditing = false
     @State private var isMoving = false
     @State private var isConfirmingDelete = false
+    @State private var isCreatingOutfit = false
     @State private var wornFeedback = 0
-    @State private var isTryingOn = false
     @Environment(\.horizontalSizeClass) private var sizeClass
 
     /// En iPad (ancho regular) la foto es más alta y el texto no pasa de una columna cómoda.
@@ -44,6 +44,7 @@ struct GarmentDetailView: View {
         .toolbar(.hidden, for: .tabBar)
         .toolbar { toolbar }
         .sheet(isPresented: $isEditing) { GarmentEditorView(garment: garment) }
+        .sheet(isPresented: $isCreatingOutfit) { OutfitEditorView(garments: [garment]) }
         .sheet(isPresented: $isMoving) {
             NavigationStack {
                 LocationPicker(selection: garment.location) { newLocation in
@@ -58,13 +59,6 @@ struct GarmentDetailView: View {
             Text("Se borrarán la prenda y su foto. No se puede deshacer.")
         }
         .sensoryFeedback(.success, trigger: wornFeedback)
-        .fullScreenCover(isPresented: $isTryingOn) { TryOnView(garment: garment) }
-        #if DEBUG
-        .task {
-            // `-openTryOn` junto a `-openGarment` abre el probador (capturas y pruebas manuales).
-            if ProcessInfo.processInfo.arguments.contains("-openTryOn") { isTryingOn = true }
-        }
-        #endif
     }
 
     // MARK: Cabecera
@@ -86,22 +80,6 @@ struct GarmentDetailView: View {
                     }
                     .buttonStyle(.plain)
                     .padding(.leading)
-                    .padding(.bottom, 44)
-                }
-            }
-            .overlay(alignment: .bottomTrailing) {
-                if GarmentShell.style(for: garment.category) != .unsupported {
-                    Button {
-                        isTryingOn = true
-                    } label: {
-                        Label("Probar en 3D", systemImage: "figure.stand")
-                            .font(.footnote.weight(.semibold))
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .glassBackground(in: Capsule(), interactive: true)
-                    }
-                    .buttonStyle(.plain)
-                    .padding(.trailing)
                     .padding(.bottom, 44)
                 }
             }
@@ -130,6 +108,7 @@ struct GarmentDetailView: View {
 
             whereCard
             measurementsCard
+            outfitsCard
             infoCard
 
             if !garment.notes.isEmpty {
@@ -216,6 +195,51 @@ struct GarmentDetailView: View {
                                                    chestWidthCm: garment.chestWidthCm, waistWidthCm: garment.waistWidthCm,
                                                    bodyChestCm: profile.chestCm, bodyWaistCm: profile.waistCm) {
                         FitBadge(fit: fit, personName: profile.name)
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var outfitsCard: some View {
+        let outfits = (garment.outfits ?? []).sorted { $0.createdAt > $1.createdAt }
+        card(title: String(localized: "En tus looks")) {
+            if outfits.isEmpty {
+                Button {
+                    isCreatingOutfit = true
+                } label: {
+                    Label("Crear un look con esta prenda", systemImage: "plus.circle.fill")
+                        .font(.subheadline.weight(.semibold))
+                }
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        ForEach(outfits) { outfit in
+                            NavigationLink(value: outfit) {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    OutfitMosaic(garments: outfit.pieces, cornerRadius: 14, spacing: 2)
+                                        .frame(width: 92, height: 92)
+                                    Text(outfit.displayName)
+                                        .font(.caption.weight(.semibold))
+                                        .foregroundStyle(.primary)
+                                        .lineLimit(1)
+                                        .frame(width: 92, alignment: .leading)
+                                }
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        Button {
+                            isCreatingOutfit = true
+                        } label: {
+                            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                .strokeBorder(Color.accentColor.opacity(0.5), style: StrokeStyle(lineWidth: 1.5, dash: [5, 4]))
+                                .frame(width: 92, height: 92)
+                                .overlay { Image(systemName: "plus").font(.title3.weight(.semibold)) }
+                        }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(Color.accentColor)
+                        .accessibilityLabel(String(localized: "Crear un look con esta prenda"))
                     }
                 }
             }
@@ -316,6 +340,7 @@ struct GarmentDetailView: View {
 
             Menu {
                 Button { isEditing = true } label: { Label("Editar", systemImage: "pencil") }
+                Button { isCreatingOutfit = true } label: { Label("Crear un look con esta prenda", systemImage: "tshirt") }
                 Menu {
                     Picker("Estado", selection: $garment.statusRaw) {
                         ForEach(GarmentStatus.allCases) { status in

@@ -132,38 +132,6 @@ struct ProfileView: View {
                 Text("Calculadas con tablas europeas habituales. Cada marca talla un poco distinto: úsalas como referencia.")
             }
 
-            Section {
-                HStack(spacing: 14) {
-                    if let face = profile.faceTexture.flatMap(UIImage.init(data:)) {
-                        Image(uiImage: face)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 48, height: 48)
-                            .clipShape(Circle())
-                            .accessibilityHidden(true)
-                    } else {
-                        Image(systemName: "figure.stand")
-                            .font(.title2)
-                            .foregroundStyle(Color.accentColor)
-                            .frame(width: 48, height: 48)
-                            .background(Color.accentColor.opacity(0.12), in: Circle())
-                    }
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(profile.hasTryOnPhoto ? String(localized: "Maniquí personalizado con tu foto") : String(localized: "Maniquí con tus medidas"))
-                            .font(.subheadline.weight(.semibold))
-                        TryOnPhotoButton(profile: profile)
-                    }
-                }
-                .padding(.vertical, 4)
-                if profile.hasTryOnPhoto {
-                    Button("Quitar los datos de la foto", role: .destructive) { profile.clearTryOnPhoto() }
-                }
-            } header: {
-                Text("Probador 3D")
-            } footer: {
-                Text("Con una foto de cuerpo entero, de frente, el maniquí toma tus proporciones, tu tono de piel y tu cara. Se analiza en el iPhone y la foto no se guarda.")
-            }
-
             let owned = profile.garments ?? []
             if !owned.isEmpty {
                 Section {
