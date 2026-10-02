@@ -50,8 +50,8 @@ struct RootView: View {
 
     #if DEBUG
     /// Abre una pantalla concreta al arrancar, para capturas y pruebas manuales:
-    /// `-openTab locations|profile|search|stats`, `-openGarment "Chaqueta vaquera"`
-    /// o `-openLocation "Armario grande"`.
+    /// `-openTab looks|week|trips|locations|profile|search|stats`, `-openGarment "Chaqueta vaquera"`,
+    /// `-openLocation "Armario grande"`, `-openOutfit "Oficina"` o `-openTrip "Escapada a la sierra"`.
     private func applyDebugLaunchArguments() {
         let arguments = ProcessInfo.processInfo.arguments
         func value(after flag: String) -> String? {
@@ -63,6 +63,9 @@ struct RootView: View {
         case "profile": router.selectedTab = .profile
         case "search": router.selectedTab = .search
         case "stats": router.closetPath.append(ClosetRoute.stats)
+        case "looks": router.selectedTab = .looks
+        case "week": router.selectedTab = .looks; router.looksSection = .week
+        case "trips": router.selectedTab = .looks; router.looksSection = .trips
         default: break
         }
         // `-samplePhotos`: las prendas sin foto reciben su ilustración como foto recortada,
@@ -79,6 +82,14 @@ struct RootView: View {
                 garment.hasCutout = true
                 garment.imageRevision += 1
             }
+        }
+        if let name = value(after: "-openOutfit"),
+           let outfit = try? modelContext.fetch(FetchDescriptor<Outfit>()).first(where: { $0.name == name }) {
+            router.open(outfit)
+        }
+        if let name = value(after: "-openTrip"),
+           let trip = try? modelContext.fetch(FetchDescriptor<Trip>()).first(where: { $0.name == name }) {
+            router.open(trip)
         }
         if let name = value(after: "-openLocation"),
            let location = try? modelContext.fetch(FetchDescriptor<StorageLocation>()).first(where: { $0.name == name }) {

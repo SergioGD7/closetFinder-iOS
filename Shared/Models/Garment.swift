@@ -35,6 +35,9 @@ nonisolated final class Garment {
 
     var location: StorageLocation?
     var owner: BodyProfile?
+    /// Looks y maletas en los que aparece (relaciones inversas de `Outfit` y `Trip`).
+    var outfits: [Outfit]? = []
+    var trips: [Trip]? = []
 
     var isFavorite: Bool = false
     var wearCount: Int = 0

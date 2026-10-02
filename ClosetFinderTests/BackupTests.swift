@@ -30,6 +30,31 @@ struct BackupTests {
         #expect(restored.photo == Data([1, 2, 3]))
         #expect(restored.chestWidthCm == 54)
         #expect(restored.colors == [.blue])
+
+        // Looks, semana y maletas (versión 2)
+        #expect(summary.outfits == 4)
+        #expect(summary.trips == 1)
+        let trip = try #require(try target.fetch(FetchDescriptor<Trip>()).first)
+        #expect(trip.sortedOutfits.count == 2)
+        #expect(trip.packedCount == 1)
+        #expect(try target.fetchCount(FetchDescriptor<OutfitPlan>()) == 5)
+        let weekend = try #require(try target.fetch(FetchDescriptor<Outfit>()).first { $0.name == "Fin de semana" })
+        #expect(weekend.pieces.map(\.displayName).contains("Chaqueta vaquera"))
+    }
+
+    @Test func readsVersionOneBackups() throws {
+        // Una copia antigua no tiene looks ni maletas: se restaura igual.
+        let sourceContainer = AppModelContainer.preview()
+        var archive = try BackupService.makeArchive(from: sourceContainer.mainContext)
+        archive.version = 1
+        archive.outfits = nil
+        archive.plans = nil
+        archive.trips = nil
+        let decoded = try BackupArchive.decode(archive.encoded())
+        let targetContainer = AppModelContainer.make(inMemory: true)
+        let summary = try BackupService.restore(decoded, into: targetContainer.mainContext)
+        #expect(summary.garments == archive.garments.count)
+        #expect(summary.outfits == 0)
     }
 
     @Test func restoringTwiceDoesNotDuplicate() throws {
@@ -44,7 +69,9 @@ struct BackupTests {
 
         #expect(second.garments == 0)
         #expect(second.locations == 0)
-        #expect(second.skipped == archive.garments.count + archive.locations.count + archive.profiles.count)
+        #expect(second.outfits == 0)
+        #expect(second.skipped == archive.garments.count + archive.locations.count + archive.profiles.count
+                + (archive.outfits?.count ?? 0) + (archive.trips?.count ?? 0))
         #expect(try target.fetchCount(FetchDescriptor<Garment>()) == archive.garments.count)
     }
 

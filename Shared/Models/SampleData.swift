@@ -60,8 +60,10 @@ enum SampleData {
             .init(String(localized: "Polo rojo"), .tShirt, "M", [.red], compartments[String(localized: "Cajón \(1)")], status: .lent, chest: 52, length: 70, wears: 5, daysAgo: 30),
         ]
 
+        var byName: [String: Garment] = [:]
         for item in items {
             let garment = Garment(name: item.name, category: item.category, size: item.size, colors: item.colors)
+            byName[item.name] = garment
             context.insert(garment)
             garment.location = item.location
             garment.owner = me
@@ -78,6 +80,46 @@ enum SampleData {
             garment.lastWornAt = Calendar.current.date(byAdding: .day, value: -item.daysAgo, to: .now)
             garment.isFavorite = item.favorite
         }
+
+        // Looks
+        func pieces(_ names: [String.LocalizationValue]) -> [Garment] {
+            names.compactMap { byName[String(localized: $0)] }
+        }
+        func makeOutfit(_ name: String, _ garments: [Garment], favorite: Bool = false, worn: Int = 0) -> Outfit {
+            let outfit = Outfit(name: name)
+            context.insert(outfit)
+            outfit.garments = garments
+            outfit.isFavorite = favorite
+            outfit.wearCount = worn
+            return outfit
+        }
+        let office = makeOutfit(String(localized: "Oficina"),
+                                pieces(["Camisa de lino", "Chino gris marengo", "Americana azul", "Zapatillas running"]), worn: 6)
+        let weekend = makeOutfit(String(localized: "Fin de semana"),
+                                 pieces(["Camiseta básica blanca", "Vaqueros rectos", "Chaqueta vaquera", "Zapatillas running"]),
+                                 favorite: true, worn: 9)
+        let snow = makeOutfit(String(localized: "Día de nieve"),
+                              pieces(["Jersey de punto burdeos", "Plumífero azul marino", "Vaqueros rectos", "Botas de montaña"]), worn: 2)
+        let summer = makeOutfit(String(localized: "Verano"),
+                                pieces(["Camisa de lino", "Pantalón corto beige", "Zapatillas running"]), worn: 3)
+
+        // Semana: looks planificados para algunos días de esta semana.
+        let week = WeekPlanner.days(around: .now)
+        for (index, outfit) in [(0, office), (1, summer), (2, office), (4, weekend), (5, snow)] where index < week.count {
+            let plan = OutfitPlan(day: Calendar.current.startOfDay(for: week[index]))
+            context.insert(plan)
+            plan.outfit = outfit
+        }
+
+        // Maleta
+        let start = Calendar.current.startOfDay(for: .now.addingTimeInterval(9 * 86_400))
+        let trip = Trip(name: String(localized: "Escapada a la sierra"), startDate: start, endDate: start.addingTimeInterval(2 * 86_400))
+        context.insert(trip)
+        trip.outfits = [snow, weekend]
+        trip.extraGarments = pieces(["Sudadera verde"])
+        trip.notes = String(localized: "Previsión: nieve el sábado.")
+        if let boots = byName[String(localized: "Botas de montaña")] { trip.togglePacked(boots) }
+
         try? context.save()
     }
 
