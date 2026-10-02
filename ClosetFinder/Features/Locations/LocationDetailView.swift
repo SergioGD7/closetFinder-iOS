@@ -12,6 +12,7 @@ struct LocationDetailView: View {
     @State private var editorTarget: LocationEditorTarget?
     @State private var isAddingGarment = false
     @State private var isConfirmingDelete = false
+    @State private var isShowingLabel = false
     @State private var isSelecting = false
     @State private var selection: Set<PersistentIdentifier> = []
     @State private var isMovingSelection = false
@@ -38,6 +39,7 @@ struct LocationDetailView: View {
         .safeAreaInset(edge: .bottom) { selectionBar }
         .sheet(item: $editorTarget) { LocationEditorView(target: $0) }
         .sheet(isPresented: $isAddingGarment) { GarmentEditorView(location: location) }
+        .sheet(isPresented: $isShowingLabel) { QRLabelSheet(location: location) }
         .sheet(isPresented: $isMovingSelection) {
             NavigationStack {
                 LocationPicker(selection: nil, allowsNone: false, onPick: moveSelection)
@@ -194,6 +196,7 @@ struct LocationDetailView: View {
                 Button { editorTarget = .new(parent: location) } label: {
                     Label(location.kind == .room ? "Añadir mueble" : "Añadir compartimento", systemImage: "plus.square")
                 }
+                Button { isShowingLabel = true } label: { Label("Etiqueta QR", systemImage: "qrcode") }
                 Divider()
                 Button { editorTarget = .edit(location) } label: { Label("Editar", systemImage: "pencil") }
                 Button(role: .destructive) { isConfirmingDelete = true } label: { Label("Eliminar", systemImage: "trash") }

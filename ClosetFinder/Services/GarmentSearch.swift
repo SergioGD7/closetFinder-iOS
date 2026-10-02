@@ -35,6 +35,16 @@ nonisolated enum SearchToken: Hashable, Identifiable, Sendable {
     }
 
     /// Palabras que, escritas por el usuario, sugieren este token.
+    /// Tokens del mismo tipo se combinan con «o»; de tipos distintos, con «y».
+    var kind: Int {
+        switch self {
+        case .color: 0
+        case .category: 1
+        case .season: 2
+        case .status: 3
+        }
+    }
+
     var keywords: [String] {
         switch self {
         case .color(let value): [value.masculine, value.feminine]
@@ -58,12 +68,16 @@ nonisolated enum GarmentSearch {
     static let stopWords: Set<String> = [
         "de", "del", "la", "el", "los", "las", "un", "una", "unos", "unas", "mi", "mis",
         "y", "en", "con", "donde", "esta", "estan", "que", "para", "por",
+        "algo", "alguna", "alguno", "algun", "ropa", "prenda", "prendas", "cosa", "cosas",
+        "busco", "quiero", "necesito", "tengo", "ponerme", "llevar",
     ]
 
     static func search(_ garments: [Garment], text: String, tokens: [SearchToken] = []) -> [Garment] {
         let words = queryWords(text)
+        let groups = Dictionary(grouping: tokens, by: \.kind).values
         let filtered = garments.filter { garment in
-            tokens.allSatisfy { matches(garment, token: $0) } && matches(garment, words: words)
+            groups.allSatisfy { group in group.contains { matches(garment, token: $0) } }
+                && matches(garment, words: words)
         }
         guard !words.isEmpty else {
             return filtered.sorted { $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending }

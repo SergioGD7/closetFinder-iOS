@@ -1,6 +1,11 @@
 import SwiftData
 import SwiftUI
 
+/// Pantallas propias de la pestaña Armario.
+enum ClosetRoute: Hashable {
+    case stats
+}
+
 enum ClosetSort: String, CaseIterable, Identifiable {
     case recent, name, mostWorn, leastWorn
 
@@ -52,6 +57,11 @@ struct ClosetView: View {
             .navigationTitle("Armario")
             .toolbar { toolbar }
             .appNavigationDestinations()
+            .navigationDestination(for: ClosetRoute.self) { route in
+                switch route {
+                case .stats: StatsView()
+                }
+            }
             .sheet(isPresented: $isAdding) { GarmentEditorView() }
         }
     }
@@ -148,6 +158,13 @@ struct ClosetView: View {
 
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
+        if !garments.isEmpty {
+            ToolbarItem(placement: .topBarLeading) {
+                NavigationLink(value: ClosetRoute.stats) {
+                    Label("Estadísticas", systemImage: "chart.bar")
+                }
+            }
+        }
         ToolbarItemGroup(placement: .topBarTrailing) {
             if !garments.isEmpty {
                 Menu {

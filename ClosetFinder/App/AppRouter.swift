@@ -5,12 +5,13 @@ enum AppTab: Hashable {
     case closet, locations, profile, search
 }
 
-/// Estado de navegación compartido: pestaña activa y pila del Armario (para abrir una prenda
-/// desde Spotlight o Siri).
+/// Estado de navegación compartido: pestaña activa y pilas de navegación, para abrir una
+/// prenda o una ubicación desde Spotlight, Siri, el widget o una etiqueta QR.
 @Observable
 final class AppRouter {
     var selectedTab: AppTab = .closet
     var closetPath = NavigationPath()
+    var locationsPath = NavigationPath()
 
     func open(_ garment: Garment) {
         selectedTab = .closet
@@ -19,12 +20,34 @@ final class AppRouter {
         closetPath = path
     }
 
+    func open(_ location: StorageLocation) {
+        selectedTab = .locations
+        var path = NavigationPath()
+        path.append(location)
+        locationsPath = path
+    }
+
     func openGarment(withID id: String, in context: ModelContext) {
         guard let uuid = UUID(uuidString: id) else { return }
-        var descriptor = FetchDescriptor<Garment>(predicate: #Predicate { $0.uuid == uuid })
-        descriptor.fetchLimit = 1
-        guard let garment = try? context.fetch(descriptor).first else { return }
-        open(garment)
+        open(.garment(uuid), in: context)
+    }
+
+    /// Abre el destino del enlace. Devuelve `false` si la prenda o ubicación ya no existe.
+    @discardableResult
+    func open(_ link: DeepLink, in context: ModelContext) -> Bool {
+        switch link {
+        case .garment(let uuid):
+            var descriptor = FetchDescriptor<Garment>(predicate: #Predicate { $0.uuid == uuid })
+            descriptor.fetchLimit = 1
+            guard let garment = try? context.fetch(descriptor).first else { return false }
+            open(garment)
+        case .location(let uuid):
+            var descriptor = FetchDescriptor<StorageLocation>(predicate: #Predicate { $0.uuid == uuid })
+            descriptor.fetchLimit = 1
+            guard let location = try? context.fetch(descriptor).first else { return false }
+            open(location)
+        }
+        return true
     }
 }
 
