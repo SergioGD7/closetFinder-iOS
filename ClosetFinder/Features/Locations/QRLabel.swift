@@ -79,7 +79,7 @@ struct QRLabelSheet: View {
                             Label("Compartir o imprimir", systemImage: "square.and.arrow.up")
                                 .frame(maxWidth: .infinity)
                         }
-                        .glassButtonStyle(prominent: true)
+                        .buttonStyle(.primary)
                         .controlSize(.large)
                         .fontWeight(.semibold)
                     } else {

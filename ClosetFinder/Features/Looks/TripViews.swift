@@ -61,7 +61,7 @@ struct TripsListView: View {
                 Text("Crea una maleta para un viaje, añade los looks que quieres llevar y la app te dirá qué meter y dónde está cada prenda.")
             } actions: {
                 Button("Nueva maleta") { isCreating = true }
-                    .glassButtonStyle(prominent: true)
+                    .buttonStyle(.primary)
             }
         } else {
             List {
@@ -281,7 +281,8 @@ struct TripDetailView: View {
             }
         }
         .sheet(isPresented: $isAddingGarment) {
-            GarmentPickerSheet(selected: trip.extraGarments ?? []) { garment in
+            GarmentPickerSheet(title: String(localized: "Añadir prenda"), unavailable: trip.packingList,
+                               unavailableReason: String(localized: "Ya va en la maleta")) { garment in
                 if !(trip.extraGarments ?? []).contains(where: { $0 === garment }) {
                     trip.extraGarments = (trip.extraGarments ?? []) + [garment]
                 }

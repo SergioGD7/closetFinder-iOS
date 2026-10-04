@@ -30,15 +30,6 @@ nonisolated enum OutfitSlot: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
-    /// Cuántas prendas caben: arriba se permiten dos capas (camisa y jersey) y varios accesorios.
-    var maxItems: Int {
-        switch self {
-        case .top: 2
-        case .accessories: 4
-        default: 1
-        }
-    }
-
     static func slot(for category: GarmentCategory) -> OutfitSlot {
         switch category {
         case .jacket, .coat, .blazer: .outer

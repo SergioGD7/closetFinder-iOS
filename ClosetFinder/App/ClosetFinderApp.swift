@@ -20,9 +20,11 @@ struct RootView: View {
     @Environment(AppRouter.self) private var router
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
+    @AppStorage(AppearanceMode.storageKey) private var appearance: AppearanceMode = .system
 
     var body: some View {
         RootTabView()
+            .preferredColorScheme(appearance.colorScheme)
             .task {
                 if ProcessInfo.processInfo.arguments.contains("-seedSampleData") {
                     SampleData.insertIfEmpty(into: modelContext)
@@ -64,6 +66,7 @@ struct RootView: View {
         case "search": router.selectedTab = .search
         case "stats": router.closetPath.append(ClosetRoute.stats)
         case "looks": router.selectedTab = .looks
+        case "outfits": router.selectedTab = .looks; router.looksSection = .outfits
         case "week": router.selectedTab = .looks; router.looksSection = .week
         case "trips": router.selectedTab = .looks; router.looksSection = .trips
         default: break

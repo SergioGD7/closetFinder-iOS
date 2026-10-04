@@ -40,6 +40,12 @@ struct ClosetView: View {
     @State private var sort: ClosetSort = .recent
     @State private var favoritesOnly = false
     @State private var isAdding = false
+    // Selección múltiple
+    @State private var isSelecting = false
+    @State private var selection: Set<PersistentIdentifier> = []
+    @State private var isConfirmingDelete = false
+    @State private var isMovingSelection = false
+    @State private var deleteFeedback = 0
 
     private let columns = [GridItem(.adaptive(minimum: 150), spacing: 12)]
 
@@ -63,7 +69,88 @@ struct ClosetView: View {
                 }
             }
             .sheet(isPresented: $isAdding) { GarmentEditorView() }
+            .safeAreaInset(edge: .bottom) { selectionBar }
+            .toolbar(isSelecting ? .hidden : .automatic, for: .tabBar)
+            .confirmationDialog(
+                selection.count == 1 ? String(localized: "¿Eliminar 1 prenda?") : String(localized: "¿Eliminar \(selection.count) prendas?"),
+                isPresented: $isConfirmingDelete, titleVisibility: .visible
+            ) {
+                Button("Eliminar", role: .destructive, action: deleteSelection)
+            } message: {
+                Text("Se borrarán con sus fotos y desaparecerán de los looks. No se puede deshacer.")
+            }
+            .sheet(isPresented: $isMovingSelection) {
+                NavigationStack {
+                    LocationPicker(selection: nil, allowsNone: true) { destination in
+                        let moving = garments.filter { selection.contains($0.persistentModelID) }
+                        for garment in moving { garment.location = destination }
+                        SpotlightIndexer.index(moving)
+                        endSelection()
+                    }
+                }
+            }
+            .sensoryFeedback(.success, trigger: deleteFeedback)
+            #if DEBUG
+            .task {
+                // `-selecting` abre el Armario en modo selección con dos prendas marcadas (capturas).
+                if ProcessInfo.processInfo.arguments.contains("-selecting") {
+                    isSelecting = true
+                    selection = Set(visibleGarments.prefix(2).map(\.persistentModelID))
+                }
+            }
+            #endif
         }
+    }
+
+    // MARK: Selección múltiple
+
+    @ViewBuilder
+    private var selectionBar: some View {
+        if isSelecting {
+            HStack(spacing: 10) {
+                Button {
+                    isMovingSelection = true
+                } label: {
+                    Label("Mover", systemImage: "arrow.left.arrow.right").frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.floatingSecondary)
+
+                Button(role: .destructive) {
+                    isConfirmingDelete = true
+                } label: {
+                    Label(selection.isEmpty ? String(localized: "Eliminar") : String(localized: "Eliminar (\(selection.count))"),
+                          systemImage: "trash")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(DestructiveButtonStyle())
+            }
+            .disabled(selection.isEmpty)
+            .frame(maxWidth: 560)
+            .padding(.horizontal)
+            .padding(.bottom, 8)
+            .transition(.move(edge: .bottom).combined(with: .opacity))
+        }
+    }
+
+    private func toggle(_ garment: Garment) {
+        let id = garment.persistentModelID
+        if selection.contains(id) { selection.remove(id) } else { selection.insert(id) }
+    }
+
+    private func endSelection() {
+        withAnimation(.spring(duration: 0.3, bounce: 0)) {
+            isSelecting = false
+            selection.removeAll()
+        }
+    }
+
+    private func deleteSelection() {
+        let deleting = garments.filter { selection.contains($0.persistentModelID) }
+        SpotlightIndexer.remove(deleting)
+        for garment in deleting { modelContext.delete(garment) }
+        try? modelContext.save()
+        deleteFeedback += 1
+        endSelection()
     }
 
     // MARK: Contenido
@@ -114,11 +201,27 @@ struct ClosetView: View {
                 } else {
                     LazyVGrid(columns: columns, spacing: 16) {
                         ForEach(visible) { garment in
-                            NavigationLink(value: garment) {
-                                GarmentCard(garment: garment)
+                            if isSelecting {
+                                Button {
+                                    toggle(garment)
+                                } label: {
+                                    GarmentCard(garment: garment)
+                                        .overlay(alignment: .bottomTrailing) {
+                                            SelectionMark(isSelected: selection.contains(garment.persistentModelID))
+                                                .padding(10)
+                                                .padding(.bottom, 44)
+                                        }
+                                        .opacity(selection.isEmpty || selection.contains(garment.persistentModelID) ? 1 : 0.75)
+                                }
+                                .buttonStyle(.pressable)
+                                .accessibilityAddTraits(selection.contains(garment.persistentModelID) ? .isSelected : [])
+                            } else {
+                                NavigationLink(value: garment) {
+                                    GarmentCard(garment: garment)
+                                }
+                                .buttonStyle(.pressable)
+                                .contextMenu { contextMenu(for: garment) }
                             }
-                            .buttonStyle(.plain)
-                            .contextMenu { contextMenu(for: garment) }
                         }
                     }
                     .padding(.horizontal)
@@ -142,11 +245,6 @@ struct ClosetView: View {
             Label(garment.isFavorite ? String(localized: "Quitar de favoritas") : String(localized: "Añadir a favoritas"),
                   systemImage: garment.isFavorite ? "heart.slash" : "heart")
         }
-        Button {
-            garment.markWorn()
-        } label: {
-            Label("La he usado hoy", systemImage: "checkmark")
-        }
         Divider()
         Button(role: .destructive) {
             SpotlightIndexer.remove([garment])
@@ -158,6 +256,23 @@ struct ClosetView: View {
 
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
+        if isSelecting {
+            ToolbarItem(placement: .topBarLeading) {
+                let allSelected = selection.count == visibleGarments.count
+                Button(allSelected ? String(localized: "Ninguna") : String(localized: "Todas")) {
+                    selection = allSelected ? [] : Set(visibleGarments.map(\.persistentModelID))
+                }
+            }
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Listo", action: endSelection)
+            }
+        } else {
+            closetToolbar
+        }
+    }
+
+    @ToolbarContentBuilder
+    private var closetToolbar: some ToolbarContent {
         if !garments.isEmpty {
             ToolbarItem(placement: .topBarLeading) {
                 NavigationLink(value: ClosetRoute.stats) {
@@ -172,6 +287,12 @@ struct ClosetView: View {
                         ForEach(ClosetSort.allCases) { Text($0.title).tag($0) }
                     }
                     Toggle("Solo favoritas", isOn: $favoritesOnly)
+                    Divider()
+                    Button {
+                        withAnimation(.spring(duration: 0.3, bounce: 0)) { isSelecting = true }
+                    } label: {
+                        Label("Seleccionar prendas", systemImage: "checkmark.circle")
+                    }
                 } label: {
                     Label("Ordenar y filtrar", systemImage: "line.3.horizontal.decrease")
                 }
@@ -193,7 +314,7 @@ struct ClosetView: View {
             Text("Haz una foto a una prenda y di dónde la guardas. Así sabrás siempre dónde está.")
         } actions: {
             Button("Añadir prenda") { isAdding = true }
-                .glassButtonStyle(prominent: true)
+                .buttonStyle(.primary)
             if locations.isEmpty {
                 Button("Probar con un armario de ejemplo") {
                     SampleData.insertIfEmpty(into: modelContext)

@@ -23,22 +23,6 @@ extension View {
         }
     }
 
-    /// Estilo de botón de cristal (`.glass` / `.glassProminent` en iOS 26).
-    @ViewBuilder
-    func glassButtonStyle(prominent: Bool = false) -> some View {
-        if #available(iOS 26.0, *) {
-            if prominent {
-                self.buttonStyle(.glassProminent)
-            } else {
-                self.buttonStyle(.glass)
-            }
-        } else if prominent {
-            self.buttonStyle(.borderedProminent).buttonBorderShape(.capsule)
-        } else {
-            self.buttonStyle(MaterialCapsuleButtonStyle())
-        }
-    }
-
     /// La barra de pestañas se encoge al hacer scroll (iOS 26).
     @ViewBuilder
     func minimizingTabBarOnScroll() -> some View {
@@ -61,22 +45,6 @@ struct GlassGroup<Content: View>: View {
         } else {
             content
         }
-    }
-}
-
-/// Botón de cápsula con material translúcido, para iOS anteriores a 26.
-struct MaterialCapsuleButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.body.weight(.semibold))
-            .padding(.horizontal, 18)
-            .padding(.vertical, 12)
-            .background(.regularMaterial, in: Capsule())
-            .overlay { Capsule().strokeBorder(.white.opacity(0.25), lineWidth: 0.5) }
-            .shadow(color: .black.opacity(0.12), radius: 10, y: 4)
-            .opacity(configuration.isPressed ? 0.7 : 1)
-            .scaleEffect(configuration.isPressed ? 0.97 : 1)
-            .animation(.snappy(duration: 0.2), value: configuration.isPressed)
     }
 }
 

@@ -177,7 +177,7 @@ struct LocationDetailView: View {
                       systemImage: "arrow.left.arrow.right")
                     .frame(maxWidth: .infinity)
             }
-            .glassButtonStyle(prominent: true)
+            .buttonStyle(.primary)
             .controlSize(.large)
             .fontWeight(.semibold)
             .disabled(selection.isEmpty)

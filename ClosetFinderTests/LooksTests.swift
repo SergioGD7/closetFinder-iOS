@@ -21,8 +21,6 @@ struct LooksTests {
         #expect(covered == Set(GarmentCategory.allCases))
         #expect(OutfitSlot.slot(for: .coat) == .outer)
         #expect(OutfitSlot.slot(for: .dress) == .fullBody)
-        #expect(OutfitSlot.top.maxItems == 2)
-        #expect(OutfitSlot.bottom.maxItems == 1)
     }
 
     @Test func piecesGoFromTopToBottom() throws {

@@ -1,89 +1,114 @@
 import SwiftData
 import SwiftUI
 
-/// Mosaico con las prendas de un look (hasta cuatro; si hay más, indica cuántas faltan).
-struct OutfitMosaic: View {
-    let garments: [Garment]
-    var cornerRadius: CGFloat = 20
-    var spacing: CGFloat = 3
+/// Una prenda recortada, sin fondo: la foto sin fondo, la foto normal con esquinas redondeadas
+/// o, si no hay foto, su ilustración.
+struct GarmentCutout: View {
+    let garment: Garment
+    var fullSize = false
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        let items = Array(garments.prefix(4))
-        let extra = garments.count - items.count
         Group {
-            switch items.count {
-            case 0:
-                ZStack {
-                    Color(.tertiarySystemFill)
-                    GarmentArtwork(category: .tShirt, color: .gray)
-                        .opacity(0.35)
-                        .padding(24)
+            if let image = ImageCache.shared.image(for: garment, fullSize: fullSize) {
+                if garment.hasCutout {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 }
-            case 1:
-                tile(items[0])
-            case 2:
-                HStack(spacing: spacing) { tile(items[0]); tile(items[1]) }
-            case 3:
-                HStack(spacing: spacing) {
-                    tile(items[0])
-                    VStack(spacing: spacing) { tile(items[1]); tile(items[2]) }
-                }
-            default:
-                VStack(spacing: spacing) {
-                    HStack(spacing: spacing) { tile(items[0]); tile(items[1]) }
-                    HStack(spacing: spacing) {
-                        tile(items[2])
-                        tile(items[3])
-                            .overlay {
-                                if extra > 0 {
-                                    Text("+\(extra)")
-                                        .font(.headline)
-                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                        .background(.black.opacity(0.35))
-                                        .foregroundStyle(.white)
-                                }
-                            }
-                    }
-                }
+            } else {
+                GarmentArtwork(category: garment.category, color: garment.primaryColor)
             }
         }
-        .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-        .accessibilityHidden(true)
-    }
-
-    private func tile(_ garment: Garment) -> some View {
-        GarmentImage(garment: garment, inset: 0.1)
+        // En oscuro, un halo claro: si no, una prenda negra desaparece sobre el fondo.
+        .shadow(color: colorScheme == .dark ? .white.opacity(0.4) : .black.opacity(0.12),
+                radius: colorScheme == .dark ? 2.5 : 6, y: colorScheme == .dark ? 0 : 4)
     }
 }
 
-/// Tarjeta de un look para rejillas.
+/// Un look como en un probador: las prendas de arriba abajo, como se llevan puestas.
+/// Abrigo y parte de arriba comparten fila; el calzado y los accesorios son más bajos.
+struct OutfitFigure: View {
+    let garments: [Garment]
+    var spacing: CGFloat = 4
+
+    private struct Row: Identifiable {
+        let id: Int
+        let garments: [Garment]
+        let weight: CGFloat
+    }
+
+    private var rows: [Row] {
+        func pieces(_ slots: Set<OutfitSlot>) -> [Garment] {
+            Outfit.sortedBySlot(garments.filter { slots.contains(OutfitSlot.slot(for: $0.category)) })
+        }
+        let candidates: [(Set<OutfitSlot>, CGFloat)] = [
+            ([.outer, .top], 1), ([.fullBody], 1.9), ([.bottom], 1.15), ([.feet], 0.55), ([.accessories], 0.45),
+        ]
+        return candidates.enumerated().compactMap { index, entry in
+            let row = pieces(entry.0)
+            return row.isEmpty ? nil : Row(id: index, garments: row, weight: entry.1)
+        }
+    }
+
+    var body: some View {
+        let rows = rows
+        GeometryReader { proxy in
+            let total = rows.map(\.weight).reduce(0, +)
+            let available = proxy.size.height - spacing * CGFloat(max(rows.count - 1, 0))
+            VStack(spacing: spacing) {
+                ForEach(rows) { row in
+                    HStack(spacing: -12) {
+                        ForEach(row.garments) { garment in
+                            GarmentCutout(garment: garment)
+                        }
+                    }
+                    .frame(height: total > 0 ? available * row.weight / total : 0)
+                    .frame(maxWidth: .infinity)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .overlay {
+            if rows.isEmpty {
+                GarmentArtwork(category: .tShirt, color: .gray).opacity(0.3).padding(20)
+            }
+        }
+        .accessibilityHidden(true)
+    }
+}
+
+/// Tarjeta de un look: la figura sobre un fondo liso, con el nombre debajo.
 struct OutfitCard: View {
     let outfit: Outfit
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Color.clear
-                .aspectRatio(1, contentMode: .fit)
-                .overlay { OutfitMosaic(garments: outfit.pieces, cornerRadius: 22) }
-                .overlay(alignment: .topLeading) {
+        VStack(alignment: .leading, spacing: 8) {
+            OutfitFigure(garments: outfit.pieces)
+                .padding(14)
+                .aspectRatio(0.7, contentMode: .fit)
+                .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+                .overlay(alignment: .topTrailing) {
                     if outfit.isFavorite {
                         Image(systemName: "heart.fill")
                             .font(.caption.weight(.bold))
                             .foregroundStyle(.pink)
-                            .padding(7)
-                            .background(.regularMaterial, in: Circle())
-                            .padding(8)
+                            .padding(10)
                     }
                 }
-            Text(outfit.displayName)
-                .font(.subheadline.weight(.semibold))
-                .lineLimit(1)
-                .padding(.horizontal, 2)
-            OutfitSubtitle(outfit: outfit)
-                .padding(.horizontal, 2)
-                .padding(.top, -3)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(outfit.displayName)
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(1)
+                OutfitSubtitle(outfit: outfit)
+            }
+            .padding(.horizontal, 4)
         }
-        .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
     }
 }
@@ -115,8 +140,10 @@ struct OutfitRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            OutfitMosaic(garments: outfit.pieces, cornerRadius: 12, spacing: 1.5)
-                .frame(width: 56, height: 56)
+            OutfitFigure(garments: outfit.pieces, spacing: 1)
+                .padding(5)
+                .frame(width: 48, height: 64)
+                .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             VStack(alignment: .leading, spacing: 3) {
                 Text(outfit.displayName)
                     .font(.subheadline.weight(.semibold))
@@ -130,50 +157,49 @@ struct OutfitRow: View {
     }
 }
 
-/// Elige una prenda. Si se indica una parte del cuerpo, solo muestra las que encajan en ella.
+/// Elige una prenda. Las de `unavailable` aparecen desactivadas con el motivo (por ejemplo,
+/// «Ya va en la maleta»), para no añadir dos veces la misma.
 struct GarmentPickerSheet: View {
-    var slot: OutfitSlot?
-    var selected: [Garment] = []
+    var title: String = String(localized: "Elegir prenda")
+    var unavailable: [Garment] = []
+    var unavailableReason: String = ""
     let onPick: (Garment) -> Void
 
     @Environment(\.dismiss) private var dismiss
     @Query(sort: \Garment.name) private var garments: [Garment]
     @State private var searchText = ""
 
-    private var candidates: [Garment] {
-        let inSlot = slot.map { slot in garments.filter { OutfitSlot.slot(for: $0.category) == slot } } ?? garments
-        return GarmentSearch.search(inSlot, text: searchText)
-    }
+    private var candidates: [Garment] { GarmentSearch.search(garments, text: searchText) }
 
     var body: some View {
         NavigationStack {
             List(candidates) { garment in
+                let isTaken = unavailable.contains { $0 === garment }
                 Button {
                     onPick(garment)
                     dismiss()
                 } label: {
                     HStack {
-                        GarmentRow(garment: garment)
-                        if selected.contains(where: { $0 === garment }) {
+                        GarmentRow(garment: garment, locationText: isTaken ? unavailableReason : nil)
+                        if isTaken {
                             Image(systemName: "checkmark.circle.fill")
-                                .foregroundStyle(Color.accentColor)
                                 .font(.title3)
+                                .foregroundStyle(.secondary)
                         }
                     }
+                    .opacity(isTaken ? 0.45 : 1)
                 }
                 .buttonStyle(.plain)
+                .disabled(isTaken)
             }
             .overlay {
                 if candidates.isEmpty {
-                    ContentUnavailableView(
-                        String(localized: "No hay prendas"),
-                        systemImage: "hanger",
-                        description: Text(slot.map { String(localized: "Añade prendas de tipo «\($0.title)» a tu armario.") }
-                                          ?? String(localized: "Añade prendas a tu armario.")))
+                    ContentUnavailableView(String(localized: "No hay prendas"), systemImage: "hanger",
+                                           description: Text("Añade prendas a tu armario."))
                 }
             }
             .searchable(text: $searchText, prompt: "Buscar prenda")
-            .navigationTitle(slot?.title ?? String(localized: "Elegir prenda"))
+            .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -184,7 +210,7 @@ struct GarmentPickerSheet: View {
     }
 }
 
-/// Elige un look guardado o crea uno nuevo.
+/// Elige un look guardado o crea uno nuevo en el probador.
 struct OutfitPickerSheet: View {
     var title: String = String(localized: "Elegir look")
     var excluding: [Outfit] = []
@@ -199,25 +225,25 @@ struct OutfitPickerSheet: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 12)], spacing: 16) {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 14)], spacing: 18) {
                     Button {
                         isCreating = true
                     } label: {
-                        VStack(alignment: .leading, spacing: 6) {
-                            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                                .strokeBorder(Color.accentColor.opacity(0.5), style: StrokeStyle(lineWidth: 1.5, dash: [6, 5]))
-                                .aspectRatio(1, contentMode: .fit)
+                        VStack(alignment: .leading, spacing: 8) {
+                            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                .strokeBorder(Color(.separator), style: StrokeStyle(lineWidth: 1.5, dash: [6, 5]))
+                                .aspectRatio(0.7, contentMode: .fit)
                                 .overlay {
-                                    Image(systemName: "plus")
-                                        .font(.title.weight(.semibold))
-                                        .foregroundStyle(Color.accentColor)
+                                    VStack(spacing: 8) {
+                                        Image(systemName: "plus").font(.title2.weight(.semibold))
+                                        Text("Crear en el probador").font(.footnote.weight(.semibold))
+                                    }
+                                    .foregroundStyle(.primary)
                                 }
-                            Text("Crear look nuevo")
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(Color.accentColor)
+                            Text(verbatim: " ").font(.subheadline)
                         }
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
 
                     ForEach(candidates) { outfit in
                         Button {
@@ -226,7 +252,7 @@ struct OutfitPickerSheet: View {
                         } label: {
                             OutfitCard(outfit: outfit)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                     }
                 }
                 .padding()
@@ -240,27 +266,14 @@ struct OutfitPickerSheet: View {
                 }
             }
             .sheet(isPresented: $isCreating) {
-                OutfitEditorView { created in
-                    onPick(created)
-                    dismiss()
+                NavigationStack {
+                    FittingRoomView(mode: .sheet(outfit: nil, preselected: [])) { created in
+                        onPick(created)
+                        dismiss()
+                    }
+                    .navigationTitle("Probador")
+                    .navigationBarTitleDisplayMode(.inline)
                 }
-            }
-        }
-    }
-}
-
-/// Cabecera de sección con la ilustración de la parte del cuerpo.
-struct OutfitSlotHeader: View {
-    let slot: OutfitSlot
-    var count: Int?
-
-    var body: some View {
-        HStack(spacing: 6) {
-            GarmentArtwork(category: slot.representativeCategory, color: .gray)
-                .frame(width: 18, height: 18)
-            Text(slot.title)
-            if let count, slot.maxItems > 1 {
-                Text("\(count)/\(slot.maxItems)").foregroundStyle(.tertiary)
             }
         }
     }

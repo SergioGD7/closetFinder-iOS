@@ -82,6 +82,12 @@ nonisolated enum GarmentColor: String, CaseIterable, Codable, Identifiable, Send
         return (Double((hex >> 16) & 0xFF) / 255, Double((hex >> 8) & 0xFF) / 255, Double(hex & 0xFF) / 255)
     }
 
+    /// Colores con poca luminosidad, que necesitan contorno sobre fondos oscuros.
+    var isDark: Bool {
+        guard let rgb else { return false }
+        return 0.2126 * rgb.r + 0.7152 * rgb.g + 0.0722 * rgb.b < 0.25
+    }
+
     var swatch: Color {
         guard let rgb else { return Color(red: 0.6, green: 0.5, blue: 0.7) }
         return Color(red: rgb.r, green: rgb.g, blue: rgb.b)
@@ -101,13 +107,15 @@ nonisolated enum GarmentColor: String, CaseIterable, Codable, Identifiable, Send
     var tint: Color {
         let base = rgb ?? (0.62, 0.6, 0.7)
         return Color(uiColor: UIColor { traits in
+            // En oscuro se mezcla con el gris de las tarjetas del sistema (#1C1C1E), no con negro,
+            // para que el fondo sugiera el color de la prenda sin dominar la pantalla.
             let dark = traits.userInterfaceStyle == .dark
-            let target = dark ? 0.0 : 1.0
-            let amount = dark ? 0.62 : 0.78
+            let target: (r: Double, g: Double, b: Double) = dark ? (0.11, 0.11, 0.12) : (1, 1, 1)
+            let amount = dark ? 0.8 : 0.8
             return UIColor(
-                red: base.r + (target - base.r) * amount,
-                green: base.g + (target - base.g) * amount,
-                blue: base.b + (target - base.b) * amount,
+                red: base.r + (target.r - base.r) * amount,
+                green: base.g + (target.g - base.g) * amount,
+                blue: base.b + (target.b - base.b) * amount,
                 alpha: 1)
         })
     }

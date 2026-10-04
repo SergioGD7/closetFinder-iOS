@@ -13,7 +13,7 @@ final class AppRouter {
     var closetPath = NavigationPath()
     var locationsPath = NavigationPath()
     var looksPath = NavigationPath()
-    var looksSection: LooksSection = .outfits
+    var looksSection: LooksSection = .fittingRoom
 
     func open(_ garment: Garment) {
         selectedTab = .closet
