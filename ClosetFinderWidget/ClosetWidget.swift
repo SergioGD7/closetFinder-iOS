@@ -27,8 +27,11 @@ struct ClosetWidget: Widget {
 
 // MARK: Configuración
 
+/// Qué mostrar: un solo parámetro con los tipos de lista y, después, cada categoría.
+/// (Un parámetro de categoría aparte, visible solo a veces, no compila en Xcode 26.)
 nonisolated enum WidgetContent: String, AppEnum {
-    case forgotten, todayLook, favorites, recent, lent, laundry, toDonate, category
+    case forgotten, todayLook, favorites, recent, lent, laundry, toDonate
+    case tShirt, shirt, sweater, jacket, coat, blazer, trousers, shorts, skirt, dress, shoes, underwear, swimwear, accessories
 
     static let typeDisplayRepresentation: TypeDisplayRepresentation = "Contenido"
     static let caseDisplayRepresentations: [WidgetContent: DisplayRepresentation] = [
@@ -39,24 +42,18 @@ nonisolated enum WidgetContent: String, AppEnum {
         .lent: "Prestadas",
         .laundry: "Lavando",
         .toDonate: "Para donar",
-        .category: "Una categoría",
-    ]
-
-    var kind: ClosetWidgetKind { ClosetWidgetKind(rawValue: rawValue) ?? .forgotten }
-}
-
-nonisolated enum WidgetCategory: String, AppEnum {
-    case tShirt, shirt, sweater, jacket, coat, blazer, trousers, shorts, skirt, dress, shoes, underwear, swimwear, accessories
-
-    static let typeDisplayRepresentation: TypeDisplayRepresentation = "Categoría"
-    static let caseDisplayRepresentations: [WidgetCategory: DisplayRepresentation] = [
         .tShirt: "Camisetas", .shirt: "Camisas", .sweater: "Jerséis y sudaderas", .jacket: "Chaquetas",
         .coat: "Abrigos", .blazer: "Americanas", .trousers: "Pantalones", .shorts: "Pantalones cortos",
         .skirt: "Faldas", .dress: "Vestidos", .shoes: "Calzado", .underwear: "Ropa interior",
         .swimwear: "Baño", .accessories: "Accesorios",
     ]
 
-    var category: GarmentCategory { GarmentCategory(rawValue: rawValue) ?? .tShirt }
+    /// La categoría, si se ha elegido una.
+    var category: GarmentCategory? { GarmentCategory(rawValue: rawValue) }
+
+    var kind: ClosetWidgetKind {
+        category != nil ? .category : ClosetWidgetKind(rawValue: rawValue) ?? .forgotten
+    }
 }
 
 struct ClosetWidgetIntent: WidgetConfigurationIntent {
@@ -65,17 +62,6 @@ struct ClosetWidgetIntent: WidgetConfigurationIntent {
 
     @Parameter(title: "Mostrar", default: .forgotten)
     var content: WidgetContent
-
-    @Parameter(title: "Categoría", default: .shoes)
-    var category: WidgetCategory
-
-    static var parameterSummary: some ParameterSummary {
-        When(\.$content, .equalTo, .category) {
-            Summary("Mostrar \(\.$content): \(\.$category)")
-        } otherwise: {
-            Summary("Mostrar \(\.$content)")
-        }
-    }
 }
 
 // MARK: Datos
@@ -148,13 +134,13 @@ nonisolated struct ClosetProvider: AppIntentTimelineProvider {
 
     static func load(_ configuration: ClosetWidgetIntent) -> ClosetEntry {
         let kind = configuration.content.kind
-        let category = configuration.category.category
+        let category = configuration.content.category
         let context = ModelContext(AppModelContainer.shared)
         let garments = (try? context.fetch(FetchDescriptor<Garment>())) ?? []
         let plans = kind == .todayLook ? ((try? context.fetch(FetchDescriptor<OutfitPlan>())) ?? []) : []
         let selected = ClosetWidgetResolver.garments(for: kind, category: category, in: garments, plans: plans)
 
-        var title = kind == .category ? category.title : kind.title
+        var title = category?.title ?? kind.title
         var outfitID: UUID?
         if kind == .todayLook, let outfit = ClosetWidgetResolver.todayOutfit(in: plans) {
             title = outfit.displayName
