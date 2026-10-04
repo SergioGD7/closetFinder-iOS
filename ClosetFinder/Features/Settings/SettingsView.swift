@@ -15,6 +15,7 @@ struct SettingsView: View {
     @State private var isExporting = false
     @State private var isImporting = false
     @State private var message: Message?
+    @AppStorage(AppearanceMode.storageKey) private var appearance: AppearanceMode = .system
 
     struct Message: Identifiable {
         let id = UUID()
@@ -25,6 +26,18 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section {
+                    Picker("Apariencia", selection: $appearance) {
+                        ForEach(AppearanceMode.allCases) { Text($0.title).tag($0) }
+                    }
+                    .pickerStyle(.segmented)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
+                } header: {
+                    Text("Apariencia")
+                } footer: {
+                    Text("Automática sigue el modo claro u oscuro del iPhone.")
+                }
                 iCloudSection
                 backupSection
                 if garments.isEmpty && locations.isEmpty {

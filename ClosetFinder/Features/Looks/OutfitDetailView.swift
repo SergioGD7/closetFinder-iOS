@@ -30,6 +30,8 @@ struct OutfitDetailView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var isEditing = false
+    @State private var isRenaming = false
+    @State private var newName = ""
     @State private var isPlanning = false
     @State private var isAddingToTrip = false
     @State private var isConfirmingDelete = false
@@ -41,9 +43,11 @@ struct OutfitDetailView: View {
         List {
             Section {
                 VStack(alignment: .leading, spacing: 12) {
-                    OutfitMosaic(garments: outfit.pieces, cornerRadius: 26)
-                        .aspectRatio(1, contentMode: .fit)
+                    OutfitFigure(garments: outfit.pieces, spacing: 8)
+                        .padding(24)
+                        .frame(height: 440)
                         .frame(maxWidth: 460)
+                        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 28, style: .continuous))
                         .frame(maxWidth: .infinity)
                     VStack(alignment: .leading, spacing: 3) {
                         Text(outfit.displayName).font(.title2.bold())
@@ -108,7 +112,18 @@ struct OutfitDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
         .toolbar { toolbar }
-        .sheet(isPresented: $isEditing) { OutfitEditorView(outfit: outfit) }
+        .sheet(isPresented: $isEditing) {
+            NavigationStack {
+                FittingRoomView(mode: .sheet(outfit: outfit, preselected: []))
+                    .navigationTitle("Probador")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+        }
+        .alert("Cambiar nombre", isPresented: $isRenaming) {
+            TextField("Nombre", text: $newName)
+            Button("Guardar") { outfit.name = newName.trimmingCharacters(in: .whitespaces) }
+            Button("Cancelar", role: .cancel) {}
+        }
         .sheet(isPresented: $isPlanning) { planSheet }
         .sheet(isPresented: $isAddingToTrip) {
             TripPickerSheet(excluding: outfit.trips ?? []) { trip in
@@ -147,7 +162,7 @@ struct OutfitDetailView: View {
                 } label: {
                     Label("Planificar", systemImage: "calendar").lineLimit(1).frame(maxWidth: .infinity)
                 }
-                .glassButtonStyle()
+                .buttonStyle(.floatingSecondary)
 
                 Button {
                     outfit.markWorn()
@@ -156,7 +171,7 @@ struct OutfitDetailView: View {
                 } label: {
                     Label("Llevar hoy", systemImage: "checkmark").lineLimit(1).frame(maxWidth: .infinity)
                 }
-                .glassButtonStyle(prominent: true)
+                .buttonStyle(.primary)
             }
             .controlSize(.large)
             .fontWeight(.semibold)
@@ -211,7 +226,11 @@ struct OutfitDetailView: View {
             .tint(outfit.isFavorite ? .pink : nil)
 
             Menu {
-                Button { isEditing = true } label: { Label("Editar", systemImage: "pencil") }
+                Button { isEditing = true } label: { Label("Cambiar prendas en el probador", systemImage: "tshirt") }
+                Button {
+                    newName = outfit.name
+                    isRenaming = true
+                } label: { Label("Cambiar nombre", systemImage: "pencil") }
                 Button { isAddingToTrip = true } label: { Label("Añadir a una maleta", systemImage: "suitcase") }
                 Divider()
                 Button(role: .destructive) { isConfirmingDelete = true } label: { Label("Eliminar", systemImage: "trash") }

@@ -1,10 +1,12 @@
 import SwiftUI
 
-/// Chip de filtro. Va en la capa de contenido, así que es sólido (no de cristal).
+/// Chip de filtro. Va en la capa de contenido, así que es sólido (no de cristal): el
+/// seleccionado se rellena con el color del texto, como un interruptor encendido.
 struct FilterChip: View {
     let title: String
     var systemImage: String?
     let isSelected: Bool
+    var compact = false
     let action: () -> Void
 
     var body: some View {
@@ -13,14 +15,17 @@ struct FilterChip: View {
                 if let systemImage { Image(systemName: systemImage) }
                 Text(title)
             }
-            .font(.subheadline.weight(.semibold))
-            .padding(.horizontal, 14)
-            .frame(minHeight: 34)
-            .foregroundStyle(isSelected ? Color.white : Color.primary)
-            .background(isSelected ? Color.accentColor : Color(.secondarySystemGroupedBackground), in: Capsule())
-            .contentShape(Capsule())
+            .font(compact ? .footnote.weight(.semibold) : .subheadline.weight(.semibold))
+            .padding(.horizontal, compact ? 12 : 14)
+            .frame(minHeight: compact ? 30 : 36)
+            .foregroundStyle(isSelected ? Color(.systemBackground) : Color.primary)
+            .background {
+                Capsule().fill(isSelected ? Color.primary : Color(.secondarySystemGroupedBackground))
+                Capsule().strokeBorder(Color(.separator).opacity(isSelected ? 0 : 0.6), lineWidth: 0.5)
+            }
+            .animation(.spring(duration: 0.25, bounce: 0), value: isSelected)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

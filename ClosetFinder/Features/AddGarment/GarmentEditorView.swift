@@ -135,13 +135,13 @@ struct GarmentEditorView: View {
                         } label: {
                             Label("Cámara", systemImage: "camera").frame(maxWidth: .infinity)
                         }
-                        .glassButtonStyle(prominent: !model.hasPhoto)
+                        .buttonStyle(PrimaryButtonStyle())
                         .disabled(!CameraPicker.isAvailable)
 
                         PhotosPicker(selection: $pickerItem, matching: .images) {
                             Label("Fotos", systemImage: "photo.on.rectangle").frame(maxWidth: .infinity)
                         }
-                        .glassButtonStyle()
+                        .buttonStyle(.secondary)
                     }
                     .fontWeight(.semibold)
                 }
@@ -218,11 +218,7 @@ struct GarmentEditorView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 6) {
                         ForEach(model.category.sizeSuggestions, id: \.self) { size in
-                            Button(size) { model.size = size }
-                                .font(.footnote.weight(.semibold))
-                                .buttonStyle(.bordered)
-                                .buttonBorderShape(.capsule)
-                                .tint(model.size == size ? .accentColor : .secondary)
+                            FilterChip(title: size, isSelected: model.size == size, compact: true) { model.size = size }
                         }
                     }
                 }

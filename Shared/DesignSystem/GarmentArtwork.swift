@@ -4,6 +4,14 @@ import SwiftUI
 struct GarmentArtwork: View {
     let category: GarmentCategory
     let color: GarmentColor
+    @Environment(\.colorScheme) private var colorScheme
+
+    /// Contorno: oscuro para prendas claras; en modo oscuro, claro para las oscuras (si no,
+    /// unas zapatillas negras desaparecen sobre el fondo).
+    private var outline: Color {
+        if colorScheme == .dark, color.isDark { return .white.opacity(0.35) }
+        return .black.opacity(color == .white || color == .beige ? 0.14 : 0.05)
+    }
 
     var body: some View {
         GeometryReader { proxy in
@@ -11,7 +19,7 @@ struct GarmentArtwork: View {
             ZStack {
                 GarmentSilhouette(category: category, part: .body).fill(color.fill)
                 GarmentSilhouette(category: category, part: .body)
-                    .stroke(.black.opacity(color == .white || color == .beige ? 0.14 : 0.05), lineWidth: lineWidth)
+                    .stroke(outline, lineWidth: lineWidth * (colorScheme == .dark && color.isDark ? 1.2 : 1))
                 GarmentSilhouette(category: category, part: .sole).fill(.white)
                 GarmentSilhouette(category: category, part: .strap)
                     .stroke(color.swatch, style: StrokeStyle(lineWidth: lineWidth * 3.5, lineCap: .round))

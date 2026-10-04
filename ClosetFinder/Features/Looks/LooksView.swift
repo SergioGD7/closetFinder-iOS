@@ -2,12 +2,13 @@ import SwiftData
 import SwiftUI
 
 enum LooksSection: String, CaseIterable, Identifiable {
-    case outfits, week, trips
+    case fittingRoom, outfits, week, trips
 
     var id: Self { self }
 
     var title: String {
         switch self {
+        case .fittingRoom: String(localized: "Probador")
         case .outfits: String(localized: "Looks")
         case .week: String(localized: "Semana")
         case .trips: String(localized: "Maletas")
@@ -18,7 +19,6 @@ enum LooksSection: String, CaseIterable, Identifiable {
 /// Pestaña Looks: looks guardados, planificación semanal y maletas de viaje.
 struct LooksView: View {
     @Environment(AppRouter.self) private var router
-    @State private var isCreatingOutfit = false
     @State private var isCreatingTrip = false
 
     var body: some View {
@@ -26,7 +26,8 @@ struct LooksView: View {
         NavigationStack(path: $router.looksPath) {
             Group {
                 switch router.looksSection {
-                case .outfits: OutfitsGridView(isCreating: $isCreatingOutfit)
+                case .fittingRoom: FittingRoomView(mode: .tab)
+                case .outfits: OutfitsGridView { router.looksSection = .fittingRoom }
                 case .week: WeekPlanView()
                 case .trips: TripsListView(isCreating: $isCreatingTrip)
                 }
@@ -40,23 +41,20 @@ struct LooksView: View {
                         ForEach(LooksSection.allCases) { Text($0.title).tag($0) }
                     }
                     .pickerStyle(.segmented)
-                    .frame(maxWidth: 320)
+                    .frame(maxWidth: 360)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     switch router.looksSection {
                     case .outfits:
-                        Button { isCreatingOutfit = true } label: { Label("Nuevo look", systemImage: "plus") }
+                        Button { router.looksSection = .fittingRoom } label: { Label("Nuevo look", systemImage: "plus") }
                     case .trips:
                         Button { isCreatingTrip = true } label: { Label("Nueva maleta", systemImage: "plus") }
-                    case .week:
+                    case .week, .fittingRoom:
                         EmptyView()
                     }
                 }
             }
             .appNavigationDestinations()
-            .sheet(isPresented: $isCreatingOutfit) {
-                OutfitEditorView { router.looksPath.append($0) }
-            }
             .sheet(isPresented: $isCreatingTrip) {
                 TripEditorView { router.looksPath.append($0) }
             }
@@ -68,10 +66,10 @@ struct LooksView: View {
 struct OutfitsGridView: View {
     @Query(sort: \Outfit.createdAt, order: .reverse) private var outfits: [Outfit]
     @Query private var garments: [Garment]
-    @Binding var isCreating: Bool
+    let onCreate: () -> Void
     @State private var favoritesOnly = false
 
-    private let columns = [GridItem(.adaptive(minimum: 150), spacing: 12)]
+    private let columns = [GridItem(.adaptive(minimum: 150), spacing: 14)]
 
     var body: some View {
         if outfits.isEmpty {
@@ -83,8 +81,8 @@ struct OutfitsGridView: View {
                      : String(localized: "Elige una prenda para cada parte del cuerpo y guarda la combinación para ponértela cuando quieras."))
             } actions: {
                 if !garments.isEmpty {
-                    Button("Crear un look") { isCreating = true }
-                        .glassButtonStyle(prominent: true)
+                    Button("Abrir el probador") { onCreate() }
+                        .buttonStyle(.primary)
                 }
             }
         } else {
@@ -103,7 +101,7 @@ struct OutfitsGridView: View {
                             NavigationLink(value: outfit) {
                                 OutfitCard(outfit: outfit)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                         }
                     }
                     .padding(.horizontal)

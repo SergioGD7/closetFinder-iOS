@@ -25,7 +25,7 @@ struct ProfileView: View {
                         Text("Con tu altura, pecho, cintura y pie calculamos tus tallas y te avisamos si una prenda te queda bien.")
                     } actions: {
                         Button("Añadir medidas") { editorTarget = .new }
-                            .glassButtonStyle(prominent: true)
+                            .buttonStyle(.primary)
                     }
                 }
             }

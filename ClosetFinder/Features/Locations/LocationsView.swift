@@ -27,7 +27,7 @@ struct LocationsView: View {
                         Text("Empieza por las estancias donde guardas ropa: dormitorio, entrada, trastero…")
                     } actions: {
                         Button("Añadir estancia") { editorTarget = .new(parent: nil) }
-                            .glassButtonStyle(prominent: true)
+                            .buttonStyle(.primary)
                     }
                 } else {
                     list

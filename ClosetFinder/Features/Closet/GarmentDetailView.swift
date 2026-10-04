@@ -13,7 +13,6 @@ struct GarmentDetailView: View {
     @State private var isMoving = false
     @State private var isConfirmingDelete = false
     @State private var isCreatingOutfit = false
-    @State private var wornFeedback = 0
     @Environment(\.horizontalSizeClass) private var sizeClass
 
     /// En iPad (ancho regular) la foto es más alta y el texto no pasa de una columna cómoda.
@@ -37,14 +36,19 @@ struct GarmentDetailView: View {
         }
         .ignoresSafeArea(edges: .top)
         .background(Color(.systemGroupedBackground))
-        .safeAreaInset(edge: .bottom) { actionBar }
         .navigationTitle(garment.displayName)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
         .toolbar { toolbar }
         .sheet(isPresented: $isEditing) { GarmentEditorView(garment: garment) }
-        .sheet(isPresented: $isCreatingOutfit) { OutfitEditorView(garments: [garment]) }
+        .sheet(isPresented: $isCreatingOutfit) {
+            NavigationStack {
+                FittingRoomView(mode: .sheet(outfit: nil, preselected: [garment]))
+                    .navigationTitle("Probador")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+        }
         .sheet(isPresented: $isMoving) {
             NavigationStack {
                 LocationPicker(selection: garment.location) { newLocation in
@@ -58,7 +62,6 @@ struct GarmentDetailView: View {
         } message: {
             Text("Se borrarán la prenda y su foto. No se puede deshacer.")
         }
-        .sensoryFeedback(.success, trigger: wornFeedback)
     }
 
     // MARK: Cabecera
@@ -156,14 +159,22 @@ struct GarmentDetailView: View {
                     }
                     .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
+                Button {
+                    isMoving = true
+                } label: {
+                    Label("Mover a otro sitio", systemImage: "arrow.left.arrow.right")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.secondary(.small))
+                .padding(.top, 4)
             } else {
                 HStack {
                     Label("Sin ubicación", systemImage: "questionmark.folder")
                         .foregroundStyle(.secondary)
                     Spacer()
                     Button("Asignar") { isMoving = true }
-                        .font(.subheadline.weight(.semibold))
+                        .buttonStyle(.primary(.small))
                 }
             }
         }
@@ -218,8 +229,10 @@ struct GarmentDetailView: View {
                         ForEach(outfits) { outfit in
                             NavigationLink(value: outfit) {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    OutfitMosaic(garments: outfit.pieces, cornerRadius: 14, spacing: 2)
-                                        .frame(width: 92, height: 92)
+                                    OutfitFigure(garments: outfit.pieces, spacing: 1)
+                                        .padding(8)
+                                        .frame(width: 92, height: 124)
+                                        .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                                     Text(outfit.displayName)
                                         .font(.caption.weight(.semibold))
                                         .foregroundStyle(.primary)
@@ -227,14 +240,14 @@ struct GarmentDetailView: View {
                                         .frame(width: 92, alignment: .leading)
                                 }
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                         }
                         Button {
                             isCreatingOutfit = true
                         } label: {
                             RoundedRectangle(cornerRadius: 14, style: .continuous)
                                 .strokeBorder(Color.accentColor.opacity(0.5), style: StrokeStyle(lineWidth: 1.5, dash: [5, 4]))
-                                .frame(width: 92, height: 92)
+                                .frame(width: 92, height: 124)
                                 .overlay { Image(systemName: "plus").font(.title3.weight(.semibold)) }
                         }
                         .buttonStyle(.plain)
@@ -295,36 +308,6 @@ struct GarmentDetailView: View {
         .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-    }
-
-    // MARK: Acciones
-
-    private var actionBar: some View {
-        GlassGroup(spacing: 10) {
-            HStack(spacing: 10) {
-                Button {
-                    isMoving = true
-                } label: {
-                    Label("Mover", systemImage: "arrow.left.arrow.right")
-                        .frame(maxWidth: .infinity)
-                }
-                .glassButtonStyle()
-
-                Button {
-                    garment.markWorn()
-                    wornFeedback += 1
-                } label: {
-                    Label("La he usado", systemImage: "checkmark")
-                        .frame(maxWidth: .infinity)
-                }
-                .glassButtonStyle(prominent: true)
-            }
-            .controlSize(.large)
-            .fontWeight(.semibold)
-        }
-        .frame(maxWidth: 560)
-        .padding(.horizontal)
-        .padding(.bottom, 4)
     }
 
     @ToolbarContentBuilder
