@@ -262,39 +262,51 @@ struct GarmentDetailView: View {
     /// La persona dueña de la prenda o, si no tiene, la primera de la casa.
     private var fitProfile: BodyProfile? { garment.owner ?? profiles.first }
 
+    /// Color, persona y cuántas veces te la has puesto. Los usos los suman los looks
+    /// («Llevar hoy» y «Me lo he puesto»), por eso se dice así y solo aparece si hay alguno.
+    @ViewBuilder
     private var infoCard: some View {
-        card(title: String(localized: "Uso")) {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Text(garment.wearCount == 1 ? String(localized: "Usada 1 vez") : String(localized: "Usada \(garment.wearCount) veces"))
-                    Spacer()
-                    if let lastWorn = garment.lastWornAt {
-                        Text("Última: \(lastWorn.formatted(.relative(presentation: .named)))")
-                            .foregroundStyle(.secondary)
+        if !garment.colors.isEmpty || garment.owner != nil || garment.wearCount > 0 {
+            card(title: String(localized: "Detalles")) {
+                VStack(alignment: .leading, spacing: 10) {
+                    if !garment.colors.isEmpty {
+                        detailRow(String(localized: "Color")) {
+                            HStack(spacing: 8) {
+                                ForEach(garment.colors) { color in
+                                    HStack(spacing: 4) {
+                                        ColorSwatch(color: color, size: 14)
+                                        Text(color.title)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if let owner = garment.owner {
+                        detailRow(String(localized: "Persona")) { Text(owner.name) }
+                    }
+                    if garment.wearCount > 0 {
+                        detailRow(String(localized: "Puesta con tus looks")) {
+                            Text(garment.wearCount == 1 ? String(localized: "1 vez") : String(localized: "\(garment.wearCount) veces"))
+                        }
+                        if let last = garment.lastWornAt {
+                            detailRow(String(localized: "Última vez")) {
+                                Text(last.formatted(.relative(presentation: .named)))
+                            }
+                        }
                     }
                 }
                 .font(.subheadline)
-
-                if !garment.colors.isEmpty || garment.owner != nil {
-                    Divider()
-                    HStack(spacing: 6) {
-                        ForEach(garment.colors) { color in
-                            HStack(spacing: 4) {
-                                ColorSwatch(color: color, size: 14)
-                                Text(color.title)
-                            }
-                            .font(.footnote)
-                        }
-                        Spacer()
-                        if let owner = garment.owner {
-                            Label(owner.name, systemImage: "person")
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                }
             }
         }
+    }
+
+    private func detailRow<Value: View>(_ title: String, @ViewBuilder value: () -> Value) -> some View {
+        HStack(alignment: .firstTextBaseline) {
+            Text(title).foregroundStyle(.secondary)
+            Spacer(minLength: 12)
+            value()
+        }
+        .lineLimit(1)
     }
 
     private func card<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {

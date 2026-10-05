@@ -13,7 +13,7 @@ enum ClosetSort: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .recent: String(localized: "Añadidas recientemente")
+        case .recent: String(localized: "Más recientes")
         case .name: String(localized: "Nombre")
         case .mostWorn: String(localized: "Más usadas")
         case .leastWorn: String(localized: "Menos usadas")

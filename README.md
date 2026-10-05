@@ -31,7 +31,7 @@ Además:
 - **Spotlight**: las prendas aparecen en la búsqueda del sistema y abren su detalle.
 - **Siri / Atajos**: «Busca una prenda en Closet Finder» responde dónde está.
 - **Widget configurable** (pequeño y mediano): al editarlo se elige qué mostrar (sin ponerte, look
-  de hoy, favoritas, añadidas recientemente, prestadas, lavando, para donar o una categoría), con
+  de hoy, favoritas, recientes, prestadas, lavando, para donar o una categoría), con
   dónde está cada prenda. Lee el mismo almacén que la app a través del App Group
   `group.com.sergiogonzalez.ClosetFinder`.
 - **Apariencia**: automática, clara u oscura (Ajustes, en la pestaña Medidas).

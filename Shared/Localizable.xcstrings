@@ -443,6 +443,40 @@
         }
       }
     },
+    "%lld veces": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld times"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld fois"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld-mal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld volte"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld vezes"
+          }
+        }
+      }
+    },
     "%lld/%lld": {
       "localizations": {
         "en": {
@@ -745,6 +779,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 lugar"
+          }
+        }
+      }
+    },
+    "1 vez": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 fois"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1-mal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 volta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 vez"
           }
         }
       }
@@ -1833,40 +1901,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicione suas medidas"
-          }
-        }
-      }
-    },
-    "Añadidas recientemente": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recently added"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajoutés récemment"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zuletzt hinzugefügt"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aggiunti di recente"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Adicionadas recentemente"
           }
         }
       }
@@ -7321,6 +7355,40 @@
         }
       }
     },
+    "Detalles": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Details"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Détails"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Details"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dettagli"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detalhes"
+          }
+        }
+      }
+    },
     "Detectado en la foto": {
       "localizations": {
         "en": {
@@ -10081,6 +10149,40 @@
         }
       }
     },
+    "Jerséis": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sweaters"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulls"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pullover"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maglioni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suéteres"
+          }
+        }
+      }
+    },
     "Jerséis y sudaderas": {
       "localizations": {
         "en": {
@@ -11945,6 +12047,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mais"
+          }
+        }
+      }
+    },
+    "Más recientes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Newest"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus récents"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neueste"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Più recenti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mais recentes"
           }
         }
       }
@@ -14533,6 +14669,40 @@
         }
       }
     },
+    "Puesta con tus looks": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worn in your looks"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porté dans vos looks"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In deinen Looks getragen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indossato nei tuoi look"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usada nos seus looks"
+          }
+        }
+      }
+    },
     "Puesto %lld veces": {
       "localizations": {
         "en": {
@@ -15447,6 +15617,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Próxima semana"
+          }
+        }
+      }
+    },
+    "Shorts": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shorts"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shorts"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shorts"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shorts"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shorts"
           }
         }
       }
@@ -17083,74 +17287,6 @@
         }
       }
     },
-    "Usada %lld veces": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Worn %lld times"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Porté %lld fois"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld-mal getragen"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indossato %lld volte"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usada %lld vezes"
-          }
-        }
-      }
-    },
-    "Usada 1 vez": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Worn once"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Porté 1 fois"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1-mal getragen"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indossato 1 volta"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usada 1 vez"
-          }
-        }
-      }
-    },
     "Usada ayer": {
       "localizations": {
         "en": {
@@ -18035,36 +18171,36 @@
         }
       }
     },
-    "Última: %@": {
+    "Última vez": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Last: %@"
+            "value": "Last time"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dernière fois : %@"
+            "value": "Dernière fois"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zuletzt: %@"
+            "value": "Zuletzt"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ultima: %@"
+            "value": "Ultima volta"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Última: %@"
+            "value": "Última vez"
           }
         }
       }
