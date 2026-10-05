@@ -35,6 +35,16 @@ struct LocalizationTests {
         #expect(en.localizedString(forKey: "category.singular.tShirt", value: nil, table: nil) == "T-shirt")
     }
 
+    /// Con un idioma que la app no tiene (neerlandés, japonés…), iOS elige el de desarrollo: inglés.
+    @Test func unsupportedLanguagesFallBackToEnglish() {
+        #expect(Bundle.main.developmentLocalization == "en")
+        let localizations = Bundle.main.localizations.filter { $0 != "Base" }
+        #expect(Set(localizations).isSuperset(of: ["es", "en", "fr", "de", "it", "pt-BR"]))
+        #expect(Bundle.preferredLocalizations(from: localizations, forPreferences: ["nl-NL"]) == ["en"])
+        #expect(Bundle.preferredLocalizations(from: localizations, forPreferences: ["ja-JP", "fr-FR"]) == ["fr"])
+        #expect(Bundle.preferredLocalizations(from: localizations, forPreferences: ["es-MX"]) == ["es"])
+    }
+
     @Test func frenchAgreesInGender() throws {
         let fr = try #require(Self.bundle("fr"))
         // «Veste» es femenino en francés: se usa el adjetivo femenino.

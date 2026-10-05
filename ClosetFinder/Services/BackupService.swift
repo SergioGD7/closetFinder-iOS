@@ -12,7 +12,8 @@ extension UTType {
 /// Para quien no usa iCloud, o para guardar una copia aparte en Archivos o en el ordenador.
 nonisolated struct BackupArchive: Codable, Sendable {
     /// 1: prendas, ubicaciones y personas. 2: además looks, planificación y maletas.
-    static let currentVersion = 2
+    /// 3: además precio, cuidados y días de uso de las prendas, y destino de las maletas.
+    static let currentVersion = 3
 
     var version = BackupArchive.currentVersion
     var createdAt = Date.now
@@ -33,6 +34,8 @@ nonisolated struct BackupArchive: Codable, Sendable {
         var lastWornAt: Date?
         var createdAt: Date
         var garmentIDs: [UUID]
+        // Desde la versión 3.
+        var wearDates: [Date]?
     }
 
     struct PlanRecord: Codable, Sendable {
@@ -51,6 +54,10 @@ nonisolated struct BackupArchive: Codable, Sendable {
         var createdAt: Date
         var outfitIDs: [UUID]
         var extraGarmentIDs: [UUID]
+        // Desde la versión 3.
+        var destination: String?
+        var latitude: Double?
+        var longitude: Double?
     }
 
     struct LocationRecord: Codable, Sendable {
@@ -91,6 +98,11 @@ nonisolated struct BackupArchive: Codable, Sendable {
         var createdAt: Date
         var locationID: UUID?
         var ownerID: UUID?
+        // Desde la versión 3.
+        var price: Double?
+        var purchasedAt: Date?
+        var care: [String]?
+        var wearDates: [Date]?
     }
 
     func encoded() throws -> Data {
@@ -141,11 +153,13 @@ enum BackupService {
                   photo: $0.photo, thumbnail: $0.thumbnail, hasCutout: $0.hasCutout,
                   chestWidthCm: $0.chestWidthCm, waistWidthCm: $0.waistWidthCm, lengthCm: $0.lengthCm,
                   sleeveCm: $0.sleeveCm, inseamCm: $0.inseamCm, isFavorite: $0.isFavorite, wearCount: $0.wearCount,
-                  lastWornAt: $0.lastWornAt, createdAt: $0.createdAt, locationID: $0.location?.uuid, ownerID: $0.owner?.uuid)
+                  lastWornAt: $0.lastWornAt, createdAt: $0.createdAt, locationID: $0.location?.uuid, ownerID: $0.owner?.uuid,
+                  price: $0.price, purchasedAt: $0.purchasedAt, care: $0.careRaw, wearDates: $0.wearDates)
         }
         archive.outfits = try context.fetch(FetchDescriptor<Outfit>()).map {
             .init(id: $0.uuid, name: $0.name, notes: $0.notes, isFavorite: $0.isFavorite, wearCount: $0.wearCount,
-                  lastWornAt: $0.lastWornAt, createdAt: $0.createdAt, garmentIDs: ($0.garments ?? []).map(\.uuid))
+                  lastWornAt: $0.lastWornAt, createdAt: $0.createdAt, garmentIDs: ($0.garments ?? []).map(\.uuid),
+                  wearDates: $0.wearDates)
         }
         archive.plans = try context.fetch(FetchDescriptor<OutfitPlan>()).map {
             .init(id: $0.uuid, day: $0.day, outfitID: $0.outfit?.uuid)
@@ -153,7 +167,8 @@ enum BackupService {
         archive.trips = try context.fetch(FetchDescriptor<Trip>()).map {
             .init(id: $0.uuid, name: $0.name, startDate: $0.startDate, endDate: $0.endDate, notes: $0.notes,
                   packedGarmentIDs: $0.packedGarmentIDs, createdAt: $0.createdAt,
-                  outfitIDs: ($0.outfits ?? []).map(\.uuid), extraGarmentIDs: ($0.extraGarments ?? []).map(\.uuid))
+                  outfitIDs: ($0.outfits ?? []).map(\.uuid), extraGarmentIDs: ($0.extraGarments ?? []).map(\.uuid),
+                  destination: $0.destination, latitude: $0.latitude, longitude: $0.longitude)
         }
         return archive
     }
@@ -228,6 +243,10 @@ enum BackupService {
             garment.createdAt = record.createdAt
             garment.location = record.locationID.flatMap { locations[$0] }
             garment.owner = record.ownerID.flatMap { profiles[$0] }
+            garment.price = record.price
+            garment.purchasedAt = record.purchasedAt
+            garment.careRaw = record.care ?? []
+            garment.wearDates = record.wearDates ?? []
             summary.garments += 1
         }
 
@@ -244,6 +263,7 @@ enum BackupService {
             outfit.lastWornAt = record.lastWornAt
             outfit.createdAt = record.createdAt
             outfit.garments = record.garmentIDs.compactMap { garments[$0] }
+            outfit.wearDates = record.wearDates ?? []
             outfits[record.id] = outfit
             summary.outfits += 1
         }
@@ -267,6 +287,9 @@ enum BackupService {
             trip.createdAt = record.createdAt
             trip.outfits = record.outfitIDs.compactMap { outfits[$0] }
             trip.extraGarments = record.extraGarmentIDs.compactMap { garments[$0] }
+            trip.destination = record.destination ?? ""
+            trip.latitude = record.latitude
+            trip.longitude = record.longitude
             summary.trips += 1
         }
         try context.save()

@@ -38,6 +38,12 @@ struct OutfitDetailView: View {
     @State private var planDate = Date.now
     @State private var feedback = 0
     @State private var confirmation: String?
+    @State private var shareImage: UIImage?
+
+    /// Cambia cuando cambia lo que sale en la imagen para compartir.
+    private var shareKey: String {
+        outfit.displayName + outfit.pieces.map { "\($0.uuid)\($0.imageRevision)" }.joined()
+    }
 
     var body: some View {
         List {
@@ -142,6 +148,9 @@ struct OutfitDetailView: View {
             Text("Las prendas no se borran. El look desaparece de la semana y de las maletas.")
         }
         .sensoryFeedback(.success, trigger: feedback)
+        .task(id: shareKey) {
+            shareImage = ShareImageRenderer.render(OutfitShareCard(outfit: outfit).padding(16), width: 360)
+        }
     }
 
     private var summary: String {
@@ -225,6 +234,13 @@ struct OutfitDetailView: View {
             }
             .tint(outfit.isFavorite ? .pink : nil)
 
+            if let shareImage, !outfit.pieces.isEmpty {
+                ShareLink(item: Image(uiImage: shareImage),
+                          preview: SharePreview(outfit.displayName, image: Image(uiImage: shareImage))) {
+                    Label("Compartir", systemImage: "square.and.arrow.up")
+                }
+            }
+
             Menu {
                 Button { isEditing = true } label: { Label("Cambiar prendas en el probador", systemImage: "tshirt") }
                 Button {
@@ -238,6 +254,39 @@ struct OutfitDetailView: View {
                 Label("Más", systemImage: "ellipsis")
             }
         }
+    }
+}
+
+/// Imagen de un look para compartir: la figura vestida, el nombre y las prendas.
+struct OutfitShareCard: View {
+    let outfit: Outfit
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            OutfitFigure(garments: outfit.pieces, spacing: 6)
+                .padding(20)
+                .frame(height: 380)
+                .frame(maxWidth: .infinity)
+                .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+            Text(outfit.displayName)
+                .font(.title2.bold())
+            VStack(alignment: .leading, spacing: 4) {
+                ForEach(outfit.pieces) { garment in
+                    HStack(spacing: 8) {
+                        ColorSwatch(color: garment.primaryColor, size: 12)
+                        Text(garment.displayName).font(.subheadline)
+                        if !garment.brand.isEmpty {
+                            Text(garment.brand).font(.subheadline).foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
+            Label("Closet Finder", systemImage: "hanger")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.tertiary)
+        }
+        .padding(18)
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 26, style: .continuous))
     }
 }
 

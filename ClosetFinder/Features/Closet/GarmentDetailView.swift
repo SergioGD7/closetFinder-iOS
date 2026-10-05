@@ -14,6 +14,8 @@ struct GarmentDetailView: View {
     @State private var isConfirmingDelete = false
     @State private var isCreatingOutfit = false
     @Environment(\.horizontalSizeClass) private var sizeClass
+    /// Para redibujar las medidas al cambiar de centímetros a pulgadas.
+    @AppStorage(LengthUnit.storageKey) private var lengthUnit = LengthUnitPreference.automatic.rawValue
 
     /// En iPad (ancho regular) la foto es más alta y el texto no pasa de una columna cómoda.
     private var heroHeight: CGFloat { sizeClass == .regular ? 480 : 380 }
@@ -41,6 +43,7 @@ struct GarmentDetailView: View {
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
         .toolbar { toolbar }
+        .onAppear { RecentHistory.recordGarment(garment.uuid) }
         .sheet(isPresented: $isEditing) { GarmentEditorView(garment: garment) }
         .sheet(isPresented: $isCreatingOutfit) {
             NavigationStack {
@@ -113,6 +116,7 @@ struct GarmentDetailView: View {
             measurementsCard
             outfitsCard
             infoCard
+            careCard
 
             if !garment.notes.isEmpty {
                 card(title: String(localized: "Notas")) {
@@ -191,7 +195,7 @@ struct GarmentDetailView: View {
                     HStack(alignment: .top) {
                         ForEach(measurements, id: \.0) { measurement, value in
                             VStack(alignment: .leading, spacing: 1) {
-                                Text(value.centimeters)
+                                Text(value.lengthText)
                                     .font(.headline)
                                     .monospacedDigit()
                                 Text(measurement.shortTitle)
@@ -266,7 +270,7 @@ struct GarmentDetailView: View {
     /// («Llevar hoy» y «Me lo he puesto»), por eso se dice así y solo aparece si hay alguno.
     @ViewBuilder
     private var infoCard: some View {
-        if !garment.colors.isEmpty || garment.owner != nil || garment.wearCount > 0 {
+        if !garment.colors.isEmpty || garment.owner != nil || garment.wearCount > 0 || garment.price != nil || garment.purchasedAt != nil {
             card(title: String(localized: "Detalles")) {
                 VStack(alignment: .leading, spacing: 10) {
                     if !garment.colors.isEmpty {
@@ -294,8 +298,34 @@ struct GarmentDetailView: View {
                             }
                         }
                     }
+                    if let price = garment.price {
+                        detailRow(String(localized: "Precio")) { Text(WardrobeValue.format(price)) }
+                        if let cost = garment.costPerWear, garment.wearCount > 0 {
+                            detailRow(String(localized: "Coste por puesta")) { Text(WardrobeValue.format(cost)) }
+                        }
+                    }
+                    if let purchasedAt = garment.purchasedAt {
+                        detailRow(String(localized: "Comprada")) {
+                            Text(purchasedAt.formatted(.dateTime.month(.wide).year()))
+                        }
+                    }
                 }
                 .font(.subheadline)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var careCard: some View {
+        let care = garment.care
+        if !care.isEmpty {
+            card(title: String(localized: "Cuidados")) {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), alignment: .leading)], alignment: .leading, spacing: 8) {
+                    ForEach(care) { instruction in
+                        Label(instruction.title, systemImage: instruction.symbol)
+                            .font(.subheadline)
+                    }
+                }
             }
         }
     }
@@ -373,7 +403,7 @@ struct FitBadge: View {
                 .font(.caption.weight(.bold))
             Text(fit.result.title)
                 .fontWeight(.semibold)
-            Text("· \(fit.bodyPart) de \(personName): \(fit.bodyCm.centimeters)")
+            Text("· \(fit.bodyPart) de \(personName): \(fit.bodyCm.lengthText)")
                 .foregroundStyle(fit.result.color.opacity(0.85))
         }
         .font(.footnote)

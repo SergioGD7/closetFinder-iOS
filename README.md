@@ -10,23 +10,30 @@ todo con el sitio exacto donde está: estancia › mueble › balda, cajón o ca
 - **Idiomas:** español, inglés, francés, alemán, italiano y portugués (Brasil). Los textos están
   en `Shared/Localizable.xcstrings`; los del Info.plist y de Siri, en `ClosetFinder/InfoPlist.xcstrings`
   y `ClosetFinder/AppShortcuts.xcstrings`. Al compilar en Xcode, los textos nuevos aparecen solos en
-  el catálogo para traducirlos.
+  el catálogo para traducirlos. Si el iPhone está en un idioma que la app no tiene, se muestra en
+  inglés (`DEVELOPMENT_LANGUAGE = en` en los targets de la app y del widget).
 
 ## Funciones
 
 | Pestaña | Qué hace |
 | --- | --- |
-| Armario | Rejilla de prendas con talla y ubicación, filtros por categoría y favoritas, orden por uso. Selección múltiple para mover o eliminar varias prendas a la vez. Estadísticas: prendas por categoría y estancia, olvidadas (6 meses sin usar), prestadas y para donar. |
-| Looks | **Probador**: una fila deslizable por cada parte del cuerpo (abrigo, arriba, cuerpo entero, abajo, calzado y accesorios); la prenda centrada es la elegida, la chincheta fija una fila y el dado combina al azar las demás. **Looks**: los guardados, mostrados como una figura vestida; cada uno dice dónde está cada prenda. **Semana**: un look por día, con «Llevar hoy». **Maletas**: viajes con looks y prendas sueltas, y la lista de qué llevar agrupada por dónde está cada prenda, con casillas para ir marcando lo que ya está en la maleta. |
+| Armario | Rejilla de prendas con talla y ubicación, filtros por categoría y favoritas, orden por uso. Selección múltiple para mover o eliminar varias prendas a la vez. **Importar varias fotos** (hasta 50) de una vez. Estadísticas: prendas por categoría y estancia, olvidadas (6 meses sin usar), prestadas y para donar, **valor del armario** (gasto por año y coste por puesta), **tu año en ropa** (se comparte como imagen) y **huecos en el armario** (qué parte les falta a tus looks). |
+| Looks | **Probador**: una fila deslizable por cada parte del cuerpo (abrigo, arriba, cuerpo entero, abajo, calzado y accesorios); la prenda centrada es la elegida, la chincheta fija una fila y el dado combina al azar las demás. **Looks**: los guardados, mostrados como una figura vestida; cada uno dice dónde está cada prenda. **Semana**: un look por día, con «Llevar hoy». **Maletas**: viajes con looks y prendas sueltas, y la lista de qué llevar agrupada por dónde está cada prenda, con casillas para ir marcando lo que ya está en la maleta. Con el destino, **«Según el destino»** consulta el tiempo previsto (WeatherKit, 10 días antes) o se guía por la época del año, y propone capas y looks tuyos que encajan. Cada look se puede **compartir como imagen**. |
 | Ubicaciones | Árbol de estancias, muebles y compartimentos con recuento de prendas. Plantillas de mueble (armario con barra, 4 baldas y 2 cajones…). Mover prendas en lote. Etiquetas QR imprimibles y escáner. |
-| Medidas | Una o varias personas, medidas corporales y tallas recomendadas (EU/US/UK). |
-| Buscar | Texto libre sin acentos ni plurales («chaquetas azules») y filtros como tokens (color, categoría, temporada, estado). En iOS 26 con Apple Intelligence, interpreta frases como «algo de abrigo para la nieve» en el propio iPhone (Foundation Models). |
+| Medidas | Una o varias personas, medidas corporales y tallas recomendadas (EU/US/UK). En centímetros o pulgadas: por defecto, la unidad de la región (Ajustes › Medidas). |
+| Buscar | Texto libre sin acentos ni plurales («chaquetas azules») y filtros como tokens (color, categoría, temporada, estado). En iOS 26 con Apple Intelligence, interpreta frases como «algo de abrigo para la nieve» en el propio iPhone (Foundation Models). Búsquedas recientes y prendas vistas hace poco. |
 
 Además:
 
+- **Primer arranque guiado**: estancias y muebles (con sus cajones y baldas), la primera prenda e
+  iCloud. Si el armario llega desde iCloud mientras tanto, se cierra solo.
 - **Alta de prendas** con cámara o fototeca. En el dispositivo, Vision recorta el fondo,
   detecta el color dominante y sugiere la categoría. El **modo ráfaga** encadena altas en la
   misma ubicación.
+- **Leer la etiqueta**: una foto de la etiqueta interior rellena talla (con EU/UK/US), composición
+  e instrucciones de lavado. Reconocimiento de texto de Vision y reglas propias en seis idiomas;
+  con Apple Intelligence completa lo que falte.
+- **Precio y fecha de compra** de cada prenda, para el valor del armario y el coste por puesta.
 - **¿Me queda bien?** Compara las medidas de la prenda en plano con las de su dueño.
 - **Spotlight**: las prendas aparecen en la búsqueda del sistema y abren su detalle.
 - **Siri / Atajos**: «Busca una prenda en Closet Finder» responde dónde está.
@@ -50,11 +57,15 @@ Abre `ClosetFinder.xcodeproj` en Xcode 26 o posterior y ejecuta el esquema **Clo
 - `-inMemoryStore` arranca con un almacén temporal que no se guarda.
 - Solo en Debug: `-openTab locations|profile|search|stats`, `-openGarment "<nombre>"`,
   `-openLocation "<nombre>"` y `-search "<texto>"` abren una pantalla concreta al arrancar.
+- `-showOnboarding` enseña el primer arranque aunque ya se haya visto; `-skipOnboarding` lo salta.
 - Solo en Debug: `-samplePhotos` da a las prendas de ejemplo una foto recortada (su ilustración);
   `-openTab looks|outfits|week|trips`, `-openOutfit "<nombre>"` y `-openTrip "<nombre>"` abren los
   looks; `-selecting` abre el Armario en modo selección.
 - En el simulador no funcionan el recorte de fondo de Vision, el escáner QR ni la generación de
   Apple Intelligence: hay que probarlos en un iPhone real.
+- El tiempo de las maletas usa WeatherKit: en el portal de desarrollador hay que tener activado
+  WeatherKit en *Capabilities* y en *App Services* del identificador de la app. Sin él (o en el
+  simulador sin firmar) la app se guía por la época del año.
 - La firma usa el equipo `84HB28K4CM` (iCloud y App Group). Para sincronizar de verdad hay que
   ejecutar una vez desde Xcode en un dispositivo para que se cree el contenedor
   `iCloud.com.sergiogonzalez.ClosetFinder`.
@@ -73,14 +84,15 @@ xcodebuild test -project ClosetFinder.xcodeproj -scheme ClosetFinder -destinatio
 ```
 ClosetFinder/          App
 ├─ App/                Punto de entrada, pestañas, navegación y enlaces
-├─ Features/           Closet · Looks · AddGarment · Locations · Search · Profile · Settings
+├─ Features/           Closet · Looks · AddGarment · Locations · Search · Profile · Settings · Onboarding
 ├─ Services/           ImageProcessor (Vision), GarmentSearch, SmartSearch (Foundation Models),
-│                      Spotlight, BackupService
+│                      Spotlight, BackupService, LabelReader, WardrobeValue, PackingAdvisor,
+│                      TripWeather (WeatherKit), RecentHistory
 ├─ Intents/            App Intents para Siri y Atajos
 └─ DesignSystem/       Botones, cristal con alternativa para iOS < 26 y componentes
 Shared/                Código común a la app y al widget
 ├─ Models/             Garment, StorageLocation, BodyProfile, Outfit, OutfitPlan, Trip (SwiftData)
-├─ Services/           SizeConverter, WardrobeInsights, DeepLink
+├─ Services/           SizeConverter, LengthUnit, WardrobeInsights, DeepLink
 └─ DesignSystem/       Ilustraciones de prendas y color de marca
 ClosetFinderWidget/    Widget configurable (WidgetKit + App Intents)
 ```
@@ -89,4 +101,4 @@ ClosetFinderWidget/    Widget configurable (WidgetKit + App Intents)
 
 - Publicación en el App Store (App Store Connect, capturas, ficha y política de privacidad).
 - Auditoría de accesibilidad con VoiceOver y tamaños de texto grandes.
-- Medidas en pulgadas para quien use el sistema imperial.
+- Etiquetas NFC en cajas y cajones.

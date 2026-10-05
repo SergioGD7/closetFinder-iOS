@@ -453,6 +453,7 @@
 				DEVELOPMENT_TEAM = 84HB28K4CM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				DEVELOPMENT_LANGUAGE = en;
 				INFOPLIST_FILE = ClosetFinder/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Closet Finder";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
@@ -490,6 +491,7 @@
 				DEVELOPMENT_TEAM = 84HB28K4CM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				DEVELOPMENT_LANGUAGE = en;
 				INFOPLIST_FILE = ClosetFinder/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Closet Finder";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
@@ -564,6 +566,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 84HB28K4CM;
 				GENERATE_INFOPLIST_FILE = YES;
+				DEVELOPMENT_LANGUAGE = en;
 				INFOPLIST_FILE = ClosetFinderWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Closet Finder";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -592,6 +595,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 84HB28K4CM;
 				GENERATE_INFOPLIST_FILE = YES;
+				DEVELOPMENT_LANGUAGE = en;
 				INFOPLIST_FILE = ClosetFinderWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Closet Finder";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

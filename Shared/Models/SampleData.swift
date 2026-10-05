@@ -43,19 +43,19 @@ enum SampleData {
         // Prendas
         let items: [SampleGarment] = [
             .init(String(localized: "Chaqueta vaquera"), .jacket, "M", [.blue], compartments[String(localized: "Balda \(2)")], brand: "Levi's", material: String(localized: "Algodón"),
-                  season: .midSeason, chest: 54, length: 66, sleeve: 63, wears: 12, daysAgo: 9, favorite: true),
-            .init(String(localized: "Camiseta básica blanca"), .tShirt, "L", [.white], drawers[0], material: String(localized: "Algodón"), chest: 55, length: 72, wears: 30, daysAgo: 2),
-            .init(String(localized: "Sudadera verde"), .sweater, "L", [.green], drawers[2], season: .autumnWinter, chest: 58, length: 70, sleeve: 64, wears: 8, daysAgo: 20),
-            .init(String(localized: "Zapatillas running"), .shoes, "43", [.black], shoeShelves[0], brand: "Asics", wears: 40, daysAgo: 1, favorite: true),
-            .init(String(localized: "Abrigo camel"), .coat, "M", [.brown], compartments[String(localized: "Barra")], material: String(localized: "Lana"), season: .autumnWinter, chest: 57, length: 95, sleeve: 65, wears: 5, daysAgo: 160),
-            .init(String(localized: "Chino gris marengo"), .trousers, "42", [.gray], compartments[String(localized: "Balda \(3)")], waist: 43, length: 104, inseam: 81, wears: 14, daysAgo: 6),
-            .init(String(localized: "Plumífero azul marino"), .coat, "L", [.navy], snowBox, season: .autumnWinter, chest: 62, length: 78, wears: 2, daysAgo: 250),
-            .init(String(localized: "Americana azul"), .blazer, "50", [.blue], compartments[String(localized: "Barra")], material: String(localized: "Lana fría"), chest: 54, length: 75, sleeve: 64, wears: 3, daysAgo: 95),
-            .init(String(localized: "Camisa de lino"), .shirt, "M", [.lightBlue], compartments[String(localized: "Barra")], material: String(localized: "Lino"), season: .springSummer, chest: 56, length: 76, sleeve: 64, wears: 6, daysAgo: 40),
+                  season: .midSeason, chest: 54, length: 66, sleeve: 63, wears: 12, daysAgo: 9, favorite: true, price: 89, bought: 700, care: [.wash30, .noBleach, .noTumbleDry]),
+            .init(String(localized: "Camiseta básica blanca"), .tShirt, "L", [.white], drawers[0], material: String(localized: "Algodón"), chest: 55, length: 72, wears: 30, daysAgo: 2, price: 15, bought: 400, care: [.wash40, .ironMedium]),
+            .init(String(localized: "Sudadera verde"), .sweater, "L", [.green], drawers[2], season: .autumnWinter, chest: 58, length: 70, sleeve: 64, wears: 8, daysAgo: 20, price: 39, bought: 300),
+            .init(String(localized: "Zapatillas running"), .shoes, "43", [.black], shoeShelves[0], brand: "Asics", wears: 40, daysAgo: 1, favorite: true, price: 120, bought: 500),
+            .init(String(localized: "Abrigo camel"), .coat, "M", [.brown], compartments[String(localized: "Barra")], material: String(localized: "Lana"), season: .autumnWinter, chest: 57, length: 95, sleeve: 65, wears: 5, daysAgo: 160, price: 220, bought: 800, care: [.noWash, .dryClean]),
+            .init(String(localized: "Chino gris marengo"), .trousers, "42", [.gray], compartments[String(localized: "Balda \(3)")], waist: 43, length: 104, inseam: 81, wears: 14, daysAgo: 6, price: 49, bought: 260),
+            .init(String(localized: "Plumífero azul marino"), .coat, "L", [.navy], snowBox, season: .autumnWinter, chest: 62, length: 78, wears: 2, daysAgo: 250, price: 159, bought: 1000),
+            .init(String(localized: "Americana azul"), .blazer, "50", [.blue], compartments[String(localized: "Barra")], material: String(localized: "Lana fría"), chest: 54, length: 75, sleeve: 64, wears: 3, daysAgo: 95, price: 180, bought: 600, care: [.noWash, .ironLow, .dryClean]),
+            .init(String(localized: "Camisa de lino"), .shirt, "M", [.lightBlue], compartments[String(localized: "Barra")], material: String(localized: "Lino"), season: .springSummer, chest: 56, length: 76, sleeve: 64, wears: 6, daysAgo: 40, price: 45, bought: 120, care: [.wash30, .ironHigh]),
             .init(String(localized: "Bañador estampado"), .swimwear, "M", [.multicolor], suitcase, season: .springSummer, wears: 4, daysAgo: 70),
             .init(String(localized: "Jersey de punto burdeos"), .sweater, "M", [.burgundy], winterBox, material: String(localized: "Lana merino"), season: .autumnWinter, chest: 50, length: 66, sleeve: 62, wears: 9, daysAgo: 180),
-            .init(String(localized: "Vaqueros rectos"), .trousers, "42", [.navy], compartments[String(localized: "Balda \(3)")], brand: "Levi's", waist: 42.5, length: 106, inseam: 82, wears: 22, daysAgo: 3),
-            .init(String(localized: "Botas de montaña"), .shoes, "43", [.brown], snowBox, season: .autumnWinter, wears: 3, daysAgo: 240),
+            .init(String(localized: "Vaqueros rectos"), .trousers, "42", [.navy], compartments[String(localized: "Balda \(3)")], brand: "Levi's", waist: 42.5, length: 106, inseam: 82, wears: 22, daysAgo: 3, price: 49, bought: 900, care: [.wash30, .noTumbleDry]),
+            .init(String(localized: "Botas de montaña"), .shoes, "43", [.brown], snowBox, season: .autumnWinter, wears: 3, daysAgo: 240, price: 110, bought: 1100),
             .init(String(localized: "Pantalón corto beige"), .shorts, "M", [.beige], suitcase, season: .springSummer, waist: 44, length: 48, wears: 7, daysAgo: 60),
             .init(String(localized: "Polo rojo"), .tShirt, "M", [.red], compartments[String(localized: "Cajón \(1)")], status: .lent, chest: 52, length: 70, wears: 5, daysAgo: 30),
         ]
@@ -78,7 +78,11 @@ enum SampleData {
             garment.inseamCm = item.inseam
             garment.wearCount = item.wears
             garment.lastWornAt = Calendar.current.date(byAdding: .day, value: -item.daysAgo, to: .now)
+            garment.wearDates = wearDates(count: item.wears, lastDaysAgo: item.daysAgo)
             garment.isFavorite = item.favorite
+            garment.price = item.price
+            garment.purchasedAt = item.boughtDaysAgo.flatMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }
+            garment.care = item.care
         }
 
         // Looks
@@ -91,6 +95,7 @@ enum SampleData {
             outfit.garments = garments
             outfit.isFavorite = favorite
             outfit.wearCount = worn
+            outfit.wearDates = wearDates(count: worn, lastDaysAgo: 3)
             return outfit
         }
         let office = makeOutfit(String(localized: "Oficina"),
@@ -118,9 +123,17 @@ enum SampleData {
         trip.outfits = [snow, weekend]
         trip.extraGarments = pieces(["Sudadera verde"])
         trip.notes = String(localized: "Previsión: nieve el sábado.")
+        trip.destination = "Navacerrada"
+        trip.latitude = 40.7838
+        trip.longitude = -4.0107
         if let boots = byName[String(localized: "Botas de montaña")] { trip.togglePacked(boots) }
 
         try? context.save()
+    }
+
+    /// Fechas repartidas hacia atrás: la última hace `lastDaysAgo` días y el resto cada dos semanas.
+    private static func wearDates(count: Int, lastDaysAgo: Int) -> [Date] {
+        (0..<count).compactMap { Calendar.current.date(byAdding: .day, value: -(lastDaysAgo + $0 * 14), to: .now) }
     }
 
     private static func makeLocation(_ name: String, _ kind: LocationKind, index: Int,
@@ -149,11 +162,15 @@ enum SampleData {
         var wears = 0
         var daysAgo = 0
         var favorite = false
+        var price: Double?
+        var boughtDaysAgo: Int?
+        var care: [CareInstruction] = []
 
         init(_ name: String, _ category: GarmentCategory, _ size: String, _ colors: [GarmentColor], _ location: StorageLocation?,
              brand: String = "", material: String = "", season: Season = .allYear, status: GarmentStatus = .stored,
              chest: Double? = nil, waist: Double? = nil, length: Double? = nil, sleeve: Double? = nil, inseam: Double? = nil,
-             wears: Int = 0, daysAgo: Int = 0, favorite: Bool = false) {
+             wears: Int = 0, daysAgo: Int = 0, favorite: Bool = false,
+             price: Double? = nil, bought: Int? = nil, care: [CareInstruction] = []) {
             self.name = name
             self.category = category
             self.size = size
@@ -171,6 +188,9 @@ enum SampleData {
             self.wears = wears
             self.daysAgo = daysAgo
             self.favorite = favorite
+            self.price = price
+            self.boughtDaysAgo = bought
+            self.care = care
         }
     }
 }

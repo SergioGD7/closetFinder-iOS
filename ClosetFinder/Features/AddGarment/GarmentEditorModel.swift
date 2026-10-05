@@ -15,8 +15,15 @@ final class GarmentEditorModel {
     var notes = ""
     var location: StorageLocation?
     var owner: BodyProfile?
-    /// Texto tal y como lo escribe el usuario («54», «54,5»).
+    /// Texto tal y como lo escribe el usuario («54», «54,5»), en la unidad elegida.
     var measurements: [GarmentMeasurement: String] = [:]
+    /// Texto inicial de cada medida: si no se toca, se guarda el valor original sin redondeos.
+    private var originalMeasurements: [GarmentMeasurement: String] = [:]
+    let unit = LengthUnit.current
+    var care: [CareInstruction] = []
+    var price = ""
+    var hasPurchaseDate = false
+    var purchasedAt = Date.now
 
     var photo: Data?
     var thumbnail: Data?
@@ -48,9 +55,14 @@ final class GarmentEditorModel {
             self.owner = garment.owner
             for measurement in GarmentMeasurement.allCases {
                 if let value = garment.measurement(measurement) {
-                    measurements[measurement] = SizeConverter.format(value)
+                    measurements[measurement] = unit.editText(value)
                 }
             }
+            originalMeasurements = measurements
+            care = garment.care
+            price = garment.price.map { SizeConverter.format($0) } ?? ""
+            hasPurchaseDate = garment.purchasedAt != nil
+            purchasedAt = garment.purchasedAt ?? .now
             photo = garment.photo
             thumbnail = garment.thumbnail
             hasCutout = garment.hasCutout
@@ -123,8 +135,14 @@ final class GarmentEditorModel {
         garment.location = location
         garment.owner = owner
         for measurement in GarmentMeasurement.allCases {
-            garment.setMeasurement(measurement, to: Self.parseCentimeters(measurements[measurement]))
+            let text = measurements[measurement]
+            if text == nil || text != originalMeasurements[measurement] {
+                garment.setMeasurement(measurement, to: unit.parse(text))
+            }
         }
+        garment.care = care
+        garment.price = Self.parsePrice(price)
+        garment.purchasedAt = hasPurchaseDate ? purchasedAt : nil
         if photoChanged {
             garment.photo = photo
             garment.thumbnail = thumbnail
@@ -145,6 +163,9 @@ final class GarmentEditorModel {
         material = ""
         notes = ""
         measurements = [:]
+        originalMeasurements = [:]
+        care = []
+        price = ""
         status = .stored
         photo = nil
         thumbnail = nil
@@ -156,9 +177,33 @@ final class GarmentEditorModel {
         colorsWereChosen = false
     }
 
-    static func parseCentimeters(_ text: String?) -> Double? {
-        guard let text = text?.trimmingCharacters(in: .whitespaces), !text.isEmpty else { return nil }
-        guard let value = Double(text.replacingOccurrences(of: ",", with: ".")), value > 0 else { return nil }
+    func toggleCare(_ instruction: CareInstruction) {
+        care = CareInstruction.toggling(instruction, in: care)
+    }
+
+    /// Aplica lo leído en la etiqueta sin borrar lo que el usuario ya hubiera escrito.
+    func apply(_ label: LabelInfo) {
+        if let size = label.size { self.size = size }
+        if !label.fibers.isEmpty { material = label.compositionText }
+        if !label.care.isEmpty { care = CareInstruction.sorted(care + label.care) }
+    }
+
+    /// «49», «49,95», «49,95 €», «1.299» o «1,299.95». Sin precio, `nil`.
+    static func parsePrice(_ text: String) -> Double? {
+        let kept = text.filter { $0.isNumber || $0 == "," || $0 == "." }
+        guard kept.contains(where: \.isNumber) else { return nil }
+        let separators = kept.filter { $0 == "," || $0 == "." }
+        var normalized = kept.filter(\.isNumber)
+        if let last = kept.lastIndex(where: { $0 == "," || $0 == "." }) {
+            let decimals = kept[kept.index(after: last)...]
+            let mixed = Set(separators).count > 1
+            // Con un solo separador repetido, o seguido de tres cifras, son miles: «1.299».
+            let isDecimal = mixed || (separators.count == 1 && decimals.count != 3)
+            if isDecimal {
+                normalized = kept[..<last].filter(\.isNumber) + "." + decimals
+            }
+        }
+        guard let value = Double(normalized), value >= 0 else { return nil }
         return value
     }
 }

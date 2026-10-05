@@ -23,6 +23,9 @@ struct ProfileEditorView: View {
     @State private var name = ""
     @State private var sizing: SizingProfile = .menswear
     @State private var values: [BodyMeasurement: String] = [:]
+    /// Texto inicial de cada medida: si no se toca, se guarda el valor original sin redondeos.
+    @State private var originalValues: [BodyMeasurement: String] = [:]
+    private let unit = LengthUnit.current
     @State private var isConfirmingDelete = false
 
     init(target: ProfileEditorTarget, onSave: @escaping (BodyProfile) -> Void = { _ in }) {
@@ -33,9 +36,10 @@ struct ProfileEditorView: View {
             _sizing = State(initialValue: profile.sizing)
             var initial: [BodyMeasurement: String] = [:]
             for measurement in BodyMeasurement.allCases {
-                if let value = profile.value(of: measurement) { initial[measurement] = SizeConverter.format(value) }
+                if let value = profile.value(of: measurement) { initial[measurement] = LengthUnit.current.editText(value) }
             }
             _values = State(initialValue: initial)
+            _originalValues = State(initialValue: initial)
         }
     }
 
@@ -66,7 +70,7 @@ struct ProfileEditorView: View {
                                     .keyboardType(.decimalPad)
                                     .multilineTextAlignment(.trailing)
                                     .frame(width: 70)
-                                Text("cm").foregroundStyle(.secondary)
+                                Text(verbatim: unit.symbol).foregroundStyle(.secondary)
                             }
                             Text(measurement.howTo)
                                 .font(.caption)
@@ -75,7 +79,7 @@ struct ProfileEditorView: View {
                         .padding(.vertical, 2)
                     }
                 } header: {
-                    Text("Medidas en centímetros")
+                    Text(unit == .inches ? String(localized: "Medidas en pulgadas") : String(localized: "Medidas en centímetros"))
                 } footer: {
                     Text("Usa una cinta métrica flexible y no aprietes. Todas son opcionales.")
                 }
@@ -119,7 +123,9 @@ struct ProfileEditorView: View {
         profile.name = trimmed.isEmpty ? String(localized: "Yo") : trimmed
         profile.sizing = sizing
         for measurement in BodyMeasurement.allCases {
-            profile.setValue(GarmentEditorModel.parseCentimeters(values[measurement]), of: measurement)
+            if values[measurement] != originalValues[measurement] || values[measurement] == nil {
+                profile.setValue(unit.parse(values[measurement]), of: measurement)
+            }
         }
         try? modelContext.save()
         onSave(profile)

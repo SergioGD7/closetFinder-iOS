@@ -42,6 +42,28 @@ struct BackupTests {
         #expect(weekend.pieces.map(\.displayName).contains("Chaqueta vaquera"))
     }
 
+    @Test func keepsPricesCareWearDatesAndDestination() throws {
+        // Versión 3: precio, cuidados, días de uso y destino de la maleta.
+        let sourceContainer = AppModelContainer.preview()
+        let source = sourceContainer.mainContext
+        let jacket = try #require(try source.fetch(FetchDescriptor<Garment>()).first { $0.name == "Chaqueta vaquera" })
+        let data = try BackupService.makeArchive(from: source).encoded()
+        let targetContainer = AppModelContainer.make(inMemory: true)
+        let target = targetContainer.mainContext
+        try BackupService.restore(BackupArchive.decode(data), into: target)
+
+        let restored = try #require(try target.fetch(FetchDescriptor<Garment>()).first { $0.uuid == jacket.uuid })
+        #expect(restored.price == 89)
+        #expect(restored.purchasedAt == jacket.purchasedAt)
+        #expect(restored.care == [.wash30, .noBleach, .noTumbleDry])
+        #expect(restored.wearDates.count == jacket.wearDates.count)
+        let trip = try #require(try target.fetch(FetchDescriptor<Trip>()).first)
+        #expect(trip.destination == "Navacerrada")
+        #expect(trip.latitude == 40.7838)
+        let office = try #require(try target.fetch(FetchDescriptor<Outfit>()).first { $0.name == "Oficina" })
+        #expect(office.wearDates.count == 6)
+    }
+
     @Test func readsVersionOneBackups() throws {
         // Una copia antigua no tiene looks ni maletas: se restaura igual.
         let sourceContainer = AppModelContainer.preview()
