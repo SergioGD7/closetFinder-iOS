@@ -9,7 +9,8 @@ struct SearchView: View {
     @State private var text = ""
     @State private var tokens: [SearchToken] = []
     @State private var suggestedTokens: [SearchToken] = []
-    @AppStorage("recentSearches") private var recentStorage = ""
+    @AppStorage(RecentHistory.searchesKey) private var recentStorage = ""
+    @AppStorage(RecentHistory.garmentsKey) private var recentGarmentStorage = ""
 
     // Búsqueda inteligente (Apple Intelligence)
     @State private var isInterpreting = false
@@ -22,8 +23,12 @@ struct SearchView: View {
 
     private var results: [Garment] { GarmentSearch.search(garments, text: text, tokens: tokens) }
 
-    private var recentSearches: [String] {
-        recentStorage.split(separator: "\n").map(String.init)
+    private var recentSearches: [String] { RecentHistory.decode(recentStorage) }
+
+    /// Prendas abiertas hace poco, en el orden en que se abrieron. Las borradas se ignoran.
+    private var recentGarments: [Garment] {
+        let byID = Dictionary(garments.map { ($0.uuid.uuidString, $0) }, uniquingKeysWith: { first, _ in first })
+        return RecentHistory.decode(recentGarmentStorage).compactMap { byID[$0] }
     }
 
     var body: some View {
@@ -144,6 +149,41 @@ struct SearchView: View {
 
     @ViewBuilder
     private var browseSections: some View {
+        let recentGarments = recentGarments
+        if !recentGarments.isEmpty {
+            Section {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .top, spacing: 10) {
+                        ForEach(recentGarments) { garment in
+                            NavigationLink(value: garment) {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    GarmentImage(garment: garment, inset: 0.1)
+                                        .frame(width: 84, height: 84)
+                                        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                                    Text(garment.displayName)
+                                        .font(.caption.weight(.semibold))
+                                        .foregroundStyle(.primary)
+                                        .lineLimit(2, reservesSpace: true)
+                                        .frame(width: 84, alignment: .leading)
+                                }
+                            }
+                            .buttonStyle(.pressable)
+                            .accessibilityElement(children: .combine)
+                        }
+                    }
+                }
+                .listRowInsets(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16))
+            } header: {
+                HStack {
+                    Text("Vistas hace poco")
+                    Spacer()
+                    Button("Borrar") { recentGarmentStorage = "" }
+                        .font(.footnote)
+                        .textCase(nil)
+                }
+            }
+        }
+
         if !recentSearches.isEmpty {
             Section {
                 ForEach(recentSearches, id: \.self) { recent in
@@ -152,6 +192,11 @@ struct SearchView: View {
                     } label: {
                         Label(recent, systemImage: "clock.arrow.circlepath")
                             .foregroundStyle(.primary)
+                    }
+                    .swipeActions {
+                        Button("Quitar", role: .destructive) {
+                            recentStorage = RecentHistory.removing(recent, from: recentStorage)
+                        }
                     }
                 }
             } header: {
@@ -207,10 +252,7 @@ struct SearchView: View {
     }
 
     private func remember(_ query: String) {
-        let trimmed = query.trimmingCharacters(in: .whitespaces)
-        guard !trimmed.isEmpty else { return }
-        let updated = [trimmed] + recentSearches.filter { $0.caseInsensitiveCompare(trimmed) != .orderedSame }
-        recentStorage = updated.prefix(6).joined(separator: "\n")
+        recentStorage = RecentHistory.adding(query, to: recentStorage, limit: RecentHistory.searchLimit, caseInsensitive: true)
     }
 }
 

@@ -55,6 +55,7 @@ nonisolated final class Outfit {
     var isFavorite: Bool = false
     var wearCount: Int = 0
     var lastWornAt: Date?
+    var wearDates: [Date] = []
     var createdAt: Date = Date.now
 
     @Relationship(deleteRule: .nullify, inverse: \Garment.outfits)
@@ -100,7 +101,8 @@ nonisolated final class Outfit {
 
     func markWorn(on date: Date = .now) {
         wearCount += 1
-        lastWornAt = date
+        lastWornAt = max(lastWornAt ?? date, date)
+        wearDates.append(date)
         for garment in garments ?? [] { garment.markWorn(on: date) }
     }
 }
@@ -127,6 +129,10 @@ nonisolated final class Trip {
     var startDate: Date = Date.now
     var endDate: Date = Date.now
     var notes: String = ""
+    /// Ciudad o lugar del viaje y sus coordenadas, para consultar el tiempo previsto.
+    var destination: String = ""
+    var latitude: Double?
+    var longitude: Double?
     /// Prendas ya metidas en la maleta (UUID de cada prenda).
     var packedGarmentIDs: [String] = []
     var createdAt: Date = Date.now

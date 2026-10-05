@@ -21,6 +21,8 @@ struct RootView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage(AppearanceMode.storageKey) private var appearance: AppearanceMode = .system
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @State private var isShowingOnboarding = false
 
     var body: some View {
         RootTabView()
@@ -30,9 +32,17 @@ struct RootView: View {
                     SampleData.insertIfEmpty(into: modelContext)
                 }
                 SpotlightIndexer.reindexAll(in: modelContext)
+                decideOnboarding()
                 #if DEBUG
                 applyDebugLaunchArguments()
                 #endif
+            }
+            .fullScreenCover(isPresented: $isShowingOnboarding) {
+                OnboardingView {
+                    hasCompletedOnboarding = true
+                    isShowingOnboarding = false
+                }
+                .preferredColorScheme(appearance.colorScheme)
             }
             .onContinueUserActivity(CSSearchableItemActionType) { activity in
                 guard let id = activity.userInfo?[CSSearchableItemActivityIdentifier] as? String else { return }
@@ -48,6 +58,25 @@ struct RootView: View {
                     WidgetCenter.shared.reloadAllTimelines()
                 }
             }
+    }
+
+    /// El primer arranque guiado sale una sola vez, y solo si el armario está vacío: quien ya
+    /// tiene datos (de una versión anterior o de iCloud) no lo ve. `-showOnboarding` lo fuerza.
+    private func decideOnboarding() {
+        let arguments = ProcessInfo.processInfo.arguments
+        if arguments.contains("-showOnboarding") {
+            isShowingOnboarding = true
+            return
+        }
+        let isTesting = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+        guard !hasCompletedOnboarding, !isTesting, !arguments.contains("-skipOnboarding") else { return }
+        let garments = (try? modelContext.fetchCount(FetchDescriptor<Garment>())) ?? 0
+        let locations = (try? modelContext.fetchCount(FetchDescriptor<StorageLocation>())) ?? 0
+        if garments + locations > 0 {
+            hasCompletedOnboarding = true
+        } else {
+            isShowingOnboarding = true
+        }
     }
 
     #if DEBUG

@@ -16,6 +16,13 @@ struct GarmentEditorView: View {
     @State private var isShowingCamera = false
     @State private var savedFeedback = 0
     @State private var burstMessage: String?
+    // Leer la etiqueta
+    @State private var isChoosingLabelSource = false
+    @State private var isShowingLabelCamera = false
+    @State private var labelPickerItem: PhotosPickerItem?
+    @State private var isPickingLabelPhoto = false
+    @State private var isReadingLabel = false
+    @State private var labelResult: LabelReading?
 
     init(garment: Garment? = nil, location: StorageLocation? = nil, owner: BodyProfile? = nil) {
         self.garment = garment
@@ -33,6 +40,8 @@ struct GarmentEditorView: View {
                 colorSection
                 whereSection
                 usageSection
+                careSection
+                purchaseSection
                 measurementsSection
                 Section("Notas") {
                     TextField("Dónde la compraste, arreglos pendientes…", text: $model.notes, axis: .vertical)
@@ -65,6 +74,37 @@ struct GarmentEditorView: View {
                     Task { await model.processPhoto(data) }
                 }
                 .ignoresSafeArea()
+            }
+            .confirmationDialog("Leer la etiqueta", isPresented: $isChoosingLabelSource, titleVisibility: .visible) {
+                Button("Hacer foto") { isShowingLabelCamera = true }
+                    .disabled(!CameraPicker.isAvailable)
+                Button("Elegir de Fotos") { isPickingLabelPhoto = true }
+            } message: {
+                Text("Haz una foto a la etiqueta interior, estirada y con buena luz.")
+            }
+            .photosPicker(isPresented: $isPickingLabelPhoto, selection: $labelPickerItem, matching: .images)
+            .onChange(of: labelPickerItem) { _, item in
+                guard let item else { return }
+                Task {
+                    if let data = try? await item.loadTransferable(type: Data.self) { await readLabel(data) }
+                    labelPickerItem = nil
+                }
+            }
+            .fullScreenCover(isPresented: $isShowingLabelCamera) {
+                CameraPicker { data in
+                    Task { await readLabel(data) }
+                }
+                .ignoresSafeArea()
+            }
+            .sheet(item: $labelResult) { result in
+                LabelResultSheet(info: result.info) { model.apply(result.info) }
+            }
+            .overlay {
+                if isReadingLabel {
+                    ProgressView("Leyendo la etiqueta…")
+                        .padding(20)
+                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                }
             }
             .overlay(alignment: .top) { burstBanner }
             .sensoryFeedback(.success, trigger: savedFeedback)
@@ -224,7 +264,13 @@ struct GarmentEditorView: View {
                 }
             }
             TextField("Marca", text: $model.brand)
-            TextField("Material", text: $model.material)
+            TextField("Material", text: $model.material, prompt: Text("100 % algodón"))
+            Button {
+                isChoosingLabelSource = true
+            } label: {
+                Label("Leer la etiqueta", systemImage: "text.viewfinder")
+            }
+            .disabled(isReadingLabel)
         }
     }
 
@@ -293,7 +339,7 @@ struct GarmentEditorView: View {
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
                             .frame(width: 70)
-                        Text("cm").foregroundStyle(.secondary)
+                        Text(verbatim: model.unit.symbol).foregroundStyle(.secondary)
                     }
                 }
             } header: {
@@ -302,6 +348,51 @@ struct GarmentEditorView: View {
                 Text("Mide la prenda extendida en plano. Con tus medidas corporales, la app te dirá si te queda bien.")
             }
         }
+    }
+
+    private var careSection: some View {
+        Section {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 8, alignment: .leading)], alignment: .leading, spacing: 8) {
+                ForEach(CareInstruction.allCases) { instruction in
+                    FilterChip(title: instruction.title, systemImage: instruction.symbol,
+                               isSelected: model.care.contains(instruction), compact: true) {
+                        model.toggleCare(instruction)
+                    }
+                }
+            }
+            .padding(.vertical, 4)
+        } header: {
+            Text("Cuidados")
+        } footer: {
+            Text("«Leer la etiqueta» los rellena solos.")
+        }
+    }
+
+    private var purchaseSection: some View {
+        Section {
+            HStack {
+                Text("Precio")
+                TextField(String(localized: "Opcional"), text: $model.price)
+                    .keyboardType(.decimalPad)
+                    .multilineTextAlignment(.trailing)
+                Text(verbatim: WardrobeValue.currencySymbol).foregroundStyle(.secondary)
+            }
+            Toggle("Fecha de compra", isOn: $model.hasPurchaseDate.animation())
+            if model.hasPurchaseDate {
+                DatePicker("Comprada el", selection: $model.purchasedAt, in: ...Date.now, displayedComponents: .date)
+            }
+        } header: {
+            Text("Compra")
+        } footer: {
+            Text("Con el precio, las estadísticas calculan lo que vale tu armario y cuánto te cuesta cada puesta.")
+        }
+    }
+
+    private func readLabel(_ data: Data) async {
+        isReadingLabel = true
+        let info = await LabelReader.read(data)
+        isReadingLabel = false
+        labelResult = LabelReading(info: info)
     }
 
     private var burstSection: some View {

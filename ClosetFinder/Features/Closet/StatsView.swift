@@ -5,6 +5,7 @@ import SwiftUI
 /// Estadísticas del armario: qué hay, dónde está y qué no se usa.
 struct StatsView: View {
     @Query private var garments: [Garment]
+    @Query private var outfits: [Outfit]
     @Query(sort: [SortDescriptor(\StorageLocation.sortIndex)]) private var locations: [StorageLocation]
 
     var body: some View {
@@ -19,6 +20,26 @@ struct StatsView: View {
             }
             .listRowBackground(Color.clear)
             .listRowInsets(EdgeInsets())
+
+            Section {
+                NavigationLink {
+                    WardrobeValueView()
+                } label: {
+                    LabeledContent {
+                        let priced = WardrobeValue.priced(garments)
+                        if !priced.isEmpty { Text(WardrobeValue.format(WardrobeValue.total(priced))) }
+                    } label: {
+                        Label("Valor del armario", systemImage: "banknote")
+                    }
+                }
+                NavigationLink {
+                    YearInReviewView()
+                } label: {
+                    Label(String(localized: "Tu \(String(Calendar.current.component(.year, from: .now))) en ropa"), systemImage: "sparkles")
+                }
+            }
+
+            gapsSection
 
             if !byCategory.isEmpty {
                 Section("Por categoría") {
@@ -101,6 +122,36 @@ struct StatsView: View {
     }
 
     private var forgotten: [Garment] { WardrobeInsights.forgotten(garments) }
+
+    @ViewBuilder
+    private var gapsSection: some View {
+        let gaps = WardrobeGaps.gaps(in: outfits)
+        if !gaps.isEmpty {
+            Section {
+                ForEach(gaps) { gap in
+                    HStack(spacing: 12) {
+                        GarmentArtwork(category: gap.slot.representativeCategory, color: .gray)
+                            .padding(6)
+                            .frame(width: 44, height: 44)
+                            .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(gap.slot.title).font(.subheadline.weight(.semibold))
+                            Text(gap.outfits.count == 1
+                                 ? String(localized: "Completaría 1 look: \(gap.outfits[0].displayName)")
+                                 : String(localized: "Completaría \(gap.outfits.count) looks: \(gap.outfits.map(\.displayName).formatted(.list(type: .and)))"))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .accessibilityElement(children: .combine)
+                }
+            } header: {
+                Text("Huecos en el armario")
+            } footer: {
+                Text("Looks a los que les falta una parte. Si vas a comprar algo, esto es lo que más looks completaría.")
+            }
+        }
+    }
 
     private func count(_ status: GarmentStatus) -> Int { garments.filter { $0.status == status }.count }
 

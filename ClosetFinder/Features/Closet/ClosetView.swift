@@ -40,6 +40,7 @@ struct ClosetView: View {
     @State private var sort: ClosetSort = .recent
     @State private var favoritesOnly = false
     @State private var isAdding = false
+    @State private var isImporting = false
     // Selección múltiple
     @State private var isSelecting = false
     @State private var selection: Set<PersistentIdentifier> = []
@@ -69,6 +70,7 @@ struct ClosetView: View {
                 }
             }
             .sheet(isPresented: $isAdding) { GarmentEditorView() }
+            .sheet(isPresented: $isImporting) { BatchImportView() }
             .safeAreaInset(edge: .bottom) { selectionBar }
             .toolbar(isSelecting ? .hidden : .automatic, for: .tabBar)
             .confirmationDialog(
@@ -297,10 +299,21 @@ struct ClosetView: View {
                     Label("Ordenar y filtrar", systemImage: "line.3.horizontal.decrease")
                 }
             }
-            Button {
-                isAdding = true
+            Menu {
+                Button {
+                    isAdding = true
+                } label: {
+                    Label("Añadir prenda", systemImage: "camera")
+                }
+                Button {
+                    isImporting = true
+                } label: {
+                    Label("Importar varias fotos", systemImage: "photo.stack")
+                }
             } label: {
                 Label("Añadir prenda", systemImage: "plus")
+            } primaryAction: {
+                isAdding = true
             }
         }
     }
@@ -315,6 +328,8 @@ struct ClosetView: View {
         } actions: {
             Button("Añadir prenda") { isAdding = true }
                 .buttonStyle(.primary)
+            Button("Importar varias fotos") { isImporting = true }
+                .buttonStyle(.secondary)
             if locations.isEmpty {
                 Button("Probar con un armario de ejemplo") {
                     SampleData.insertIfEmpty(into: modelContext)

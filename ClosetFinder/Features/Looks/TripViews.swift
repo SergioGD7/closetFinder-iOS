@@ -14,7 +14,7 @@ struct TripRow: View {
                 Text(trip.name)
                     .font(.body.weight(.semibold))
                     .foregroundStyle(.primary)
-                Text(TripRow.dateText(trip))
+                Text(trip.destination.isEmpty ? TripRow.dateText(trip) : "\(trip.destination) · \(TripRow.dateText(trip))")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -92,6 +92,7 @@ struct TripEditorView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @State private var name: String
+    @State private var destination: String
     @State private var startDate: Date
     @State private var endDate: Date
     @State private var notes: String
@@ -101,6 +102,7 @@ struct TripEditorView: View {
         self.onSave = onSave
         let start = trip?.startDate ?? Calendar.current.startOfDay(for: .now.addingTimeInterval(7 * 86_400))
         _name = State(initialValue: trip?.name ?? "")
+        _destination = State(initialValue: trip?.destination ?? "")
         _startDate = State(initialValue: start)
         _endDate = State(initialValue: trip?.endDate ?? start.addingTimeInterval(2 * 86_400))
         _notes = State(initialValue: trip?.notes ?? "")
@@ -111,6 +113,10 @@ struct TripEditorView: View {
             Form {
                 Section {
                     TextField("Nombre", text: $name, prompt: Text("Escapada a Lisboa"))
+                    TextField("Destino", text: $destination, prompt: Text("Lisboa"))
+                        .textContentType(.addressCity)
+                } footer: {
+                    Text("Con el destino, la maleta te dice qué tiempo hará y qué llevar.")
                 }
                 Section {
                     DatePicker("Salida", selection: $startDate, displayedComponents: .date)
@@ -152,6 +158,19 @@ struct TripEditorView: View {
             modelContext.insert(saved)
         }
         saved.notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
+        let place = destination.trimmingCharacters(in: .whitespaces)
+        if place != saved.destination || (!place.isEmpty && saved.latitude == nil) {
+            saved.destination = place
+            saved.latitude = nil
+            saved.longitude = nil
+            if !place.isEmpty {
+                Task {
+                    guard let found = await TripWeather.locate(place), saved.destination == place else { return }
+                    saved.latitude = found.latitude
+                    saved.longitude = found.longitude
+                }
+            }
+        }
         try? modelContext.save()
         onSave(saved)
         dismiss()
@@ -193,6 +212,8 @@ struct TripDetailView: View {
                 }
                 .padding(.vertical, 4)
             }
+
+            TripAdviceSection(trip: trip) { isEditing = true }
 
             Section {
                 ForEach(trip.sortedOutfits) { outfit in

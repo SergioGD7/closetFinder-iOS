@@ -42,7 +42,16 @@ nonisolated final class Garment {
     var isFavorite: Bool = false
     var wearCount: Int = 0
     var lastWornAt: Date?
+    /// Días en que se puso, para las estadísticas de cada año. Las prendas anteriores a este
+    /// campo pueden tener más usos (`wearCount`) que fechas.
+    var wearDates: [Date] = []
     var createdAt: Date = Date.now
+
+    /// Precio de compra, en la moneda del usuario.
+    var price: Double?
+    var purchasedAt: Date?
+    /// Instrucciones de lavado (`CareInstruction`).
+    var careRaw: [String] = []
 
     init(name: String = "", category: GarmentCategory = .tShirt, size: String = "", colors: [GarmentColor] = []) {
         self.name = name
@@ -72,6 +81,17 @@ nonisolated final class Garment {
     }
 
     var primaryColor: GarmentColor { colors.first ?? .gray }
+
+    var care: [CareInstruction] {
+        get { CareInstruction.sorted(careRaw.compactMap(CareInstruction.init(rawValue:))) }
+        set { careRaw = CareInstruction.sorted(newValue).map(\.rawValue) }
+    }
+
+    /// Precio dividido entre las veces que te la has puesto (o el precio entero si aún no).
+    var costPerWear: Double? {
+        guard let price else { return nil }
+        return price / Double(max(wearCount, 1))
+    }
 
     /// El nombre que escribió el usuario o uno generado: «Camiseta blanca», «Jersey verde».
     var displayName: String {
@@ -113,6 +133,7 @@ nonisolated final class Garment {
 
     func markWorn(on date: Date = .now) {
         wearCount += 1
-        lastWornAt = date
+        lastWornAt = max(lastWornAt ?? date, date)
+        wearDates.append(date)
     }
 }

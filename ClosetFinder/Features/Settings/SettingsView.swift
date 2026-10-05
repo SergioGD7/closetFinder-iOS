@@ -16,6 +16,7 @@ struct SettingsView: View {
     @State private var isImporting = false
     @State private var message: Message?
     @AppStorage(AppearanceMode.storageKey) private var appearance: AppearanceMode = .system
+    @AppStorage(LengthUnit.storageKey) private var lengthUnit: LengthUnitPreference = .automatic
 
     struct Message: Identifiable {
         let id = UUID()
@@ -37,6 +38,17 @@ struct SettingsView: View {
                     Text("Apariencia")
                 } footer: {
                     Text("Automática sigue el modo claro u oscuro del iPhone.")
+                }
+                Section {
+                    Picker("Unidades", selection: $lengthUnit) {
+                        ForEach(LengthUnitPreference.allCases) { Text($0.title).tag($0) }
+                    }
+                } header: {
+                    Text("Medidas")
+                } footer: {
+                    Text(LengthUnit.resolve(.automatic) == .inches
+                         ? String(localized: "Automática usa la unidad de tu región: pulgadas.")
+                         : String(localized: "Automática usa la unidad de tu región: centímetros."))
                 }
                 iCloudSection
                 backupSection

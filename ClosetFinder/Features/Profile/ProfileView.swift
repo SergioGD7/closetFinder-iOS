@@ -5,6 +5,8 @@ import SwiftUI
 struct ProfileView: View {
     @Query(sort: \BodyProfile.createdAt) private var profiles: [BodyProfile]
     @AppStorage("selectedProfileID") private var selectedID = ""
+    /// Para redibujar al cambiar de centímetros a pulgadas en Ajustes.
+    @AppStorage(LengthUnit.storageKey) private var lengthUnit = LengthUnitPreference.automatic.rawValue
 
     @State private var editorTarget: ProfileEditorTarget?
     @State private var isShowingSettings = false
@@ -92,7 +94,7 @@ struct ProfileView: View {
                             HStack {
                                 Text(measurement.title).foregroundStyle(.secondary)
                                 Spacer()
-                                Text(profile.value(of: measurement)?.centimeters ?? "—")
+                                Text(profile.value(of: measurement)?.lengthText ?? "—")
                                     .fontWeight(.semibold)
                                     .monospacedDigit()
                             }
