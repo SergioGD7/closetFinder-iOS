@@ -9,7 +9,7 @@ nonisolated enum ClosetWidgetKind: String, CaseIterable, Sendable {
         case .forgotten: String(localized: "Sin ponerte")
         case .todayLook: String(localized: "Look de hoy")
         case .favorites: String(localized: "Favoritas")
-        case .recent: String(localized: "Añadidas recientemente")
+        case .recent: String(localized: "Recientes")
         case .lent: String(localized: "Prestadas")
         case .laundry: String(localized: "Lavando")
         case .toDonate: String(localized: "Para donar")

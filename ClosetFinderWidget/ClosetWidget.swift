@@ -28,6 +28,7 @@ struct ClosetWidget: Widget {
 // MARK: Configuración
 
 /// Qué mostrar: un solo parámetro con los tipos de lista y, después, cada categoría.
+/// Los nombres son cortos porque el valor se muestra en un hueco estrecho al editar el widget.
 /// (Un parámetro de categoría aparte, visible solo a veces, no compila en Xcode 26.)
 nonisolated enum WidgetContent: String, AppEnum {
     case forgotten, todayLook, favorites, recent, lent, laundry, toDonate
@@ -38,12 +39,12 @@ nonisolated enum WidgetContent: String, AppEnum {
         .forgotten: "Sin ponerte",
         .todayLook: "Look de hoy",
         .favorites: "Favoritas",
-        .recent: "Añadidas recientemente",
+        .recent: "Recientes",
         .lent: "Prestadas",
         .laundry: "Lavando",
         .toDonate: "Para donar",
-        .tShirt: "Camisetas", .shirt: "Camisas", .sweater: "Jerséis y sudaderas", .jacket: "Chaquetas",
-        .coat: "Abrigos", .blazer: "Americanas", .trousers: "Pantalones", .shorts: "Pantalones cortos",
+        .tShirt: "Camisetas", .shirt: "Camisas", .sweater: "Jerséis", .jacket: "Chaquetas",
+        .coat: "Abrigos", .blazer: "Americanas", .trousers: "Pantalones", .shorts: "Shorts",
         .skirt: "Faldas", .dress: "Vestidos", .shoes: "Calzado", .underwear: "Ropa interior",
         .swimwear: "Baño", .accessories: "Accesorios",
     ]
