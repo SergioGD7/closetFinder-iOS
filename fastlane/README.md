@@ -13,6 +13,7 @@ y portugués de Brasil (pt-BR). La estructura es la de `fastlane deliver`.
 | `promotional_text.txt` | 170 | Texto promocional (se puede cambiar sin nueva versión) |
 | `description.txt` | 4000 | Descripción completa |
 | `keywords.txt` | 100 | Palabras clave separadas por comas, sin repetir las del nombre |
+| `privacy_url.txt`, `support_url.txt` | | Política de privacidad y soporte, en el idioma de la ficha |
 | `copyright.txt`, `primary_category.txt`, `secondary_category.txt` | | Comunes: © 2026, Estilo de vida y Productividad |
 
 Los textos se generan con `python3 scripts/app_store/metadata.py`, que comprueba los límites.
@@ -48,11 +49,15 @@ También se pueden copiar los textos y arrastrar las capturas a mano en App Stor
 
 ## Lo que hay que rellenar en App Store Connect
 
-- **URL de privacidad** (obligatoria) y **URL de soporte**: hace falta una página pública. El
-  repositorio es privado, así que no sirve un enlace a GitHub.
+- **URL de privacidad** y **URL de soporte**: ya están en `privacy_url.txt` y `support_url.txt` de
+  cada idioma. Son páginas de GitHub Pages (carpeta `docs/`), generadas con
+  `python3 scripts/app_store/web.py`:
+  - https://sergiogd7.github.io/closetFinder-iOS/privacy/
+  - https://sergiogd7.github.io/closetFinder-iOS/support/
 - **Privacidad de la app**: «No se recopilan datos». Coincide con los manifiestos de privacidad
   (`ClosetFinder/PrivacyInfo.xcprivacy` y `ClosetFinderWidget/PrivacyInfo.xcprivacy`): sin rastreo,
-  sin datos recopilados, y `UserDefaults` solo para los ajustes de la propia app (motivo CA92.1). La app no tiene analítica, anuncios ni
-  cuentas; los datos están en el dispositivo y en el iCloud privado del usuario.
+  sin datos recopilados, y `UserDefaults` solo para los ajustes de la propia app (motivo CA92.1).
+  La app no tiene analítica, anuncios ni cuentas; los datos están en el dispositivo y en el
+  iCloud privado del usuario.
 - **Clasificación por edades**: 4+ (ningún contenido sensible).
 - **Cifrado**: la app no usa cifrado propio; la respuesta es «No» (solo el cifrado estándar del sistema).
