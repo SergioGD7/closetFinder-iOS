@@ -116,7 +116,7 @@ struct TripEditorView: View {
                     TextField("Destino", text: $destination, prompt: Text("Lisboa"))
                         .textContentType(.addressCity)
                 } footer: {
-                    Text("Con el destino, la maleta te dice qué tiempo hará y qué llevar.")
+                    Text("Con el destino, la maleta sabe si allí es verano o invierno en esas fechas.")
                 }
                 Section {
                     DatePicker("Salida", selection: $startDate, displayedComponents: .date)
@@ -165,7 +165,7 @@ struct TripEditorView: View {
             saved.longitude = nil
             if !place.isEmpty {
                 Task {
-                    guard let found = await TripWeather.locate(place), saved.destination == place else { return }
+                    guard let found = await TripPlace.locate(place), saved.destination == place else { return }
                     saved.latitude = found.latitude
                     saved.longitude = found.longitude
                 }

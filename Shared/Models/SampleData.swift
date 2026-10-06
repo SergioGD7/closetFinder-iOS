@@ -122,7 +122,7 @@ enum SampleData {
         context.insert(trip)
         trip.outfits = [snow, weekend]
         trip.extraGarments = pieces(["Sudadera verde"])
-        trip.notes = String(localized: "Previsión: nieve el sábado.")
+        trip.notes = String(localized: "No olvidar guantes y gorro.")
         trip.destination = "Navacerrada"
         trip.latitude = 40.7838
         trip.longitude = -4.0107

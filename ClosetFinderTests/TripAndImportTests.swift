@@ -17,30 +17,26 @@ struct TripAndImportTests {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = .gmt
         let january = DateComponents(calendar: calendar, year: 2027, month: 1, day: 15).date!
+        let april = DateComponents(calendar: calendar, year: 2027, month: 4, day: 15).date!
         let july = DateComponents(calendar: calendar, year: 2027, month: 7, day: 15).date!
-        #expect(TripForecast.seasonal(start: january, latitude: 40, calendar: calendar).season == .autumnWinter)
-        #expect(TripForecast.seasonal(start: january, latitude: -34, calendar: calendar).season == .springSummer)
-        #expect(TripForecast.seasonal(start: july, latitude: nil, calendar: calendar).season == .springSummer)
-        #expect(TripForecast(source: .forecast, low: 2, high: 9).season == .autumnWinter)
-        #expect(TripForecast(source: .forecast, low: 20, high: 31).season == .springSummer)
+        #expect(PackingAdvisor.season(start: january, latitude: 40, calendar: calendar) == .autumnWinter)
+        #expect(PackingAdvisor.season(start: january, latitude: -34, calendar: calendar) == .springSummer)
+        #expect(PackingAdvisor.season(start: july, latitude: nil, calendar: calendar) == .springSummer)
+        #expect(PackingAdvisor.season(start: july, latitude: -34, calendar: calendar) == .autumnWinter)
+        #expect(PackingAdvisor.season(start: april, latitude: nil, calendar: calendar) == .midSeason)
     }
 
-    @Test func layersFollowTheForecast() {
-        let cold = TripForecast(source: .forecast, low: -2, high: 6, rainyDays: 0, snowyDays: 1)
-        #expect(PackingAdvisor.layers(for: cold) == [.coat, .warmLayer])
-        let mild = TripForecast(source: .forecast, low: 12, high: 21, rainyDays: 2)
-        #expect(PackingAdvisor.layers(for: mild) == [.warmLayer, .lightJacket, .rain])
-        let hot = TripForecast(source: .forecast, low: 22, high: 33)
-        #expect(PackingAdvisor.layers(for: hot) == [.light, .swimwear])
-        #expect(PackingAdvisor.layers(for: TripForecast(source: .season, season: .autumnWinter)) == [.coat, .warmLayer])
+    @Test func layersFollowTheSeason() {
+        #expect(PackingAdvisor.layers(for: .autumnWinter) == [.coat, .warmLayer])
+        #expect(PackingAdvisor.layers(for: .midSeason) == [.lightJacket, .warmLayer])
+        #expect(PackingAdvisor.layers(for: .springSummer) == [.light, .swimwear])
     }
 
     @Test func adviceSuggestsWhatIsMissingAndFittingLooks() throws {
         let trip = try trip // «Día de nieve» y «Fin de semana», 3 días
         let garments = try context.fetch(FetchDescriptor<Garment>())
         let outfits = try context.fetch(FetchDescriptor<Outfit>())
-        let cold = TripForecast(source: .forecast, low: -3, high: 4, snowyDays: 2)
-        let advice = PackingAdvisor.advice(for: trip, forecast: cold, closet: garments, outfits: outfits)
+        let advice = PackingAdvisor.advice(for: trip, season: .autumnWinter, closet: garments, outfits: outfits)
 
         #expect(advice.lookCount == 3)
         // El plumífero (en «Día de nieve») ya cubre el abrigo y el jersey burdeos, la capa de abrigo.
@@ -48,31 +44,18 @@ struct TripAndImportTests {
         // Falta un look: «Verano» no encaja con el frío; «Oficina» sí.
         #expect(advice.outfits.map(\.name) == ["Oficina"])
 
-        let hot = TripForecast(source: .forecast, low: 21, high: 30)
-        let summer = PackingAdvisor.advice(for: trip, forecast: hot, closet: garments, outfits: outfits)
+        let summer = PackingAdvisor.advice(for: trip, season: .springSummer, closet: garments, outfits: outfits)
         let swim = try #require(summer.layers.first { $0.layer == .swimwear })
         #expect(!swim.isCovered)
         #expect(swim.suggestion?.name == "Bañador estampado")
         let summerLook = try #require(outfits.first { $0.name == "Verano" })
-        #expect(PackingAdvisor.score(summerLook, for: hot) > 0)
+        #expect(PackingAdvisor.score(summerLook, for: .springSummer) > 0)
     }
 
     @Test func longTripsNeedAtMostSevenLooks() {
         #expect(PackingAdvisor.lookCount(forDays: 3) == 3)
         #expect(PackingAdvisor.lookCount(forDays: 12) == 7)
         #expect(PackingAdvisor.lookCount(forDays: 0) == 1)
-    }
-
-    @Test func forecastOnlyForTheNextTenDays() {
-        let now = Date.now
-        let soon = now.addingTimeInterval(3 * 86_400)
-        let far = now.addingTimeInterval(20 * 86_400)
-        let past = now.addingTimeInterval(-5 * 86_400)
-        #expect(TripWeather.isWithinForecastRange(start: soon, end: soon.addingTimeInterval(86_400), now: now))
-        #expect(!TripWeather.isWithinForecastRange(start: far, end: far, now: now))
-        #expect(!TripWeather.isWithinForecastRange(start: past, end: past.addingTimeInterval(86_400), now: now))
-        // Un viaje en curso sí tiene previsión.
-        #expect(TripWeather.isWithinForecastRange(start: past, end: soon, now: now))
     }
 
     // MARK: Importación en lote

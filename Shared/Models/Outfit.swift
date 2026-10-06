@@ -129,7 +129,7 @@ nonisolated final class Trip {
     var startDate: Date = Date.now
     var endDate: Date = Date.now
     var notes: String = ""
-    /// Ciudad o lugar del viaje y sus coordenadas, para consultar el tiempo previsto.
+    /// Ciudad o lugar del viaje y sus coordenadas, para saber la época en el destino (hemisferio).
     var destination: String = ""
     var latitude: Double?
     var longitude: Double?
