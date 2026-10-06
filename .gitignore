@@ -7,3 +7,8 @@ build/
 
 # macOS
 .DS_Store
+
+# Capturas del App Store: se generan con scripts/app_store/make_screenshots.sh
+fastlane/screenshots_raw/
+fastlane/screenshots/
+fastlane/screenshots_preview/
