@@ -54,7 +54,10 @@ También se pueden copiar los textos y arrastrar las capturas a mano en App Stor
   `python3 scripts/app_store/web.py`:
   - https://sergiogd7.github.io/closetFinder-iOS/privacy/
   - https://sergiogd7.github.io/closetFinder-iOS/support/
-- **Privacidad de la app**: «No se recopilan datos». La app no tiene analítica, anuncios ni
-  cuentas; los datos están en el dispositivo y en el iCloud privado del usuario.
+- **Privacidad de la app**: «No se recopilan datos». Coincide con los manifiestos de privacidad
+  (`ClosetFinder/PrivacyInfo.xcprivacy` y `ClosetFinderWidget/PrivacyInfo.xcprivacy`): sin rastreo,
+  sin datos recopilados, y `UserDefaults` solo para los ajustes de la propia app (motivo CA92.1).
+  La app no tiene analítica, anuncios ni cuentas; los datos están en el dispositivo y en el
+  iCloud privado del usuario.
 - **Clasificación por edades**: 4+ (ningún contenido sensible).
 - **Cifrado**: la app no usa cifrado propio; la respuesta es «No» (solo el cifrado estándar del sistema).
