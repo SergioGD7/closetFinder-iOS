@@ -273,74 +273,6 @@
         }
       }
     },
-    "%lld días de lluvia": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld rainy days"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld jours de pluie"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld Regentage"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld giorni di pioggia"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld dias de chuva"
-          }
-        }
-      }
-    },
-    "%lld días de nieve": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld snowy days"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld jours de neige"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld Schneetage"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld giorni di neve"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld dias de neve"
-          }
-        }
-      }
-    },
     "%lld en curso": {
       "localizations": {
         "en": {
@@ -1017,74 +949,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 dia"
-          }
-        }
-      }
-    },
-    "1 día de lluvia": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 rainy day"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 jour de pluie"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 Regentag"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 giorno di pioggia"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 dia de chuva"
-          }
-        }
-      }
-    },
-    "1 día de nieve": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 snowy day"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 jour de neige"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 Schneetag"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 giorno di neve"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 dia de neve"
           }
         }
       }
@@ -2007,40 +1871,6 @@
         }
       }
     },
-    "Algo para la lluvia": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Something for the rain"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "De quoi se protéger de la pluie"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Etwas gegen Regen"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qualcosa per la pioggia"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Algo para a chuva"
-          }
-        }
-      }
-    },
     "Algodón": {
       "localizations": {
         "en": {
@@ -2619,36 +2449,36 @@
         }
       }
     },
-    "Añade el destino para ver el tiempo previsto": {
+    "Añade el destino si es en el otro hemisferio": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add the destination to see the forecast"
+            "value": "Add the destination if it’s in the other hemisphere"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajoutez la destination pour voir la météo prévue"
+            "value": "Ajoutez la destination si elle est dans l’autre hémisphère"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Füge das Reiseziel hinzu, um die Vorhersage zu sehen"
+            "value": "Füge das Reiseziel hinzu, wenn es auf der anderen Erdhalbkugel liegt"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aggiungi la destinazione per vedere le previsioni"
+            "value": "Aggiungi la destinazione se è nell’altro emisfero"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Adicione o destino para ver a previsão do tempo"
+            "value": "Adicione o destino se for no outro hemisfério"
           }
         }
       }
@@ -8375,36 +8205,36 @@
         }
       }
     },
-    "Con el destino, la maleta te dice qué tiempo hará y qué llevar.": {
+    "Con el destino, la maleta sabe si allí es verano o invierno en esas fechas.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "With the destination, the suitcase tells you the weather and what to pack."
+            "value": "With the destination, the suitcase knows whether it’s summer or winter there on those dates."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Avec la destination, la valise vous indique la météo et quoi emporter."
+            "value": "Avec la destination, la valise sait si c’est l’été ou l’hiver là-bas à ces dates."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mit dem Reiseziel sagt dir der Koffer, wie das Wetter wird und was du einpacken solltest."
+            "value": "Mit dem Reiseziel weiß der Koffer, ob dort zu der Zeit Sommer oder Winter ist."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Con la destinazione, la valigia ti dice che tempo farà e cosa portare."
+            "value": "Con la destinazione, la valigia sa se lì in quelle date è estate o inverno."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Com o destino, a mala mostra a previsão do tempo e o que levar."
+            "value": "Com o destino, a mala sabe se lá é verão ou inverno nessas datas."
           }
         }
       }
@@ -12159,40 +11989,6 @@
         }
       }
     },
-    "Fuentes de datos": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data sources"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sources de données"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Datenquellen"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fonti dei dati"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fontes de dados"
-          }
-        }
-      }
-    },
     "garment.generatedName": {
       "localizations": {
         "es": {
@@ -13927,40 +13723,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "guarda-roupas"
-          }
-        }
-      }
-    },
-    "La previsión aparece diez días antes del viaje. Mientras, te orientamos por la época del año.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The forecast appears ten days before the trip. Until then, we go by the time of year."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La météo apparaît dix jours avant le voyage. En attendant, nous nous basons sur la saison."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Vorhersage erscheint zehn Tage vor der Reise. Bis dahin orientieren wir uns an der Jahreszeit."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le previsioni compaiono dieci giorni prima del viaggio. Nel frattempo ci basiamo sul periodo dell’anno."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A previsão aparece dez dias antes da viagem. Enquanto isso, nos baseamos na época do ano."
           }
         }
       }
@@ -16345,6 +16107,40 @@
         }
       }
     },
+    "No olvidar guantes y gorro.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Don’t forget gloves and a hat."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne pas oublier gants et bonnet."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Handschuhe und Mütze nicht vergessen."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non dimenticare guanti e berretto."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não esquecer luvas e gorro."
+          }
+        }
+      }
+    },
     "No planchar": {
       "localizations": {
         "en": {
@@ -16375,40 +16171,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Não passar"
-          }
-        }
-      }
-    },
-    "No se ha podido consultar el tiempo. Te orientamos por la época del año.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The weather couldn’t be checked. We go by the time of year."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Impossible de consulter la météo. Nous nous basons sur la saison."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Wetter konnte nicht abgerufen werden. Wir orientieren uns an der Jahreszeit."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Non è stato possibile consultare il meteo. Ci basiamo sul periodo dell’anno."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não foi possível consultar o tempo. Nos baseamos na época do ano."
           }
         }
       }
@@ -18929,40 +18691,6 @@
         }
       }
     },
-    "Previsión: nieve el sábado.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Forecast: snow on Saturday."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prévisions : neige samedi."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vorhersage: Schnee am Samstag."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Previsioni: neve sabato."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Previsão: neve no sábado."
-          }
-        }
-      }
-    },
     "Primavera · Verano": {
       "localizations": {
         "en": {
@@ -20153,36 +19881,36 @@
         }
       }
     },
-    "Según el destino": {
+    "Según la época del viaje": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Based on the destination"
+            "value": "Based on the time of year"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Selon la destination"
+            "value": "Selon la saison du voyage"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Je nach Reiseziel"
+            "value": "Je nach Reisezeit"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "In base alla destinazione"
+            "value": "In base al periodo del viaggio"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "De acordo com o destino"
+            "value": "De acordo com a época da viagem"
           }
         }
       }
@@ -23759,40 +23487,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Já usava o Closet Finder? Com o mesmo ID Apple, seu guarda-roupa chega sozinho do iCloud em alguns segundos."
-          }
-        }
-      }
-    },
-    "Época: %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time of year: %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saison : %@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jahreszeit: %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Periodo: %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Época: %@"
           }
         }
       }

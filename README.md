@@ -18,7 +18,7 @@ todo con el sitio exacto donde está: estancia › mueble › balda, cajón o ca
 | Pestaña | Qué hace |
 | --- | --- |
 | Armario | Rejilla de prendas con talla y ubicación, filtros por categoría y favoritas, orden por uso. Selección múltiple para mover o eliminar varias prendas a la vez. **Importar varias fotos** (hasta 50) de una vez. Estadísticas: prendas por categoría y estancia, olvidadas (6 meses sin usar), prestadas y para donar, **valor del armario** (gasto por año y coste por puesta), **tu año en ropa** (se comparte como imagen) y **huecos en el armario** (qué parte les falta a tus looks). |
-| Looks | **Probador**: una fila deslizable por cada parte del cuerpo (abrigo, arriba, cuerpo entero, abajo, calzado y accesorios); la prenda centrada es la elegida, la chincheta fija una fila y el dado combina al azar las demás. **Looks**: los guardados, mostrados como una figura vestida; cada uno dice dónde está cada prenda. **Semana**: un look por día, con «Llevar hoy». **Maletas**: viajes con looks y prendas sueltas, y la lista de qué llevar agrupada por dónde está cada prenda, con casillas para ir marcando lo que ya está en la maleta. Con el destino, **«Según el destino»** consulta el tiempo previsto (WeatherKit, 10 días antes) o se guía por la época del año, y propone capas y looks tuyos que encajan. Cada look se puede **compartir como imagen**. |
+| Looks | **Probador**: una fila deslizable por cada parte del cuerpo (abrigo, arriba, cuerpo entero, abajo, calzado y accesorios); la prenda centrada es la elegida, la chincheta fija una fila y el dado combina al azar las demás. **Looks**: los guardados, mostrados como una figura vestida; cada uno dice dónde está cada prenda. **Semana**: un look por día, con «Llevar hoy». **Maletas**: viajes con looks y prendas sueltas, y la lista de qué llevar agrupada por dónde está cada prenda, con casillas para ir marcando lo que ya está en la maleta. **«Según la época del viaje»** propone capas (con una prenda tuya para cada una) y looks que encajan, según las fechas y el hemisferio del destino. Cada look se puede **compartir como imagen**. |
 | Ubicaciones | Árbol de estancias, muebles y compartimentos con recuento de prendas. Plantillas de mueble (armario con barra, 4 baldas y 2 cajones…). Mover prendas en lote. Etiquetas QR imprimibles y escáner. |
 | Medidas | Una o varias personas, medidas corporales y tallas recomendadas (EU/US/UK). En centímetros o pulgadas: por defecto, la unidad de la región (Ajustes › Medidas). |
 | Buscar | Texto libre sin acentos ni plurales («chaquetas azules») y filtros como tokens (color, categoría, temporada, estado). En iOS 26 con Apple Intelligence, interpreta frases como «algo de abrigo para la nieve» en el propio iPhone (Foundation Models). Búsquedas recientes y prendas vistas hace poco. |
@@ -63,9 +63,6 @@ Abre `ClosetFinder.xcodeproj` en Xcode 26 o posterior y ejecuta el esquema **Clo
   looks; `-selecting` abre el Armario en modo selección.
 - En el simulador no funcionan el recorte de fondo de Vision, el escáner QR ni la generación de
   Apple Intelligence: hay que probarlos en un iPhone real.
-- El tiempo de las maletas usa WeatherKit: en el portal de desarrollador hay que tener activado
-  WeatherKit en *Capabilities* y en *App Services* del identificador de la app. Sin él (o en el
-  simulador sin firmar) la app se guía por la época del año.
 - La firma usa el equipo `84HB28K4CM` (iCloud y App Group). Para sincronizar de verdad hay que
   ejecutar una vez desde Xcode en un dispositivo para que se cree el contenedor
   `iCloud.com.sergiogonzalez.ClosetFinder`.
@@ -87,7 +84,7 @@ ClosetFinder/          App
 ├─ Features/           Closet · Looks · AddGarment · Locations · Search · Profile · Settings · Onboarding
 ├─ Services/           ImageProcessor (Vision), GarmentSearch, SmartSearch (Foundation Models),
 │                      Spotlight, BackupService, LabelReader, WardrobeValue, PackingAdvisor,
-│                      TripWeather (WeatherKit), RecentHistory
+│                      TripPlace (MapKit), RecentHistory
 ├─ Intents/            App Intents para Siri y Atajos
 └─ DesignSystem/       Botones, cristal con alternativa para iOS < 26 y componentes
 Shared/                Código común a la app y al widget
