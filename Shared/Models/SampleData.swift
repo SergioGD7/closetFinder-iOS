@@ -31,7 +31,7 @@ enum SampleData {
         let suitcase = makeLocation(String(localized: "Maleta grande"), .suitcase, index: 2, parent: storage, in: context)
 
         // Persona
-        let me = BodyProfile(name: String(localized: "Yo"), sizing: .menswear)
+        let me = BodyProfile(name: "Alex", sizing: .menswear)
         context.insert(me)
         me.heightCm = 178
         me.chestCm = 98

@@ -3,7 +3,7 @@ import SwiftUI
 
 /// Pantallas propias de la pestaña Armario.
 enum ClosetRoute: Hashable {
-    case stats
+    case stats, value, yearInReview
 }
 
 enum ClosetSort: String, CaseIterable, Identifiable {
@@ -67,6 +67,8 @@ struct ClosetView: View {
             .navigationDestination(for: ClosetRoute.self) { route in
                 switch route {
                 case .stats: StatsView()
+                case .value: WardrobeValueView()
+                case .yearInReview: YearInReviewView()
                 }
             }
             .sheet(isPresented: $isAdding) { GarmentEditorView() }
@@ -98,6 +100,12 @@ struct ClosetView: View {
                 if ProcessInfo.processInfo.arguments.contains("-selecting") {
                     isSelecting = true
                     selection = Set(visibleGarments.prefix(2).map(\.persistentModelID))
+                }
+                // `-openImportDemo` abre la importación de fotos con fotos de ejemplo (capturas).
+                if ProcessInfo.processInfo.arguments.contains("-openImportDemo") {
+                    // En iPad la hoja no se presenta si se pide antes de que la vista esté en pantalla.
+                    try? await Task.sleep(for: .seconds(1))
+                    isImporting = true
                 }
             }
             #endif

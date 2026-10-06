@@ -26,7 +26,7 @@ struct BackupTests {
 
         let restored = try #require(try target.fetch(FetchDescriptor<Garment>()).first { $0.uuid == jacket.uuid })
         #expect(restored.location?.path == "Dormitorio › Armario grande › Balda 2")
-        #expect(restored.owner?.name == "Yo")
+        #expect(restored.owner?.name == "Alex")
         #expect(restored.photo == Data([1, 2, 3]))
         #expect(restored.chestWidthCm == 54)
         #expect(restored.colors == [.blue])

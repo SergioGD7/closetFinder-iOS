@@ -78,9 +78,36 @@ struct BatchImportView: View {
                 Text("Las fotos sin revisar no se añadirán. Tócalas para elegir qué prenda es.")
             }
             .sensoryFeedback(.success, trigger: savedFeedback)
+            #if DEBUG
+            .task {
+                if ProcessInfo.processInfo.arguments.contains("-openImportDemo"), model.items.isEmpty { await loadDemo() }
+            }
+            #endif
         }
         .interactiveDismissDisabled(!model.items.isEmpty)
     }
+
+    #if DEBUG
+    /// Fotos de ejemplo (las ilustraciones de las prendas) para las capturas del App Store.
+    /// Dos se quedan sin categoría para enseñar la revisión.
+    private func loadDemo() async {
+        let samples: [(GarmentCategory, GarmentColor, Bool)] = [
+            (.tShirt, .white, true), (.trousers, .navy, true), (.dress, .pink, false), (.sweater, .burgundy, true),
+            (.shoes, .black, true), (.coat, .brown, true), (.shirt, .lightBlue, true), (.skirt, .beige, false),
+            (.jacket, .blue, true), (.shorts, .olive, true), (.blazer, .gray, true), (.shoes, .white, true),
+        ]
+        let images: [ProcessedImage] = samples.compactMap { category, color, known in
+            let renderer = ImageRenderer(content: GarmentArtwork(category: category, color: color).frame(width: 300, height: 300))
+            renderer.scale = 2
+            guard let png = renderer.uiImage?.pngData() else { return nil }
+            return ProcessedImage(photo: png, thumbnail: png, isCutout: true, colors: [color], category: known ? category : nil)
+        }
+        let loaders: [BatchImportModel.DataLoader] = images.indices.map { index in { Data([UInt8(index)]) } }
+        model.location = (try? modelContext.fetch(FetchDescriptor<StorageLocation>()))?
+            .filter { $0.kind == .drawer }.sorted { $0.path < $1.path }.first
+        await model.process(loaders) { data in images[Int(data[0])] }
+    }
+    #endif
 
     // MARK: Vacío
 

@@ -1,0 +1,74 @@
+{
+  "es-ES": {
+    "01": ["Toda tu ropa, en tu bolsillo", "Con foto, talla y el sitio exacto donde está"],
+    "02": ["Sabe dónde está cada prenda", "Estancia, mueble y balda, con el esquema del mueble"],
+    "03": ["Tu casa, ordenada", "Armarios, cajones y cajas con etiquetas QR"],
+    "04": ["Combina looks en el probador", "Desliza cada prenda y guarda tus favoritos"],
+    "05": ["Planifica la semana", "Un look por día, y «Llevar hoy» lleva la cuenta"],
+    "06": ["Haz la maleta sin olvidar nada", "Qué llevar y dónde está, según la época del viaje"],
+    "07": ["Encuéntrala al momento", "Busca por color, tipo o como lo dirías"],
+    "08": ["Tu armario, en una tarde", "Importa 50 fotos: recorta el fondo y reconoce cada prenda"],
+    "09": ["Tus tallas, calculadas", "Medidas de toda la casa y tallas EU, US y UK"],
+    "10": ["Lo que vale tu armario", "Precio, gasto por año y coste por puesta"]
+  },
+  "en-US": {
+    "01": ["Your whole closet, in your pocket", "With photo, size and exactly where it is"],
+    "02": ["Know where every item is", "Room, furniture and shelf, with a diagram of the furniture"],
+    "03": ["Your home, organized", "Wardrobes, drawers and boxes with QR labels"],
+    "04": ["Mix looks in the fitting room", "Swipe through each item and save your favorites"],
+    "05": ["Plan your week", "One look a day, and “Wear today” keeps count"],
+    "06": ["Pack without forgetting a thing", "What to bring and where it is, for the time of year"],
+    "07": ["Find it in seconds", "Search by color, type or the way you’d say it"],
+    "08": ["Your closet, in one afternoon", "Import 50 photos: backgrounds removed, items recognized"],
+    "09": ["Your sizes, worked out", "Measurements for everyone at home, with EU, US and UK sizes"],
+    "10": ["What your closet is worth", "Price, yearly spending and cost per wear"]
+  },
+  "fr-FR": {
+    "01": ["Tout votre dressing dans la poche", "Avec photo, taille et l’endroit exact où il se trouve"],
+    "02": ["Retrouvez chaque vêtement", "Pièce, meuble et étagère, avec le schéma du meuble"],
+    "03": ["Votre maison, bien rangée", "Armoires, tiroirs et boîtes avec étiquettes QR"],
+    "04": ["Composez vos looks en cabine", "Faites défiler chaque pièce et gardez vos favoris"],
+    "05": ["Planifiez la semaine", "Un look par jour, « Porter aujourd’hui » tient le compte"],
+    "06": ["Une valise sans oublis", "Quoi emporter et où le trouver, selon la saison"],
+    "07": ["Trouvez-le en un instant", "Cherchez par couleur, type ou comme vous le diriez"],
+    "08": ["Votre dressing en un après-midi", "Importez 50 photos : fond retiré, vêtement reconnu"],
+    "09": ["Vos tailles, calculées", "Mesures de toute la famille et tailles EU, US et UK"],
+    "10": ["Ce que vaut votre dressing", "Prix, dépenses par an et coût par utilisation"]
+  },
+  "de-DE": {
+    "01": ["Dein ganzer Schrank in der Tasche", "Mit Foto, Größe und dem genauen Ort"],
+    "02": ["Wisse, wo jedes Teil ist", "Raum, Möbel und Fach, mit Skizze des Möbels"],
+    "03": ["Dein Zuhause, aufgeräumt", "Schränke, Schubladen und Kisten mit QR-Etiketten"],
+    "04": ["Looks in der Umkleide kombinieren", "Teile durchwischen und Lieblingslooks speichern"],
+    "05": ["Plane deine Woche", "Ein Look pro Tag – „Heute tragen“ zählt mit"],
+    "06": ["Packen, ohne etwas zu vergessen", "Was mitmuss und wo es liegt, passend zur Reisezeit"],
+    "07": ["In Sekunden gefunden", "Suche nach Farbe, Art oder so, wie du es sagen würdest"],
+    "08": ["Dein Schrank an einem Nachmittag", "50 Fotos importieren: Hintergrund weg, Teil erkannt"],
+    "09": ["Deine Größen, berechnet", "Maße der ganzen Familie und Größen EU, US und UK"],
+    "10": ["Was dein Schrank wert ist", "Preis, Ausgaben pro Jahr und Kosten pro Tragen"]
+  },
+  "it": {
+    "01": ["Tutto l’armadio in tasca", "Con foto, taglia e il posto esatto in cui si trova"],
+    "02": ["Sai dov’è ogni capo", "Stanza, mobile e ripiano, con lo schema del mobile"],
+    "03": ["La tua casa, in ordine", "Armadi, cassetti e scatole con etichette QR"],
+    "04": ["Crea look nel camerino", "Scorri ogni capo e salva i tuoi preferiti"],
+    "05": ["Pianifica la settimana", "Un look al giorno, e «Indossa oggi» tiene il conto"],
+    "06": ["La valigia senza dimenticanze", "Cosa portare e dove si trova, in base al periodo"],
+    "07": ["Lo trovi in un attimo", "Cerca per colore, tipo o come lo diresti"],
+    "08": ["Il tuo armadio in un pomeriggio", "Importa 50 foto: sfondo rimosso, capo riconosciuto"],
+    "09": ["Le tue taglie, calcolate", "Misure di tutta la famiglia e taglie EU, US e UK"],
+    "10": ["Quanto vale il tuo armadio", "Prezzo, spesa annuale e costo per utilizzo"]
+  },
+  "pt-BR": {
+    "01": ["Seu guarda-roupa no bolso", "Com foto, tamanho e o lugar exato onde está"],
+    "02": ["Saiba onde está cada peça", "Cômodo, móvel e prateleira, com o desenho do móvel"],
+    "03": ["Sua casa, organizada", "Armários, gavetas e caixas com etiquetas QR"],
+    "04": ["Monte looks no provador", "Deslize cada peça e salve seus favoritos"],
+    "05": ["Planeje a semana", "Um look por dia, e “Usar hoje” registra o uso"],
+    "06": ["Faça a mala sem esquecer nada", "O que levar e onde está, de acordo com a época"],
+    "07": ["Encontre em segundos", "Busque por cor, tipo ou do jeito que você falaria"],
+    "08": ["Seu guarda-roupa em uma tarde", "Importe 50 fotos: fundo removido, peça reconhecida"],
+    "09": ["Seus tamanhos, calculados", "Medidas da casa toda e tamanhos EU, US e UK"],
+    "10": ["Quanto vale seu guarda-roupa", "Preço, gasto por ano e custo por uso"]
+  }
+}

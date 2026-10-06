@@ -76,6 +76,11 @@ Tests (Swift Testing). También se ejecutan en GitHub Actions en cada pull reque
 xcodebuild test -project ClosetFinder.xcodeproj -scheme ClosetFinder -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
 ```
 
+## App Store
+
+La ficha (en los seis idiomas) y las capturas de iPhone y iPad están en `fastlane/`. Las capturas
+se generan con `scripts/app_store/make_screenshots.sh`; ver `fastlane/README.md`.
+
 ## Estructura
 
 ```
@@ -96,6 +101,6 @@ ClosetFinderWidget/    Widget configurable (WidgetKit + App Intents)
 
 ## Pendiente (hoja de ruta)
 
-- Publicación en el App Store (App Store Connect, capturas, ficha y política de privacidad).
+- Página pública con la política de privacidad y el soporte, y subida a App Store Connect.
 - Auditoría de accesibilidad con VoiceOver y tamaños de texto grandes.
 - Etiquetas NFC en cajas y cajones.

@@ -81,7 +81,7 @@ struct RootView: View {
 
     #if DEBUG
     /// Abre una pantalla concreta al arrancar, para capturas y pruebas manuales:
-    /// `-openTab looks|week|trips|locations|profile|search|stats`, `-openGarment "Chaqueta vaquera"`,
+    /// `-openTab looks|week|trips|locations|profile|search|stats|value|year`, `-openGarment "Chaqueta vaquera"`,
     /// `-openLocation "Armario grande"`, `-openOutfit "Oficina"` o `-openTrip "Escapada a la sierra"`.
     private func applyDebugLaunchArguments() {
         let arguments = ProcessInfo.processInfo.arguments
@@ -94,6 +94,8 @@ struct RootView: View {
         case "profile": router.selectedTab = .profile
         case "search": router.selectedTab = .search
         case "stats": router.closetPath.append(ClosetRoute.stats)
+        case "value": router.closetPath.append(ClosetRoute.stats); router.closetPath.append(ClosetRoute.value)
+        case "year": router.closetPath.append(ClosetRoute.stats); router.closetPath.append(ClosetRoute.yearInReview)
         case "looks": router.selectedTab = .looks
         case "outfits": router.selectedTab = .looks; router.looksSection = .outfits
         case "week": router.selectedTab = .looks; router.looksSection = .week
