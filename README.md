@@ -79,7 +79,9 @@ xcodebuild test -project ClosetFinder.xcodeproj -scheme ClosetFinder -destinatio
 ## App Store
 
 La ficha (en los seis idiomas) y las capturas de iPhone y iPad están en `fastlane/`. Las capturas
-se generan con `scripts/app_store/make_screenshots.sh`; ver `fastlane/README.md`.
+se generan con `scripts/app_store/make_screenshots.sh`; ver `fastlane/README.md`. La política de
+privacidad y la página de soporte están en `docs/` (GitHub Pages):
+https://sergiogd7.github.io/closetFinder-iOS/privacy/ y https://sergiogd7.github.io/closetFinder-iOS/support/.
 
 ## Estructura
 
@@ -101,6 +103,6 @@ ClosetFinderWidget/    Widget configurable (WidgetKit + App Intents)
 
 ## Pendiente (hoja de ruta)
 
-- Página pública con la política de privacidad y el soporte, y subida a App Store Connect.
+- Subida a App Store Connect.
 - Auditoría de accesibilidad con VoiceOver y tamaños de texto grandes.
 - Etiquetas NFC en cajas y cajones.
