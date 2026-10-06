@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Closet Finder · Closet Finder</title>
+<link rel="icon" href="icon.png">
+<style>
+:root{--bg:#F5F5FA;--surface:#FFFFFF;--ink:#16172B;--muted:#5D5F78;--line:#E1E2EE;--accent:#4F5BD5;--on-accent:#FFFFFF;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0D0E16;--surface:#171925;--ink:#ECEDF7;--muted:#9C9EB8;--line:#2A2C3E;--accent:#8D95FF;--on-accent:#0D0E16;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:0 20px}
+main{max-width:680px;margin:0 auto;padding:40px 0 64px}
+header{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+header img{width:56px;height:56px;border-radius:13px}
+header a{color:inherit;text-decoration:none;font-weight:700;font-size:20px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+nav a{padding:6px 14px;border-radius:999px;border:1px solid var(--line);color:var(--muted);text-decoration:none;font-size:15px;background:var(--surface)}
+nav a[aria-current="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+h1{font-size:34px;line-height:1.15;margin:0 0 8px;letter-spacing:-.02em;text-wrap:balance}
+h2{font-size:20px;margin:28px 0 6px;letter-spacing:-.01em}
+p{margin:0 0 12px;max-width:65ch}
+.muted{color:var(--muted);font-size:15px}
+a{color:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin:24px 0}
+.card h2{margin-top:0}
+.button{display:inline-block;background:var(--accent);color:var(--on-accent);padding:10px 20px;border-radius:999px;text-decoration:none;font-weight:600}
+details{border-bottom:1px solid var(--line);padding:14px 0}
+summary{font-weight:600;cursor:pointer}
+details p{margin:10px 0 0}
+footer{margin-top:40px;font-size:15px;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header><img src="icon.png" alt=""><a href="">Closet Finder</a></header>
+<nav aria-label="Idioma · Language"><a href="#es" data-lang="es">Español</a><a href="#en" data-lang="en">English</a><a href="#fr" data-lang="fr">Français</a><a href="#de" data-lang="de">Deutsch</a><a href="#it" data-lang="it">Italiano</a><a href="#pt" data-lang="pt">Português</a></nav>
+<section data-lang="es" data-title="Closet Finder" lang="es"><h1>Closet Finder</h1><p>Closet Finder es una app para iPhone y iPad que te ayuda a saber qué ropa tienes y dónde la guardas.</p><footer><a href="support/#es">Soporte</a><a href="privacy/#es">Política de privacidad</a></footer></section><section data-lang="en" data-title="Closet Finder" lang="en"><h1>Closet Finder</h1><p>Closet Finder is an iPhone and iPad app that helps you know what clothes you have and where you keep them.</p><footer><a href="support/#en">Support</a><a href="privacy/#en">Privacy Policy</a></footer></section><section data-lang="fr" data-title="Closet Finder" lang="fr"><h1>Closet Finder</h1><p>Closet Finder est une app pour iPhone et iPad qui vous aide à savoir quels vêtements vous avez et où vous les rangez.</p><footer><a href="support/#fr">Assistance</a><a href="privacy/#fr">Politique de confidentialité</a></footer></section><section data-lang="de" data-title="Closet Finder" lang="de"><h1>Closet Finder</h1><p>Closet Finder ist eine App für iPhone und iPad, mit der du weißt, welche Kleidung du hast und wo du sie aufbewahrst.</p><footer><a href="support/#de">Support</a><a href="privacy/#de">Datenschutzerklärung</a></footer></section><section data-lang="it" data-title="Closet Finder" lang="it"><h1>Closet Finder</h1><p>Closet Finder è un’app per iPhone e iPad che ti aiuta a sapere quali vestiti hai e dove li tieni.</p><footer><a href="support/#it">Assistenza</a><a href="privacy/#it">Informativa sulla privacy</a></footer></section><section data-lang="pt" data-title="Closet Finder" lang="pt"><h1>Closet Finder</h1><p>O Closet Finder é um app para iPhone e iPad que ajuda você a saber quais roupas tem e onde as guarda.</p><footer><a href="support/#pt">Suporte</a><a href="privacy/#pt">Política de privacidade</a></footer></section>
+</main>
+
+<script>
+(function(){
+  var codes=['es', 'en', 'fr', 'de', 'it', 'pt'], sections=document.querySelectorAll('section[data-lang]');
+  function pick(){
+    var hash=location.hash.replace('#','');
+    if(codes.indexOf(hash)>=0) return hash;
+    var langs=navigator.languages||[navigator.language||'en'];
+    for(var i=0;i<langs.length;i++){var c=langs[i].slice(0,2).toLowerCase(); if(codes.indexOf(c)>=0) return c;}
+    return 'en';
+  }
+  function show(){
+    var lang=pick();
+    sections.forEach(function(s){s.hidden=s.dataset.lang!==lang});
+    document.querySelectorAll('nav a').forEach(function(a){a.setAttribute('aria-current', a.dataset.lang===lang)});
+    document.documentElement.lang=lang;
+    var section=document.querySelector('section[data-lang="'+lang+'"]');
+    if(section) document.title=section.dataset.title+' · Closet Finder';
+  }
+  window.addEventListener('hashchange', show); show();
+})();
+</script>
+
+</body>
+</html>
