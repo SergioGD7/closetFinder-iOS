@@ -11,6 +11,7 @@ struct SettingsView: View {
     @Query private var locations: [StorageLocation]
 
     @State private var iCloudStatus: CKAccountStatus?
+    private let sync = CloudSyncMonitor.shared
     @State private var exportDocument: BackupDocument?
     @State private var isExporting = false
     @State private var isImporting = false
@@ -106,10 +107,38 @@ struct SettingsView: View {
                 }
             }
             .padding(.vertical, 4)
+            if iCloudIsWorking {
+                syncStatus
+            }
         } header: {
             Text("iCloud")
         } footer: {
             Text("Tus prendas, fotos y ubicaciones se guardan en tu iCloud privado. Si borras la app y la vuelves a instalar con el mismo Apple ID, todo vuelve solo. También se sincroniza entre tu iPhone y tu iPad.")
+        }
+    }
+
+    /// Cómo va la sincronización: subiendo, última subida o el error que haya dado iCloud.
+    @ViewBuilder
+    private var syncStatus: some View {
+        if sync.isImporting || sync.isExporting {
+            Label("Sincronizando…", systemImage: "arrow.triangle.2.circlepath")
+                .foregroundStyle(.secondary)
+        } else if let lastExport = sync.lastExport ?? sync.lastImport {
+            LabeledContent(String(localized: "Última sincronización")) {
+                Text(lastExport.formatted(.relative(presentation: .named)))
+            }
+        }
+        if let error = sync.lastError {
+            VStack(alignment: .leading, spacing: 4) {
+                Label("No se han podido sincronizar algunos cambios", systemImage: "exclamationmark.icloud")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.orange)
+                Text(error)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .textSelection(.enabled)
+            }
+            .padding(.vertical, 2)
         }
     }
 
