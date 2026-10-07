@@ -43,7 +43,8 @@ Además:
   `group.com.sergiogonzalez.ClosetFinder`.
 - **Apariencia**: automática, clara u oscura (Ajustes, en la pestaña Medidas).
 - **iCloud**: sincronización con la base de datos privada del usuario. Si se borra la app y se
-  vuelve a instalar con el mismo Apple ID, los datos vuelven solos. Sin iCloud, se puede exportar
+  vuelve a instalar con el mismo Apple ID, lo primero que hace es buscar el armario en iCloud y
+  esperar a que llegue; solo si no hay nada enseña el primer arranque guiado. Sin iCloud, se puede exportar
   y restaurar una copia de seguridad (`.closetfinder`) desde Ajustes (pestaña Medidas).
 - **Enlaces `closetfinder://`**: `closetfinder://garment/<uuid>` y `closetfinder://location/<uuid>`.
   Los usan el widget y las etiquetas QR, que también se pueden escanear con la Cámara del sistema.
@@ -63,6 +64,17 @@ Abre `ClosetFinder.xcodeproj` en Xcode 26 o posterior y ejecuta el esquema **Clo
   looks; `-selecting` abre el Armario en modo selección.
 - En el simulador no funcionan el recorte de fondo de Vision, el escáner QR ni la generación de
   Apple Intelligence: hay que probarlos en un iPhone real.
+- `-restoreDemo` enseña la pantalla de «Recuperando tu armario» del primer arranque sin iCloud.
+- **Esquema de iCloud.** Antes de publicar, y cada vez que cambie el modelo de datos, hay que crear
+  el esquema completo en el entorno de desarrollo y desplegarlo a producción. Si a producción le
+  falta un campo, iCloud rechaza los cambios de ese tipo de registro y no se sincronizan:
+  1. Ejecuta la app desde Xcode en un iPhone con iCloud con el argumento `-initializeCloudKitSchema`
+     (Product › Scheme › Edit Scheme › Arguments). En la consola sale «Esquema creado en desarrollo».
+  2. En [CloudKit Console](https://icloud.developer.apple.com), en el contenedor
+     `iCloud.com.sergiogonzalez.ClosetFinder`, pulsa *Deploy Schema Changes* a producción.
+  3. Quita el argumento del esquema.
+- En Ajustes (pestaña Medidas) se ve la última sincronización con iCloud y, si iCloud rechaza algún
+  cambio, el error que ha dado.
 - La firma usa el equipo `84HB28K4CM` (iCloud y App Group). Para sincronizar de verdad hay que
   ejecutar una vez desde Xcode en un dispositivo para que se cree el contenedor
   `iCloud.com.sergiogonzalez.ClosetFinder`.

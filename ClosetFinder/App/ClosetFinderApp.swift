@@ -7,6 +7,18 @@ import WidgetKit
 struct ClosetFinderApp: App {
     @State private var router = AppRouter()
 
+    init() {
+        #if DEBUG
+        // `-initializeCloudKitSchema`: crea el esquema completo en el entorno de desarrollo de
+        // CloudKit (hay que hacerlo en un dispositivo con iCloud y luego desplegarlo a producción).
+        if ProcessInfo.processInfo.arguments.contains("-initializeCloudKitSchema") {
+            CloudKitSchemaInitializer.run()
+        }
+        #endif
+        // Antes de abrir el almacén, para no perderse la primera importación de iCloud.
+        CloudSyncMonitor.shared.start()
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView()
@@ -38,7 +50,8 @@ struct RootView: View {
                 #endif
             }
             .fullScreenCover(isPresented: $isShowingOnboarding) {
-                OnboardingView {
+                // Primero mira si hay un armario en iCloud; si no, el primer arranque guiado.
+                FirstLaunchView {
                     hasCompletedOnboarding = true
                     isShowingOnboarding = false
                 }
@@ -52,16 +65,21 @@ struct RootView: View {
                 if let link = DeepLink(url: url) { router.open(link, in: modelContext) }
             }
             .onChange(of: scenePhase) { _, phase in
+                // Guardar al dejar de estar activa (no solo al pasar a segundo plano): así iCloud
+                // recibe los cambios aunque la app se cierre justo después.
+                if phase != .active {
+                    try? modelContext.save()
+                }
                 // El widget lee el mismo almacén: al salir de la app se refresca con los cambios.
                 if phase == .background {
-                    try? modelContext.save()
                     WidgetCenter.shared.reloadAllTimelines()
                 }
             }
     }
 
-    /// El primer arranque guiado sale una sola vez, y solo si el armario está vacío: quien ya
-    /// tiene datos (de una versión anterior o de iCloud) no lo ve. `-showOnboarding` lo fuerza.
+    /// El primer arranque sale una sola vez, y solo si el armario está vacío: quien ya tiene datos
+    /// (de una versión anterior) no lo ve. Tras reinstalar, `FirstLaunchView` busca primero el
+    /// armario en iCloud. `-showOnboarding` lo fuerza.
     private func decideOnboarding() {
         let arguments = ProcessInfo.processInfo.arguments
         if arguments.contains("-showOnboarding") {

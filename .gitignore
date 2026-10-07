@@ -12,3 +12,4 @@ build/
 fastlane/screenshots_raw/
 fastlane/screenshots/
 fastlane/screenshots_preview/
+fastlane/Preview.html

@@ -647,6 +647,40 @@
         }
       }
     },
+    "%lld prendas recuperadas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld items restored"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld vêtements récupérés"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Teile wiederhergestellt"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld capi recuperati"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld peças recuperadas"
+          }
+        }
+      }
+    },
     "%lld prendas se han quedado en el armario todo el año": {
       "localizations": {
         "en": {
@@ -1255,6 +1289,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 peça salva"
+          }
+        }
+      }
+    },
+    "1 prenda recuperada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 item restored"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 vêtement récupéré"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Teil wiederhergestellt"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 capo recuperato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 peça recuperada"
           }
         }
       }
@@ -3987,6 +4055,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Botas de trilha"
+          }
+        }
+      }
+    },
+    "Buscando tu armario en iCloud…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looking for your closet in iCloud…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherche de votre dressing dans iCloud…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Schrank wird in iCloud gesucht …"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ricerca del tuo armadio su iCloud…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procurando seu guarda-roupa no iCloud…"
           }
         }
       }
@@ -10245,6 +10347,40 @@
         }
       }
     },
+    "Empezar sin esperar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start without waiting"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer sans attendre"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Warten beginnen"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inizia senza aspettare"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Começar sem esperar"
+          }
+        }
+      }
+    },
     "Empieza por las estancias donde guardas ropa: dormitorio, entrada, trastero…": {
       "localizations": {
         "en": {
@@ -10547,6 +10683,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Meia-estação"
+          }
+        }
+      }
+    },
+    "Error desconocido de iCloud": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unknown iCloud error"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erreur iCloud inconnue"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unbekannter iCloud-Fehler"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Errore iCloud sconosciuto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erro desconhecido do iCloud"
           }
         }
       }
@@ -10955,6 +11125,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Estatísticas"
+          }
+        }
+      }
+    },
+    "Estamos trayendo de iCloud tus prendas, fotos y ubicaciones. Puede tardar un poco si tienes muchas fotos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We’re bringing your items, photos and places back from iCloud. It may take a while if you have lots of photos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nous récupérons depuis iCloud vos vêtements, photos et emplacements. Cela peut prendre un moment si vous avez beaucoup de photos."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wir holen deine Kleidungsstücke, Fotos und Orte aus iCloud. Bei vielen Fotos kann das etwas dauern."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stiamo recuperando da iCloud i tuoi capi, foto e posti. Può volerci un po’ se hai molte foto."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estamos trazendo do iCloud suas peças, fotos e lugares. Pode demorar um pouco se você tiver muitas fotos."
           }
         }
       }
@@ -16277,6 +16481,40 @@
         }
       }
     },
+    "No se han podido sincronizar algunos cambios": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some changes couldn’t be synced"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Certaines modifications n’ont pas pu être synchronisées"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einige Änderungen konnten nicht synchronisiert werden"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alcune modifiche non sono state sincronizzate"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algumas alterações não puderam ser sincronizadas"
+          }
+        }
+      }
+    },
     "No se pudo abrir el archivo": {
       "localizations": {
         "en": {
@@ -19371,6 +19609,40 @@
         }
       }
     },
+    "Recuperando tu armario…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restoring your closet…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récupération de votre dressing…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Schrank wird wiederhergestellt …"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recupero del tuo armadio…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recuperando seu guarda-roupa…"
+          }
+        }
+      }
+    },
     "Renombrar": {
       "localizations": {
         "en": {
@@ -20119,6 +20391,40 @@
         }
       }
     },
+    "Si ya usabas Closet Finder con este Apple ID, tus prendas vuelven solas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If you already used Closet Finder with this Apple ID, your items come back on their own."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si vous utilisiez déjà Closet Finder avec cet identifiant Apple, vos vêtements reviennent automatiquement."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn du Closet Finder schon mit dieser Apple-ID genutzt hast, kommen deine Teile von selbst zurück."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se usavi già Closet Finder con questo ID Apple, i tuoi capi tornano da soli."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se você já usava o Closet Finder com este ID Apple, suas peças voltam sozinhas."
+          }
+        }
+      }
+    },
     "Sin %@": {
       "localizations": {
         "en": {
@@ -20591,6 +20897,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sincronizado com o iCloud"
+          }
+        }
+      }
+    },
+    "Sincronizando…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Syncing…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synchronisation…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird synchronisiert …"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sincronizzazione…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sincronizando…"
           }
         }
       }
@@ -23487,6 +23827,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Já usava o Closet Finder? Com o mesmo ID Apple, seu guarda-roupa chega sozinho do iCloud em alguns segundos."
+          }
+        }
+      }
+    },
+    "Última sincronización": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last synced"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dernière synchronisation"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zuletzt synchronisiert"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ultima sincronizzazione"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Última sincronização"
           }
         }
       }
