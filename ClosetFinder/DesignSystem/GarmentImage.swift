@@ -23,6 +23,9 @@ struct GarmentImage: View {
     var fullSize = false
     /// Margen interior relativo para fotos recortadas e ilustraciones.
     var inset: CGFloat = 0.12
+    /// Las fotos sin recortar se ven enteras (con esquinas redondeadas) en vez de rellenar el
+    /// hueco recortando los bordes. Para la cabecera del detalle.
+    var fitsPhoto = false
 
     var body: some View {
         GeometryReader { proxy in
@@ -36,6 +39,13 @@ struct GarmentImage: View {
                             .scaledToFit()
                             .shadow(color: .black.opacity(0.18), radius: 8, y: 6)
                             .padding(padding)
+                    } else if fitsPhoto {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                            .shadow(color: .black.opacity(0.12), radius: 8, y: 4)
+                            .padding(padding * 0.6)
                     } else {
                         Image(uiImage: image)
                             .resizable()

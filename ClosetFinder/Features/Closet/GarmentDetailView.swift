@@ -22,21 +22,11 @@ struct GarmentDetailView: View {
     private let readableWidth: CGFloat = 720
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                hero
-                details
-                    .padding(.horizontal)
-                    .padding(.top, 22)
-                    .padding(.bottom, 24)
-                    .frame(maxWidth: readableWidth, alignment: .leading)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(.systemGroupedBackground),
-                                in: UnevenRoundedRectangle(topLeadingRadius: 28, topTrailingRadius: 28, style: .continuous))
-                    .padding(.top, -28)
-            }
+        // La cabecera sube por detrás de la barra de navegación (para que el color llegue arriba),
+        // pero la foto empieza debajo: el margen superior es la altura de la barra y la isla.
+        GeometryReader { proxy in
+            content(topInset: proxy.safeAreaInsets.top)
         }
-        .ignoresSafeArea(edges: .top)
         .background(Color(.systemGroupedBackground))
         .navigationTitle(garment.displayName)
         .navigationBarTitleDisplayMode(.inline)
@@ -67,12 +57,34 @@ struct GarmentDetailView: View {
         }
     }
 
+    private func content(topInset: CGFloat) -> some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                hero(topInset: topInset)
+                details
+                    .padding(.horizontal)
+                    .padding(.top, 22)
+                    .padding(.bottom, 24)
+                    .frame(maxWidth: readableWidth, alignment: .leading)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(.systemGroupedBackground),
+                                in: UnevenRoundedRectangle(topLeadingRadius: 28, topTrailingRadius: 28, style: .continuous))
+                    .padding(.top, -28)
+            }
+        }
+        .ignoresSafeArea(edges: .top)
+    }
+
     // MARK: Cabecera
 
-    private var hero: some View {
-        GarmentImage(garment: garment, fullSize: true, inset: 0.14)
-            .padding(.top, garment.hasCutout || garment.photo == nil ? 50 : 0)
-            .frame(height: heroHeight)
+    /// La foto entera, debajo de la barra de navegación. Abajo deja sitio para la tarjeta de
+    /// detalles, que se monta 28 puntos sobre la cabecera, y para la cápsula de la ubicación.
+    private func hero(topInset: CGFloat) -> some View {
+        GarmentImage(garment: garment, fullSize: true, inset: 0.1, fitsPhoto: true)
+            .padding(.top, topInset + 8)
+            .padding(.bottom, garment.location == nil ? 36 : 84)
+            .frame(height: heroHeight + topInset)
+            .frame(maxWidth: .infinity)
             .background(garment.primaryColor.tint)
             .clipped()
             .overlay(alignment: .bottomLeading) {

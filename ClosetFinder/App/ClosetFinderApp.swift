@@ -120,18 +120,23 @@ struct RootView: View {
         case "trips": router.selectedTab = .looks; router.looksSection = .trips
         default: break
         }
-        // `-samplePhotos`: las prendas sin foto reciben su ilustración como foto recortada,
-        // para probar el probador 3D y las texturas sin tener fotos reales.
-        if arguments.contains("-samplePhotos"),
+        // `-samplePhotos`: las prendas sin foto reciben su ilustración como foto recortada, para
+        // probar el probador y las capturas sin fotos reales. `-samplePhotosUncut`: como una foto
+        // normal, con fondo y sin recortar (lo que pasa cuando Vision no encuentra la prenda).
+        let uncut = arguments.contains("-samplePhotosUncut")
+        if arguments.contains("-samplePhotos") || uncut,
            let garments = try? modelContext.fetch(FetchDescriptor<Garment>()) {
             for garment in garments where garment.photo == nil {
-                let renderer = ImageRenderer(content: GarmentArtwork(category: garment.category, color: garment.primaryColor)
-                    .frame(width: 600, height: 600))
+                let artwork = GarmentArtwork(category: garment.category, color: garment.primaryColor)
+                let renderer = uncut
+                    ? ImageRenderer(content: AnyView(artwork.padding(90).frame(width: 600, height: 760)
+                        .background(Color(white: 0.82))))
+                    : ImageRenderer(content: AnyView(artwork.frame(width: 600, height: 600)))
                 renderer.scale = 1
                 guard let png = renderer.uiImage?.pngData() else { continue }
                 garment.photo = png
                 garment.thumbnail = png
-                garment.hasCutout = true
+                garment.hasCutout = !uncut
                 garment.imageRevision += 1
             }
         }

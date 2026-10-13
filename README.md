@@ -59,7 +59,8 @@ Abre `ClosetFinder.xcodeproj` en Xcode 26 o posterior y ejecuta el esquema **Clo
 - Solo en Debug: `-openTab locations|profile|search|stats`, `-openGarment "<nombre>"`,
   `-openLocation "<nombre>"` y `-search "<texto>"` abren una pantalla concreta al arrancar.
 - `-showOnboarding` enseña el primer arranque aunque ya se haya visto; `-skipOnboarding` lo salta.
-- Solo en Debug: `-samplePhotos` da a las prendas de ejemplo una foto recortada (su ilustración);
+- Solo en Debug: `-samplePhotos` da a las prendas de ejemplo una foto recortada (su ilustración), y
+  `-samplePhotosUncut` una foto normal con fondo, sin recortar;
   `-openTab looks|outfits|week|trips`, `-openOutfit "<nombre>"` y `-openTrip "<nombre>"` abren los
   looks; `-selecting` abre el Armario en modo selección.
 - En el simulador no funcionan el recorte de fondo de Vision, el escáner QR ni la generación de
