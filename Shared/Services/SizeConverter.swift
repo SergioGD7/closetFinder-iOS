@@ -43,6 +43,9 @@ nonisolated struct FitAssessment: Sendable, Equatable {
     /// «pecho» o «cintura»
     let bodyPart: String
     let bodyCm: Double
+    /// Contorno de la prenda que se ha comparado (la medida en plano por dos, o el contorno si se
+    /// midió así).
+    let garmentCm: Double
     /// Contorno de la prenda menos contorno del cuerpo.
     let easeCm: Double
 }
@@ -137,13 +140,22 @@ nonisolated enum SizeConverter {
 
     // MARK: ¿Me queda bien?
 
-    /// Compara el contorno de la prenda (el doble de la medida en plano) con el del cuerpo.
+    /// El contorno de la prenda a partir de lo que se midió. La app pide la medida en plano (de un
+    /// lado a otro), que es la mitad del contorno; pero mucha gente mide el contorno completo. Una
+    /// medida en plano nunca llega a las tres cuartas partes del contorno del cuerpo, así que si
+    /// la medida pasa de ahí, ya es el contorno y no se duplica.
+    static func garmentCircumference(measured: Double, bodyCm: Double) -> Double {
+        measured >= bodyCm * 0.75 ? measured : measured * 2
+    }
+
+    /// Compara el contorno de la prenda con el del cuerpo.
     static func fit(category: GarmentCategory, chestWidthCm: Double?, waistWidthCm: Double?,
                     bodyChestCm: Double?, bodyWaistCm: Double?) -> FitAssessment? {
         switch category.bodyZone {
         case .upper:
             guard let chestWidthCm, let bodyChestCm else { return nil }
-            let ease = chestWidthCm * 2 - bodyChestCm
+            let garment = garmentCircumference(measured: chestWidthCm, bodyCm: bodyChestCm)
+            let ease = garment - bodyChestCm
             // Las prendas de abrigo se llevan encima de otras: necesitan más holgura.
             let shift: Double = category.isOuterwear ? 4 : 0
             let result: FitResult = switch ease - shift {
@@ -153,10 +165,12 @@ nonisolated enum SizeConverter {
             case ...26: .loose
             default: .tooBig
             }
-            return FitAssessment(result: result, bodyPart: String(localized: "bodyPart.chest", defaultValue: "pecho"), bodyCm: bodyChestCm, easeCm: ease)
+            return FitAssessment(result: result, bodyPart: String(localized: "bodyPart.chest", defaultValue: "pecho"),
+                                 bodyCm: bodyChestCm, garmentCm: garment, easeCm: ease)
         case .lower:
             guard let waistWidthCm, let bodyWaistCm else { return nil }
-            let ease = waistWidthCm * 2 - bodyWaistCm
+            let garment = garmentCircumference(measured: waistWidthCm, bodyCm: bodyWaistCm)
+            let ease = garment - bodyWaistCm
             let result: FitResult = switch ease {
             case ..<(-3): .tooSmall
             case ..<0: .snug
@@ -164,7 +178,8 @@ nonisolated enum SizeConverter {
             case ...10: .loose
             default: .tooBig
             }
-            return FitAssessment(result: result, bodyPart: String(localized: "bodyPart.waist", defaultValue: "cintura"), bodyCm: bodyWaistCm, easeCm: ease)
+            return FitAssessment(result: result, bodyPart: String(localized: "bodyPart.waist", defaultValue: "cintura"),
+                                 bodyCm: bodyWaistCm, garmentCm: garment, easeCm: ease)
         case .feet, .none:
             return nil
         }

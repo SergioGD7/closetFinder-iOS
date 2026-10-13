@@ -61,6 +61,32 @@ struct SizeConverterTests {
         #expect(tiny?.result == .tooSmall)
     }
 
+    @Test func measuredCircumferenceIsNotDoubled() {
+        // Camiseta medida en contorno (104 cm) en vez de en plano (52 cm): mismo resultado.
+        let flat = SizeConverter.fit(category: .tShirt, chestWidthCm: 52, waistWidthCm: nil, bodyChestCm: 98, bodyWaistCm: nil)
+        let around = SizeConverter.fit(category: .tShirt, chestWidthCm: 104, waistWidthCm: nil, bodyChestCm: 98, bodyWaistCm: nil)
+        #expect(flat?.result == .good)
+        #expect(around?.result == .good)
+        #expect(around?.garmentCm == 104)
+        #expect(around?.easeCm == 6)
+        #expect(flat?.garmentCm == 104)
+        // Pantalón con cintura medida en contorno (86 cm) para una cintura de 84.
+        let trousers = SizeConverter.fit(category: .trousers, chestWidthCm: nil, waistWidthCm: 86, bodyChestCm: nil, bodyWaistCm: 84)
+        #expect(trousers?.result == .good)
+        #expect(trousers?.easeCm == 2)
+        // Una prenda de verdad grande sigue saliendo grande, se mida como se mida.
+        #expect(SizeConverter.fit(category: .tShirt, chestWidthCm: 64, waistWidthCm: nil, bodyChestCm: 98, bodyWaistCm: nil)?.result == .tooBig)
+        #expect(SizeConverter.fit(category: .tShirt, chestWidthCm: 128, waistWidthCm: nil, bodyChestCm: 98, bodyWaistCm: nil)?.result == .tooBig)
+        // Y una pequeña, pequeña.
+        #expect(SizeConverter.fit(category: .tShirt, chestWidthCm: 90, waistWidthCm: nil, bodyChestCm: 98, bodyWaistCm: nil)?.result == .tooSmall)
+    }
+
+    @Test func circumferenceThresholdIsThreeQuartersOfTheBody() {
+        #expect(SizeConverter.garmentCircumference(measured: 54, bodyCm: 98) == 108)
+        #expect(SizeConverter.garmentCircumference(measured: 74, bodyCm: 98) == 74)
+        #expect(SizeConverter.garmentCircumference(measured: 72, bodyCm: 98) == 144)
+    }
+
     @Test func trousersFitUsesWaist() {
         let fit = SizeConverter.fit(category: .trousers, chestWidthCm: nil, waistWidthCm: 43, bodyChestCm: 98, bodyWaistCm: 84)
         #expect(fit?.result == .good)

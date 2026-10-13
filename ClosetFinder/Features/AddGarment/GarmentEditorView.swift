@@ -345,7 +345,7 @@ struct GarmentEditorView: View {
             } header: {
                 Text("Medidas de la prenda")
             } footer: {
-                Text("Mide la prenda extendida en plano. Con tus medidas corporales, la app te dirá si te queda bien.")
+                Text("Mide la prenda extendida en plano, de un lado a otro; si mides el contorno completo, la app lo detecta. Con tus medidas corporales te dirá si te queda bien.")
             }
         }
     }

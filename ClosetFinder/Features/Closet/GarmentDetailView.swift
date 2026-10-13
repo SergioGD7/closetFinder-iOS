@@ -392,18 +392,21 @@ struct GarmentDetailView: View {
     }
 }
 
-/// «Te queda bien · pecho de Yo 98 cm»
+/// «Te queda bien», con los dos contornos que se han comparado:
+/// «Prenda: 108 cm · pecho de Alex: 98 cm (+10 cm)».
 struct FitBadge: View {
     let fit: FitAssessment
     let personName: String
 
     var body: some View {
-        HStack(spacing: 5) {
-            Image(systemName: fit.result.symbol)
-                .font(.caption.weight(.bold))
-            Text(fit.result.title)
-                .fontWeight(.semibold)
-            Text("· \(fit.bodyPart) de \(personName): \(fit.bodyCm.lengthText)")
+        VStack(alignment: .leading, spacing: 2) {
+            HStack(spacing: 5) {
+                Image(systemName: fit.result.symbol)
+                    .font(.caption.weight(.bold))
+                Text(fit.result.title)
+                    .fontWeight(.semibold)
+            }
+            Text("Prenda: \(fit.garmentCm.lengthText) · \(fit.bodyPart) de \(personName): \(fit.bodyCm.lengthText) (\(easeText))")
                 .foregroundStyle(fit.result.color.opacity(0.85))
         }
         .font(.footnote)
@@ -412,6 +415,12 @@ struct FitBadge: View {
         .padding(.vertical, 6)
         .background(fit.result.color.opacity(0.13), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         .accessibilityElement(children: .combine)
+    }
+
+    /// «+10 cm», «−3 cm»
+    private var easeText: String {
+        let sign = fit.easeCm >= 0 ? "+" : "−"
+        return sign + abs(fit.easeCm).lengthText
     }
 }
 

@@ -15597,36 +15597,36 @@
         }
       }
     },
-    "Mide la prenda extendida en plano. Con tus medidas corporales, la app te dirá si te queda bien.": {
+    "Mide la prenda extendida en plano, de un lado a otro; si mides el contorno completo, la app lo detecta. Con tus medidas corporales te dirá si te queda bien.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Measure the item laid flat. With your body measurements, the app will tell you whether it fits."
+            "value": "Measure the item laid flat, from side to side; if you measure the full circumference, the app notices. With your body measurements it tells you whether it fits."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mesurez le vêtement à plat. Avec vos mensurations, l’app vous dira s’il vous va."
+            "value": "Mesurez le vêtement à plat, d’un côté à l’autre ; si vous mesurez le tour complet, l’app le détecte. Avec vos mensurations, elle vous dira s’il vous va."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Miss das Kleidungsstück flach liegend. Mit deinen Körpermaßen sagt dir die App, ob es passt."
+            "value": "Miss das Teil flach liegend von einer Seite zur anderen; wenn du den ganzen Umfang misst, erkennt die App das. Mit deinen Körpermaßen sagt sie dir, ob es passt."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Misura il capo steso in piano. Con le tue misure, l’app ti dirà se ti sta bene."
+            "value": "Misura il capo steso in piano, da un lato all’altro; se misuri la circonferenza completa, l’app se ne accorge. Con le tue misure ti dirà se ti sta bene."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Meça a peça esticada na horizontal. Com suas medidas, o app dirá se ela serve em você."
+            "value": "Meça a peça esticada, de um lado ao outro; se você medir a circunferência completa, o app percebe. Com suas medidas, ele diz se fica bem em você."
           }
         }
       }
@@ -18585,6 +18585,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Peça não reconhecida. Toque para escolher o que é."
+          }
+        }
+      }
+    },
+    "Prenda: %@ · %@ de %@: %@ (%@)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Item: %1$@ · %3$@’s %2$@: %4$@ (%5$@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vêtement : %1$@ · %2$@ de %3$@ : %4$@ (%5$@)"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teil: %1$@ · %2$@ von %3$@: %4$@ (%5$@)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capo: %1$@ · %2$@ di %3$@: %4$@ (%5$@)"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peça: %1$@ · %2$@ de %3$@: %4$@ (%5$@)"
           }
         }
       }
@@ -23453,40 +23487,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "“Ler a etiqueta” preenche para você."
-          }
-        }
-      }
-    },
-    "· %@ de %@: %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "· %1$@ (%2$@): %3$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "· %1$@ (%2$@) : %3$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "· %1$@ (%2$@): %3$@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "· %1$@ (%2$@): %3$@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "· %1$@ (%2$@): %3$@"
           }
         }
       }
